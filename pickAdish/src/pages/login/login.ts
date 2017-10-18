@@ -25,7 +25,7 @@ async login(user:User){
   try{
 const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
 if(r){
-  this.navCtrl.push('HomePage');//setRoot +to profile tab
+  this.navCtrl.push('ProfilePage');//setRoot +to profile tab
 }}catch(e){
   console.error(e);
 

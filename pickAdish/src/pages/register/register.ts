@@ -24,6 +24,7 @@ public navCtrl: NavController, public navParams: NavParams) {
 
 }
   register(user:User){
+    //add PW confrmation
     const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password);
     if(result){
       this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));

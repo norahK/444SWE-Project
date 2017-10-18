@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {  ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
-import{AngularFireDatabase} from'angularfire2/database';
+import{AngularFireDatabase,AngularFireList} from'angularfire2/database';
 //import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 @Component({
@@ -9,7 +9,7 @@ import{AngularFireDatabase} from'angularfire2/database';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-   //tips: FirebaseListObservable<any>;
+   tips: AngularFireList<any>;
   constructor(//af: AngularFire,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
@@ -19,6 +19,9 @@ export class ProfilePage {
     public navCtrl: NavController) {
      // this.tips = af.database.list('/tips');//change to user tips
   }
+  gitalltips(email){
+    this.tips= this.db.list('/tips/');//.only from regester user
+  }
   showOptions(key,title){
 //pop up window to delete or cancele
 let deletetip = this.alertCtrl.create({
@@ -27,7 +30,7 @@ let deletetip = this.alertCtrl.create({
     {
       text: 'delete', role: 'destructive',
       handler: data => {
-//this.tips.remove(key);//.then()
+this.db.list('/tips/').remove(key);//.then()
     }
     },
     {
