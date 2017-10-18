@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "362598252651",
+    "firebase_url": "https://pick-a-dish.firebaseio.com",
+    "project_id": "pick-a-dish",
+    "storage_bucket": "pick-a-dish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362598252651:android:7e8b506665c73c52",
+        "android_client_info": {
+          "package_name": "com.picka.dish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362598252651-ai98g1bcb30ha0ldudahv2uj2gasn01m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6oYPv3kcQvuRvnk7AVMdOqRD_AVHXMEI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

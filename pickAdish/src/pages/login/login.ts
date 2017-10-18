@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import{AngularFireAuth}from 'angularfire2/auth';
 
@@ -22,15 +22,28 @@ user={} as User;
 
   }
 async login(user:User){
+  try{
 const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
 if(r){
-  this.navCtrl.push('TabsPage');//setRoot
+  this.navCtrl.push('HomePage');//setRoot +to profile tab
+}}catch(e){
+  console.error(e);
+
 }
 }
 register(){this.navCtrl.push('RegisterPage')}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+ionViewWillLoad(){
+ /*this.OfAuth.outhState.subscribe(data=>{
+    if(data.email &&data.uid){
+      this.toast.create({
+        message:'wecome',${data,email},duration:3000
+      }).present();
+    }else{
+
+    }
+  })*/
+      console.log('ionViewDidLoad LoginPage');
+    }
 
 }

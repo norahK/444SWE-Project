@@ -8,8 +8,9 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ShopsPage } from '../pages/shops/shops';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import{AngularFireModule}from 'angularfire2'
-import{AngularFireAuthModule}from 'angularfire2/auth'
+import{AngularFireModule}from 'angularfire2';
+import{AngularFireAuthModule}from 'angularfire2/auth';
+import{AngularFireDatabaseModule}from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './ap.firebase.config';
@@ -27,7 +28,7 @@ import { FIREBASE_CONFIG } from './ap.firebase.config';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    AngularFireAuthModule
+    AngularFireAuthModule,AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
