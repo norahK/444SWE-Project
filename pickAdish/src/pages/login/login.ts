@@ -1,12 +1,11 @@
-import { Component , OnInit, HostBinding } from '@angular/core';
-import { AlertController,LoadingController,IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import {ViewChild , Component , OnInit, HostBinding } from '@angular/core';
+import {Slides , AlertController,LoadingController,IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import{AngularFireAuth}from 'angularfire2/auth';
 import { ProfilePage } from '../profile/profile';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/email';
-//import { ResetPassword } from '../reset-password/reset-password';
 
 @IonicPage()
 @Component({
@@ -15,8 +14,10 @@ import { EmailValidator } from '../../validators/email';
 })
 export class LoginPage {
 user={} as User;
-public loginForm;
 loading: any;
+@ViewChild('slider') slider: Slides;
+slideIndex = 0;
+slides = [1,2,3];
 //public backgroundImage = 'assets/img/background/background-6.jpg';
   constructor(    public loadingCtrl: LoadingController,
      public alertCtrl: AlertController,
@@ -24,16 +25,12 @@ loading: any;
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
      public navParams: NavParams) {
-      this.loginForm = formBuilder.group({
-        email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-        password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-    });
   }
 async login(user:User){
   try{
 const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
 if(r){
-  this.navCtrl.push(TabsPage);//ProfilePage);//setRoot +to profile tab
+  this.navCtrl.setRoot(TabsPage);//ProfilePage);// +to profile tab
 }else{
   this.Loading('user name or passord incorrict');
 }}catch(e){
@@ -52,7 +49,18 @@ ionViewWillLoad(){
 
     }
   })*/
-      console.log('ionViewDidLoad LoginPage');
+    }
+    async onSlideChanged() {
+      this.slideIndex = this.slider.getActiveIndex();
+      console.log('Slide changed! Current index is', this.slideIndex);
+    }
+
+    skip() {
+      //anonmis login
+       this.authr.auth.signInAnonymously().catch(function(error) {
+      this.Loading (error.message);
+      });
+       this.navCtrl.setRoot(TabsPage);
     }
    Loading(message) {
       const loading = this.loadingCtrl.create({
@@ -70,8 +78,34 @@ ionViewWillLoad(){
       loading.present();
     }
     resetPassword() {
+     /*   this.authr.auth.resetPassword(this.resetPasswordForm.value.email).then((user) => {
+            let alert = this.alertCtrl.create({
+                message: "We just sent you a reset link to your email",
+                buttons: [
+                    {
+                        text: "Ok",
+                        role: 'cancel',
+                        handler: () => {
+                            this.nav.pop();
+                        }
+                    }
+                ]
+            });
+            alert.present();
 
-
+        }, (error) => {
+            var errorMessage: string = error.message;
+            let errorAlert = this.alertCtrl.create({
+                message: errorMessage,
+                buttons: [
+                    {
+                        text: "Ok",
+                        role: 'cancel'
+                    }
+                ]
+            });
+            errorAlert.present();
+        });*/
       this.Loading('An e-mail was sent with your new password.');
     }
 }

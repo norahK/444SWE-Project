@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   //home page
-  rootPage:any ='LoginPage';// TabsPage;
+  rootPage:any;// ='LoginPage';// TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -20,4 +20,18 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+  /*
+  onAuthStateChanged(){
+    const unsubscribe = this.auth().onAuthStateChanged( user => {
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        unsubscribe();
+      } else {
+        this.rootPage = 'TabsPage';
+        unsubscribe();
+      }
+    });
+
+
+  }*/
 }
