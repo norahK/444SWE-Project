@@ -7,14 +7,19 @@
 </ion-header>
 
 <ion-content>
+
+
+
+
+
      <ion-list>
     <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
       <ion-icon name="ionic" item-start></ion-icon>
       @ionicframework
     </ion-item>
-    <ion-item *ngFor="let song of tips | async"(click)="showOptions(tips.$key, song.title)">
-        {{song.title}}
-      </ion-item>
+    <!--ion-item *ngFor="let tips of tips; let i = index"(click)="showOptions(tips.$key, tip.title)">
+        {{tip.title}}
+      </ion-item-->
   </ion-list>
 </ion-content>

@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Component , OnInit, HostBinding } from '@angular/core';
+import { AlertController,LoadingController,IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
+import { FormBuilder, Validators } from '@angular/forms';
 import{AngularFireAuth}from 'angularfire2/auth';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProfilePage } from '../profile/profile';
+import { TabsPage } from '../tabs/tabs';
+import { EmailValidator } from '../../validators/email';
+//import { ResetPassword } from '../reset-password/reset-password';
 
 @IonicPage()
 @Component({
@@ -17,18 +15,29 @@ import{AngularFireAuth}from 'angularfire2/auth';
 })
 export class LoginPage {
 user={} as User;
-
-  constructor(private authr:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams) {
-
+public loginForm;
+loading: any;
+//public backgroundImage = 'assets/img/background/background-6.jpg';
+  constructor(    public loadingCtrl: LoadingController,
+     public alertCtrl: AlertController,
+    private authr:AngularFireAuth,
+    public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+     public navParams: NavParams) {
+      this.loginForm = formBuilder.group({
+        email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+        password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
 async login(user:User){
   try{
 const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
 if(r){
-  this.navCtrl.push('ProfilePage');//setRoot +to profile tab
+  this.navCtrl.push(TabsPage);//ProfilePage);//setRoot +to profile tab
+}else{
+  this.Loading('user name or passord incorrict');
 }}catch(e){
-  console.error(e);
-
+  this.Loading(e);
 }
 }
 register(){this.navCtrl.push('RegisterPage')}
@@ -45,5 +54,24 @@ ionViewWillLoad(){
   })*/
       console.log('ionViewDidLoad LoginPage');
     }
+   Loading(message) {
+      const loading = this.loadingCtrl.create({
+        duration: 500
+      });
+      loading.onDidDismiss(() => {
+        const alert = this.alertCtrl.create({
+         // title: 'Success',
+          subTitle: message,
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      });
 
+      loading.present();
+    }
+    resetPassword() {
+
+
+      this.Loading('An e-mail was sent with your new password.');
+    }
 }

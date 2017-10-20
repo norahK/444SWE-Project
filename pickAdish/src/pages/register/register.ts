@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController,LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireDatabase}from 'angularfire2/database';
@@ -19,23 +19,44 @@ import{AngularFireDatabase}from 'angularfire2/database';
 export class RegisterPage {
 user ={} as User;
 
-constructor(private afauth: AngularFireAuth,public afd:AngularFireDatabase,
+constructor( public loadingCtrl: LoadingController, public alertCtrl: AlertController,private afauth: AngularFireAuth,public afd:AngularFireDatabase,
 public navCtrl: NavController, public navParams: NavParams) {
 
 }
-  register(user:User){
+async register(user:User){
     //add PW confrmation
+    try{
     const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password);
     if(result){
       this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));
+      this.Loading('regestration compleated sucssusfuly');
 
     }else{
-      //exesting account
+      this.Loading('you already have account ');
+    }
+  }catch(e){
+      this.Loading(e.message);
+
     }
 
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
+  }
+  Loading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 500
+    });
+    loading.onDidDismiss(() => {
+      const alert = this.alertCtrl.create({
+       // title: 'Success',
+        subTitle: message,
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    });
+
+    loading.present();
   }
 
 }
