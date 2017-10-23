@@ -15,6 +15,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './ap.firebase.config';
 import { AuthProvider } from '../providers/auth/auth';
+import {DishPageService} from '../providers/dish-page/dish-page.service';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider, DishPageService
   ]
 })
 export class AppModule {}
