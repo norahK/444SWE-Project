@@ -58,4 +58,8 @@ ionViewWillLoad(){
       }
   );
 }
+logout(user){
+
+
+}
 }
