@@ -16,6 +16,7 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     private fauth:AngularFireAuth,
     private toast:ToastController,
+    private authr:AngularFireAuth,
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
      // this.tips = af.database.list('/tips');//change to user tips
@@ -59,10 +60,14 @@ ionViewWillLoad(){
       }
   );
 }
+/*get currentUserAnonymous(): boolean {
+  return this.authr ? this.authr.authState.anonymous : false
+}*/
 logout(){
-  //delete session
-const root= this.app.getRootNavs();
+  this.authr.auth.signOut();
+  this.navCtrl.setRoot('WelcomeSlideoPage');
+ // const root= this.app.getRootNavs();
 //root.popToRoot();
-this.navCtrl.push('WelcomeSlideoPage');//error
+//this.navCtrl.push('WelcomeSlideoPage');//error
 }
 }

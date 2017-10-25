@@ -14,7 +14,9 @@
      </ion-header>
 
 <ion-content>
-
+    <div *ngIf="auth.currentUserAnonymous" >
+        Content for anonymous users
+      </div>
 
 
 

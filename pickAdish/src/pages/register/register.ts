@@ -25,23 +25,21 @@ public navCtrl: NavController, public navParams: NavParams) {
 }
 async register(user:User){
     //add PW confrmation
-    try{
-    const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password);
-    if(result){
-      this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));
-      this.Loading('regestration compleated sucssusfuly');
-
-    }else{
-      this.Loading('you already have account ');
+try{
+    const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password).
+    then((success)=>{ this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));
+  this.Loading('regestration compleated sucssusfuly');
+  }
+  ).catch(function(error) {
+this.Loading(error.message);     });
     }
-  }catch(e){
-      this.Loading(e.message);
-
+    catch(r){
+      this.Loading(r.message);
+      //this.Loading(r.message);
     }
-
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+   // console.log('ionViewDidLoad RegisterPage');
   }
   Loading(message) {
     const loading = this.loadingCtrl.create({

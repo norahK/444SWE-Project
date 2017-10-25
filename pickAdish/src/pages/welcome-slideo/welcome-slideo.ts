@@ -8,6 +8,7 @@ import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/email';
 import { LoginPage } from '../login/login';
 
+
 @IonicPage()
 @Component({
   selector: 'page-welcome-slideo',
@@ -44,22 +45,27 @@ export class WelcomeSlideoPage {
   }
   async login(user:User){
     try{
-  const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
-  if(r){
+  const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password)
+  .then((success)=>{
     this.navCtrl.setRoot(TabsPage);//ProfilePage);// +to profile tab
-  }else{
-    this.Loading('user name or passord incorrict');
-  }}catch(e){
-    this.Loading(e);
+  })
+  .catch(
+    (err)=>{this.Loading(err);
+    }
+  );}
+  catch(r){
+    this.Loading(r.message);
   }
   }
+
   register(){this.navCtrl.push('RegisterPage')}
   skip() {
     //anonmis login
-     this.authr.auth.signInAnonymously().catch(function(error) {
+     this.authr.auth.signInAnonymously()
+     .then((success)=>{this.navCtrl.setRoot(TabsPage);
+     }).catch(function(error) {
     this.Loading (error.message);
     });
-     this.navCtrl.setRoot(TabsPage);
   }
  Loading(message) {
     const loading = this.loadingCtrl.create({

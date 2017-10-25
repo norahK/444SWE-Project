@@ -24,7 +24,7 @@
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",
     "@ionic/storage": "2.0.1",
-    "angularfire2": "git+https://github.com/angular/angularfire2.git",
+    "angularfire2": "^5.0.0-rc.0",
     "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-device": "^1.1.4",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.0",
-    "typescript": "2.3.4"
+    "typescript": "^2.5.3"
   },
   "description": "An Ionic project",
   "cordova": {
