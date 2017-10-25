@@ -22,4 +22,31 @@ export class DishPage {
     console.log('ionViewDidLoad DishPage');
   }
 
+
+  tap: string = "type";
+  isAndroid: boolean = false;
+
+  //constructor(platform: Platform) {
+  //  this.isAndroid = platform.is('android');}
+
+ imgSrc1: string = "assets/img/Like.png";
+
+  onMouseOver1(): void {
+    this.imgSrc1 = "assets/img/Liked.png";
+  }
+
+  onMouseOut1(): void {
+    this.imgSrc1 = "assets/img/Like.png";
+  }
+  imgSrc2: string = "assets/img/Rate.png";
+
+  onMouseOver2(): void {
+    this.imgSrc2 = "assets/img/Rated.png";
+  }
+
+  onMouseOut2(): void {
+    this.imgSrc2 = "assets/img/Rate.png";
+    }
 }
+
+
