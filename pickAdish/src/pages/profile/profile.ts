@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {  ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
+import {  App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireDatabase,AngularFireList} from'angularfire2/database';
 //import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
 
 @Component({
   selector: 'page-profile',
@@ -10,7 +11,7 @@ import{AngularFireDatabase,AngularFireList} from'angularfire2/database';
 })
 export class ProfilePage {
    tips: AngularFireList<any>;
-  constructor(//af: AngularFire,
+  constructor(public app: App,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
     private fauth:AngularFireAuth,
@@ -58,8 +59,10 @@ ionViewWillLoad(){
       }
   );
 }
-logout(user){
-
-
+logout(){
+  //delete session
+const root= this.app.getRootNavs();
+//root.popToRoot();
+this.navCtrl.push('WelcomeSlideoPage');//error
 }
 }

@@ -16,6 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './ap.firebase.config';
 import { AuthProvider } from '../providers/auth/auth';
 import {DishPageService} from '../providers/dish-page/dish-page.service';
+//import { RegisterPage } from '../pages/register/register';
 
 
 @NgModule({
@@ -25,7 +26,10 @@ import {DishPageService} from '../providers/dish-page/dish-page.service';
     ProfilePage,
     HomePage,
     ShopsPage,
-    TabsPage
+    TabsPage,
+   // LoginPage,
+   // RegisterPage,
+
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,10 @@ import {DishPageService} from '../providers/dish-page/dish-page.service';
     ProfilePage,
     HomePage,
         ShopsPage,
-    TabsPage
+        TabsPage,
+//LoginPage,
+    //RegisterPage,
+
   ],
   providers: [
     StatusBar,

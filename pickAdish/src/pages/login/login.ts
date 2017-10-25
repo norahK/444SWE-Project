@@ -6,6 +6,7 @@ import{AngularFireAuth}from 'angularfire2/auth';
 import { ProfilePage } from '../profile/profile';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/email';
+import{RegisterPage} from '../register/register';
 
 @IonicPage()
 @Component({
