@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   //home page
-  rootPage:any='DishPage';// TabsPage;
+  rootPage:any='WelcomeSlideoPage';//='DishPage';// TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

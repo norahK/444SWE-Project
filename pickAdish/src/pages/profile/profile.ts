@@ -35,6 +35,18 @@ this.user.id=this.authr.auth.currentUser.uid;
   }
 });
   }}
+  sittings(){
+
+  }
+  add(){
+
+  }
+delete(tip){
+
+}gotoDishpage(id){
+
+
+}
   gitalltips(email){
     this.tips= this.db.list('/tips/');//.only from regester user
   }

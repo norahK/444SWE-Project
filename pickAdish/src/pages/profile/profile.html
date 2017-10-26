@@ -1,21 +1,21 @@
-        <ion-header>
+        <!--ion-header>
                 <ion-navbar transparent>
                     <ion-title>profile</ion-title>
                   <ion-buttons right>
                     <!--button ion-button color="light"
                             *ngIf="slideIndex < slides.length - 1"
                             class="skip-button"
-                            (click)="skip()">SKIP</button-->
+                            (click)="skip()">SKIP</button>
                   </ion-buttons>
                 </ion-navbar>
-                <!--ion-header-bar align-title="left" class="bar-positive"-->
+                <ion-header-bar align-title="left" class="bar-positive">
 
      </ion-header>
 
 <ion-content>
-    <!--div *ngIf="auth.currentUserAnonymous" >
+    <div *ngIf="auth.currentUserAnonymous" >
         Content for anonymous users
-      </div-->
+      </div>
 
 
 
@@ -30,6 +30,77 @@
     </ion-item>
     <!--ion-item *ngFor="let tips of tips; let i = index"(click)="showOptions(tips.$key, tip.title)">
         {{tip.title}}
-      </ion-item-->
+      </ion-item>
   </ion-list>
+</ion-content>
+<!---->
+
+
+<ion-content padding class="transparent-header">
+  <ion-header>
+    <ion-navbar>
+    </ion-navbar>
+  </ion-header>
+  <div id="profile-bg" [ngStyle]="{'background':'#F08655'}"></div>
+  <div id="content">
+    <div id="profile-info" padding>
+      <img id="profile-image" [src]="user.profileImage">
+      <h3 id="profile-name">{{user.name}}</h3>
+      <p class="profile-description">{{user.bio}}</p>
+      <button ion-button  small color="#F08655" (click)="add()">ADD New Dish</button>
+      <button ion-button  class="follow-button" small color="purple" (click)="sittings()">Sittings<ion-icon name=""></ion-icon></button>
+      <button ion-button (click)="logout()">Log out</button>
+    </div>
+    <hr/>
+
+    <ion-row class="profile-numbers">
+      <ion-col col-4>
+        <p>liked dish</p>
+        <span>{{user.liked}}</span>
+      </ion-col>
+      <ion-col col-4>
+        <p>added dishes</p>
+        <span>{{user.added}}</span>
+      </ion-col>
+      <ion-col col-4>
+        <p>tips </p>
+        <span>{{user.tips}}</span>
+      </ion-col>
+    </ion-row>
+
+    <div id="tips">
+      <ion-card *ngFor="let tip of tips">
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="user.profileImage">
+          </ion-avatar>
+          <h2 class="sticky">{{user.name}}</h2>
+          <p>{{tip.date}}</p>
+        </ion-item>
+        <ion-card-content>
+            <h3>{{tip.title}}</h3>
+          <p>{{tip.contant}}</p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col col-4>
+              <button ion-button  color="purple" clear small icon-left (click)="gotoDishpage()">
+                  <ion-icon name='text'></ion-icon>
+                 go to dish page
+                </button>
+          </ion-col>
+          <ion-col col-5>
+              <button ion-button no-padding color="purple" clear small icon-left (click)="delete(tip)">
+                  <ion-icon name='trash'></ion-icon>
+delete
+                </button>
+          </ion-col>
+          <ion-col col-3 align-self-center text-center>
+            <p>
+              {{tip.date}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
