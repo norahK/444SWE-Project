@@ -1,17 +1,69 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      <!-->search<!-->
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+
+  <ion-list>
+    <ion-item >
+<!-->foreach(){}<!-->
+      <ion-card>
+    <img src="img/z.jpg"/>
+    <ion-card-content>
+      <ion-card-title> Dish name        </ion-card-title>
+      <p>  shop name  </p>
+      <p> ****</p>
+      <p>0.0 RS</p>
+    </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+  <img src=""/>
+  <ion-card-content>
+    <ion-card-title> Dish name        </ion-card-title>
+    <p>  shop name  </p>
+    <p> ****</p>
+    <p>0.0 RS</p>
+  </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+<img src="img/nin-live.png"/>
+<ion-card-content>
+  <ion-card-title> Dish name        </ion-card-title>
+  <p>  shop name  </p>
+  <p> ****</p>
+  <p>0.0 RS</p>
+</ion-card-content>
+</ion-card>
+
+<ion-card>
+<img src="img/nin-live.png"/>
+<ion-card-content>
+<ion-card-title> Dish name        </ion-card-title>
+<p>  shop name  </p>
+<p> ****</p>
+<p>0.0 RS</p>
+</ion-card-content>
+</ion-card>
+
+<ion-card>
+<img src="img/nin-live.png"/>
+<ion-card-content>
+<ion-card-title> Dish name        </ion-card-title>
+<p>  shop name  </p>
+<p> ****</p>
+<p>0.0 RS</p>
+</ion-card-content>
+</ion-card>
+
+    </ion-item>
+  </ion-list>
 </ion-content>
