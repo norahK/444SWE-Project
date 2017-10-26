@@ -1,7 +1,6 @@
         <ion-header>
-          <ion-title>profile </ion-title>
                 <ion-navbar transparent>
-                    <ion-title></ion-title>
+                    <ion-title>profile</ion-title>
                   <ion-buttons right>
                     <!--button ion-button color="light"
                             *ngIf="slideIndex < slides.length - 1"
@@ -14,15 +13,16 @@
      </ion-header>
 
 <ion-content>
-    <div *ngIf="auth.currentUserAnonymous" >
+    <!--div *ngIf="auth.currentUserAnonymous" >
         Content for anonymous users
-      </div>
+      </div-->
 
 
 
 
      <ion-list>
-    <ion-list-header>welcom "name"</ion-list-header>
+    <ion-header>welcom >{{user.name}}</ion-header>
+    <p class="username">{{user.name}}</p>
     <button ion-button (click)="logout()">Log out</button>
     <ion-item>
       <ion-icon name="ionic" item-start></ion-icon>

@@ -28,6 +28,7 @@ async register(user:User){
 try{
     const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password).
     then((success)=>{ this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));
+    //this.afauth.auth.currentUser.uid
   this.Loading('regestration compleated sucssusfuly');
   }
   ).catch(function(error) {

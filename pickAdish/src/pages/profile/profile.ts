@@ -4,23 +4,37 @@ import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireDatabase,AngularFireList} from'angularfire2/database';
 //import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-   tips: AngularFireList<any>;
+  user={} as User;
+  tips: AngularFireList<any>;
   constructor(public app: App,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
-    private fauth:AngularFireAuth,
     private toast:ToastController,
     private authr:AngularFireAuth,
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
-     // this.tips = af.database.list('/tips');//change to user tips
+     // this.tips = af.database.list('/tips');//change to user tipsth
+     if(this.authr.auth.currentUser.isAnonymous)
+     {
+
+     }else{
+     this.authr.authState.subscribe(res => {
+  if (res && res.uid) {
+   this.user.email= res.email;
+this.user.email=this.authr.auth.currentUser.email;
+this.user.id=this.authr.auth.currentUser.uid;
+ } else {
+    console.log('user not logged in');
   }
+});
+  }}
   gitalltips(email){
     this.tips= this.db.list('/tips/');//.only from regester user
   }
@@ -47,7 +61,7 @@ this.db.list('/tips/').remove(key);//.then()
 deletetip.present();
 }
 ionViewWillLoad(){
-  this.fauth.authState.subscribe(data=>{
+  this.authr.authState.subscribe(data=>{
     if(data.email){
        this.toast.create({
          message: 'welcome',
