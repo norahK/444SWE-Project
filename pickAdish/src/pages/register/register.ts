@@ -3,7 +3,8 @@ import { AlertController,LoadingController, IonicPage, NavController, NavParams 
 import { User } from '../../models/user';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireDatabase}from 'angularfire2/database';
-
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -18,21 +19,30 @@ import{AngularFireDatabase}from 'angularfire2/database';
 })
 export class RegisterPage {
 user ={} as User;
+u: Observable<firebase.User>;
 
-constructor( public loadingCtrl: LoadingController, public alertCtrl: AlertController,private afauth: AngularFireAuth,public afd:AngularFireDatabase,
-public navCtrl: NavController, public navParams: NavParams) {
+constructor( public loadingCtrl: LoadingController, public alertCtrl: AlertController
+  ,private afauth: AngularFireAuth
+  ,public afd:AngularFireDatabase,
+public navCtrl: NavController
+, public navParams: NavParams) {
+  this.u = this.afauth.authState;
 
 }
 async register(user:User){
     //add PW confrmation
 try{
-    const result =this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password).
-    then((success)=>{ this.afd.list('/users/').push(user);//push({titl: data.title}//.push(user));
+   this.afauth.auth.createUserWithEmailAndPassword(user.email,user.password).
+    then((success)=>{
+       this.afd.object(`users/${this.afauth.auth.currentUser.uid}`).set(this.user)
+       .then(()=>
+        this.Loading('regestration compleated sucssusfuly'));
+    // ) ;//push({titl: data.title}//.push(user));
     //this.afauth.auth.currentUser.uid
-  this.Loading('regestration compleated sucssusfuly');
   }
-  ).catch(function(error) {
-this.Loading(error.message);     });
+  ).catch((err)=>{this.Loading(err);
+  }
+);
     }
     catch(r){
       this.Loading(r.message);
@@ -42,7 +52,7 @@ this.Loading(error.message);     });
   ionViewDidLoad() {
    // console.log('ionViewDidLoad RegisterPage');
   }
-  Loading(message) {
+  async Loading(message) {
     const loading = this.loadingCtrl.create({
       duration: 500
     });
@@ -56,6 +66,13 @@ this.Loading(error.message);     });
     });
 
     loading.present();
+  }
+  sendEmailVerification() {
+    this.afauth.authState.subscribe(user => {
+        user.sendEmailVerification()
+        .then(() => {
+this.Loading('email vervication has sended to your email ')        })
+      });
   }
 
 }

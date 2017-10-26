@@ -41,11 +41,11 @@
     <ion-navbar>
     </ion-navbar>
   </ion-header>
-  <div id="profile-bg" [ngStyle]="{'background':'#F08655'}"></div>
+  <div id="profile-bg" color="primary" [ngStyle]="{'background':'#F08655'}"></div>
   <div id="content">
     <div id="profile-info" padding>
       <img id="profile-image" [src]="user.profileImage">
-      <h3 id="profile-name">{{user.name}}</h3>
+      <h3 id="profile-name">{{(usersdata |async)?.user.name}}</h3>
       <p class="profile-description">{{user.bio}}</p>
       <button ion-button  small color="#F08655" (click)="add()">ADD New Dish</button>
       <button ion-button  class="follow-button" small color="purple" (click)="sittings()">Sittings<ion-icon name=""></ion-icon></button>

@@ -63,50 +63,55 @@ ionViewWillLoad(){
       });
        this.navCtrl.setRoot(TabsPage);
     }
-   Loading(message) {
-      const loading = this.loadingCtrl.create({
-        duration: 500
-      });
-      loading.onDidDismiss(() => {
-        const alert = this.alertCtrl.create({
-         // title: 'Success',
-          subTitle: message,
-          buttons: ['Dismiss']
-        });
-        alert.present();
-      });
+    //tested sucsess :)
+    Loading(message) {
+       const loading = this.loadingCtrl.create({
+         duration: 500
+       });
+       loading.onDidDismiss(() => {
+         const alert = this.alertCtrl.create({
+           subTitle: message,
+           buttons: ['Dismiss']
+         });
+         alert.present();
+       });
 
-      loading.present();
-    }
-    resetPassword() {
-     /*   this.authr.auth.resetPassword(this.resetPasswordForm.value.email).then((user) => {
-            let alert = this.alertCtrl.create({
-                message: "We just sent you a reset link to your email",
-                buttons: [
-                    {
-                        text: "Ok",
-                        role: 'cancel',
-                        handler: () => {
-                            this.nav.pop();
-                        }
-                    }
-                ]
-            });
-            alert.present();
+       loading.present();
+     }
 
-        }, (error) => {
-            var errorMessage: string = error.message;
-            let errorAlert = this.alertCtrl.create({
-                message: errorMessage,
-                buttons: [
-                    {
-                        text: "Ok",
-                        role: 'cancel'
-                    }
-                ]
-            });
-            errorAlert.present();
-        });*/
-      this.Loading('An e-mail was sent with your new password.');
-    }
+   //tested success :)
+     resetPassword() {
+             let alert = this.alertCtrl.create({
+               title:'enter your email',
+                 inputs:[
+                   {
+                     name:'recoverEmail',
+                     placeholder:'email'
+                   },
+                 ],
+                 buttons: [
+                     {
+                         text: "send",
+                         handler: data=> {
+                  this.authr.auth.sendPasswordResetEmail(data.recoverEmail)
+                           .then(()=>{
+                                     this.navCtrl.popToRoot();
+                             this.Loading('email sended check your email ');})
+                           .catch((err)=>{
+                             this.navCtrl.popToRoot();
+                             this.Loading(err.message);
+                           });
+                     }
+                     },
+                     {
+                       text: "cancel",
+                       role: 'Dismiss'
+
+                   }
+                 ]
+             });
+             alert.present();
+
+     }
+
 }

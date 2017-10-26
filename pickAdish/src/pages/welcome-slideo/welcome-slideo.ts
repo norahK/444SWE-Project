@@ -1,5 +1,5 @@
 import {ViewChild , Component , OnInit, HostBinding } from '@angular/core';
-import {Slides , AlertController,LoadingController,IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import {App,Slides , AlertController,LoadingController,IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import{AngularFireAuth}from 'angularfire2/auth';
@@ -7,7 +7,6 @@ import { ProfilePage } from '../profile/profile';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/email';
 import { LoginPage } from '../login/login';
-
 
 @IonicPage()
 @Component({
@@ -21,7 +20,7 @@ export class WelcomeSlideoPage {
   @ViewChild('slider') slider: Slides;
   slideIndex = 0;
   slides = [1,2,3];
-  constructor(  public loadingCtrl: LoadingController,
+  constructor( public app:App,public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
    private authr:AngularFireAuth,
    public navCtrl: NavController,
@@ -30,6 +29,7 @@ export class WelcomeSlideoPage {
  }
 
   ionViewDidLoad() {
+    //check for previos log in to not log in evry time user login from same device
 /*this.OfAuth.outhState.subscribe(data=>{
     if(data.email &&data.uid){
       this.toast.create({
@@ -67,13 +67,14 @@ export class WelcomeSlideoPage {
     this.Loading (error.message);
     });
   }
+
+//tested sucsess :)
  Loading(message) {
     const loading = this.loadingCtrl.create({
       duration: 500
     });
     loading.onDidDismiss(() => {
       const alert = this.alertCtrl.create({
-       // title: 'Success',
         subTitle: message,
         buttons: ['Dismiss']
       });
@@ -82,35 +83,41 @@ export class WelcomeSlideoPage {
 
     loading.present();
   }
+
+//tested success :)
   resetPassword() {
-   /*   this.authr.auth.resetPassword(this.resetPasswordForm.value.email).then((user) => {
           let alert = this.alertCtrl.create({
-              message: "We just sent you a reset link to your email",
+            title:'enter your email',
+              inputs:[
+                {
+                  name:'recoverEmail',
+                  placeholder:'email'
+                },
+              ],
               buttons: [
                   {
-                      text: "Ok",
-                      role: 'cancel',
-                      handler: () => {
-                          this.nav.pop();
-                      }
+                      text: "send",
+                      handler: data=> {
+               this.authr.auth.sendPasswordResetEmail(data.recoverEmail)
+                        .then(()=>{
+                                  this.navCtrl.popToRoot();
+                          this.Loading('email sended check your email ');})
+                        .catch((err)=>{
+                          this.navCtrl.popToRoot();
+                          this.Loading(err.message);
+                        });
                   }
+                  },
+                  {
+                    text: "cancel",
+                    role: 'Dismiss'
+
+                }
               ]
           });
           alert.present();
 
-      }, (error) => {
-          var errorMessage: string = error.message;
-          let errorAlert = this.alertCtrl.create({
-              message: errorMessage,
-              buttons: [
-                  {
-                      text: "Ok",
-                      role: 'cancel'
-                  }
-              ]
-          });
-          errorAlert.present();
-      });*/
-    this.Loading('An e-mail was sent with your new password.');
   }
+
+
 }
