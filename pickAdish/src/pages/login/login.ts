@@ -3,9 +3,7 @@ import {Slides , AlertController,LoadingController,IonicPage, NavController, Nav
 import { User } from '../../models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import{AngularFireAuth}from 'angularfire2/auth';
-import { ProfilePage } from '../profile/profile';
 import { TabsPage } from '../tabs/tabs';
-import { EmailValidator } from '../../validators/email';
 import{RegisterPage} from '../register/register';
 
 @IonicPage()
@@ -51,18 +49,8 @@ ionViewWillLoad(){
     }
   })*/
     }
-    async onSlideChanged() {
-      this.slideIndex = this.slider.getActiveIndex();
-      console.log('Slide changed! Current index is', this.slideIndex);
-    }
 
-    skip() {
-      //anonmis login
-       this.authr.auth.signInAnonymously().catch(function(error) {
-      this.Loading (error.message);
-      });
-       this.navCtrl.setRoot(TabsPage);
-    }
+
     //tested sucsess :)
     Loading(message) {
        const loading = this.loadingCtrl.create({

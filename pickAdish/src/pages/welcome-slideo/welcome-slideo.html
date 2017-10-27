@@ -7,8 +7,8 @@
                       <ion-slide class="slide-background" style="background: #F0C0AE">>
                       <div class="text-wrapper">
                           <div class="slide-text">
-                            <h2 class="slide-title">pick a dish app</h2><br>
-                            <p>to choose the propiriat dish for your occation</p>
+                            <h2 class="slide-title" style="color:#F08655">pick a dish App</h2><br>
+                            <p style="color:#EBEBE4">to choose the appropriate dish for your occasion</p>
                           </div>
                         </div>
                       </ion-slide>
@@ -16,22 +16,21 @@
                       <ion-slide class="slide-background" style="background:#F0C0AE">
                         <div class="text-wrapper">
                             <div class="slide-text">
-                              <h2 class="slide-title">what you will find</h2><br>
-                              <p>1/browser all dishes in all shops </p>
-                              <p>2/like and save in lists you created </p>
-                              <p>3/take alook on dish rate to choose the propriat for you  </p>
+                              <h2 class="slide-title" style="color:#F08655">what you will find</h2><br>
+                              <p style="color:#EBEBE4">1/browser all dishes in all shops </p>
+                              <p style="color:#EBEBE4">2/like and save dishes in lists you created </p>
+                              <p style="color:#EBEBE4">3/take a look on dish rate to choose the appropriate for you</p>
 
                             </div>
                           </div>
                       </ion-slide>
 
                       <ion-slide>
-                          <div ng-include src="../register/register.html"></div>
                               <div padding>
                                   <ion-row>
                                       <ion-col>
-                                          <img class="logo" style="width: 100px; height: 100px;" src="assets/img/Picture1.png" />
-                                        </ion-col>
+                                        <img class="logo" style="width: 150px; height: 120px;" src="assets/img/Picture1.png" /><br>
+                                      </ion-col>
                                     </ion-row>
                                     <ion-row>
                                         <ion-col>
@@ -50,10 +49,15 @@
                               </ion-row>
                                   <button ion-button (click)="login(user)">Login</button>
                                   <button ion-button (click)="register()" color="light">Register</button>
-                                  <button ion-button block clear (click)="resetPassword()">
+                                  <br>
+                                  <button ion-button clear (click)="resetPassword()">
                                       I forgot my password
                                     </button>
-                                    <button ion-button clear full (click)="skip()">Skip!</button>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <button ion-button clear  (click)="skip()">Skip!</button>
                                     </div>
 
             </ion-slide>

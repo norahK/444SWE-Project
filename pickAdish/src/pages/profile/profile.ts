@@ -6,6 +6,7 @@ import {FirebaseListObservable } from "angularfire2/database-deprecated";
 import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
 import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-profile',
@@ -16,6 +17,7 @@ export class ProfilePage {
   user={} as User;
   tips: Observable<any[]>;
   usersdata :AngularFireObject<User>;
+
   constructor(public app: App,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
@@ -23,39 +25,50 @@ export class ProfilePage {
     private authr:AngularFireAuth,
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
-     this.tips = db.list('/tips').valueChanges();//change to user tipsth
-     if(this.authr.auth.currentUser.isAnonymous)
-     {
+      const unsubscribe = this.authr.authState.subscribe(logedin => {
+        if(!logedin){
+          this.user.name = "no user ";
+          return;
+          //return signout
+        }
+        else if (logedin.isAnonymous) {
+          this.user.name= "anonymes";
+        } else {
 
-     }else{
-     this.authr.authState.subscribe(res => {
-  if (res && res.uid) {
-   // this.user = this.db.list('users/${auth.uid}');
-    this.user.email= res.email;
-this.user.email=this.authr.auth.currentUser.email;
-this.user.id=this.authr.auth.currentUser.uid;
- } else {
-    console.log('user not logged in');
-  }
-});
-  }}
-//  get (): FirebaseListObservable<any[]>{
+          this.user.id = logedin.uid;
+          this.user.email= logedin.email;
+          //from database
+          this.user.name = logedin.displayName;
+          //gitall info method !
+          this.user.bio ="get from database";
+          this.gitalltips( logedin.uid);
+
+        }
+      });
+    }
+     //  get (): FirebaseListObservable<any[]>{
   //  return this.db.list('/tips');
 //}
   sittings(){
-
+    this.navCtrl.push('SettingsPage');
   }
   add(){
-
+//  this.navCtrl.push('SettingsPage');
   }
 delete(tip){
 
-}gotoDishpage(id){
-
-
 }
-
-  gitalltips(email){
+gotoDishpage(id){
+ // this.navCtrl.push('SettingsPage');+pass id with it
+}
+  gitalltips(uid){
+    /*   firebase
+    .database()
+    .ref('/userProfile')
+    .child(newUser.uid)
+    .set({ email: email });
+  });*/
+     //this.tips = db.list('/tips').valueChanges();//change to user tipsth
     //this.tips= this.db.list('/tips/');//.only from regester user
   }
   showOptions(key,title){

@@ -50,7 +50,6 @@ try{
     }
   }
   ionViewDidLoad() {
-   // console.log('ionViewDidLoad RegisterPage');
   }
   async Loading(message) {
     const loading = this.loadingCtrl.create({
@@ -67,7 +66,7 @@ try{
 
     loading.present();
   }
-  sendEmailVerification() {
+  sendEmailVerification() {//later
     this.afauth.authState.subscribe(user => {
         user.sendEmailVerification()
         .then(() => {

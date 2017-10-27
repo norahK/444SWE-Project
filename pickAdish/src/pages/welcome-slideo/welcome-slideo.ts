@@ -3,10 +3,7 @@ import {App,Slides , AlertController,LoadingController,IonicPage, NavController,
 import { User } from '../../models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import{AngularFireAuth}from 'angularfire2/auth';
-import { ProfilePage } from '../profile/profile';
 import { TabsPage } from '../tabs/tabs';
-import { EmailValidator } from '../../validators/email';
-import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -30,6 +27,7 @@ export class WelcomeSlideoPage {
 
   ionViewDidLoad() {
     //check for previos log in to not log in evry time user login from same device
+
 /*this.OfAuth.outhState.subscribe(data=>{
     if(data.email &&data.uid){
       this.toast.create({
@@ -47,7 +45,7 @@ export class WelcomeSlideoPage {
     try{
   const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password)
   .then((success)=>{
-    this.navCtrl.setRoot(TabsPage);//ProfilePage);// +to profile tab
+    this.navCtrl.setRoot(TabsPage);//as a root even when return to app with out sign out
   })
   .catch(
     (err)=>{this.Loading(err);

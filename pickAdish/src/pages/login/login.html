@@ -1,59 +1,39 @@
-<ion-content ><!--padding fullscreen="true" class="no-padding-top">
-
-      <ion-slides pager  #slider pager="true" (ionSlideWillChange)=onSlideChanged()>
-
-                    <ion-slide class="slide-background" style="background: #F0C0AE">>
-                    <div class="text-wrapper">
-                        <div class="slide-text">
-                          <h2 class="slide-title">pick a dish app</h2><br>
-                          <p>to choose the propiriat dish for your occation</p>
-                        </div>
-                      </div>
-                    </ion-slide>
-
-                    <ion-slide class="slide-background" style="background:#F0C0AE">
-                      <div class="text-wrapper">
-                          <div class="slide-text">
-                            <h2 class="slide-title" [innerHTML]="2"></h2><br>
-                            <p [innerHTML]="2"></p>
-                          </div>
-                        </div>
-                    </ion-slide>
-
-                    <ion-slide>
-                        <div ng-controller="ExampleController">
-                            <div ng-include="'/src/pages/profile/profile.html'"></div>
+  <ion-header>
+                    <ion-title>login</ion-title>
+                     </ion-header>
 
 
-</div-->
-                            <div padding>
-                                <ion-row>
-                                    <ion-col>
-                                        <img class="logo" style="width: 100px; height: 100px;" src="assets/img/Picture1.png" />
-                                      </ion-col>
-                                  </ion-row>
-                                  <ion-row>
-                                      <ion-col>
 
-                                                    <ion-item><ion-label stacked>Email</ion-label>
 
-                                <ion-input type="email" [(ngModel)]="user.email"placeholder="Your email address" ></ion-input>
-                              </ion-item>
+<ion-content >
+<div padding>
+  <ion-row>
+      <ion-col>
+        <img class="logo" style="width: 150px; height: 120px;" src="assets/img/Picture1.png" /><br>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
 
-                            <ion-item>
-                              <ion-label stacked>Password  </ion-label>
-                                  <ion-input  [(ngModel)]="user.password" type="password" placeholder="Your password"
-                                ></ion-input>
-                                </ion-item>
-                              </ion-col>
-                            </ion-row>
-                                <button ion-button (click)="login(user)">Login</button>
-                                <button ion-button (click)="register()" color="light">Register</button>
-                                <button ion-button block clear (click)="resetPassword()">
-                                    I forgot my password
-                                  </button>
-                                  <button ion-button clear full (click)="skip()">Skip!</button>
-                                  </div>
+                      <ion-item><ion-label stacked>Email</ion-label>
+
+  <ion-input type="email" [(ngModel)]="user.email"placeholder="Your email address" ></ion-input>
+</ion-item>
+
+<ion-item>
+<ion-label stacked>Password  </ion-label>
+    <ion-input  [(ngModel)]="user.password" type="password" placeholder="Your password"
+  ></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+  <button ion-button (click)="login(user)">Login</button>
+  <button ion-button (click)="register()" color="light">Register</button>
+  <br>
+  <button ion-button clear (click)="resetPassword()">
+      I forgot my password
+    </button>
+    </div>
 
 
 </ion-content>
