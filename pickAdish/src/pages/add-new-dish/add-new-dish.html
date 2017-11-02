@@ -4,11 +4,52 @@
   <ion-navbar>
     <ion-title>add-new-dish</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-<button ion-button (click)="takePhoto()">pic <ion-icon name="add"></ion-icon>
-</button>
+   <ion-list>
+      <ion-item>
+        <ion-label>name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>price SR</ion-label>
+        <ion-input type="price"></ion-input>
+      </ion-item>
+    <ion-item>
+      <button ion-button (click)="takePhoto()">pic <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+        <ion-label>type of dish </ion-label>
+        <ion-select [(ngModel)]="types">
+          <ion-option value="non">choose a type</ion-option>
+          <ion-option value="cake">cake</ion-option>
+          <ion-option value="choco">choco</ion-option>
+          <ion-option value="healthy">healty</ion-option>
+        </ion-select>
+      </ion-item>
+<!--list of checks-->
+<ion-item>
+    <ion-label>occasion </ion-label>
+    <ion-checkbox disabled="true"></ion-checkbox>
+</ion-item>
+
+<!--shops from database-->
+    <ion-item>
+        <ion-label>shops</ion-label>
+        <ion-select [(ngModel)]="shops">
+          <ion-option value="non">choose a shop or add one </ion-option>
+        </ion-select>
+</ion-item>
+<ion-item>        <button ion-button (click)="addShop()">add shop <ion-icon name="add"></ion-icon> </button>
+</ion-item>
+<ion-item>
+    <div padding>
+        <button ion-button (click)="submit()">Add</button>
+        <button ion-button (click)="back()">Cancel</button>
+        </div>
+</ion-item>
+    </ion-list>
+
 </ion-content>

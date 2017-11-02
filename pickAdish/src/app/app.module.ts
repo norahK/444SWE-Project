@@ -16,6 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './ap.firebase.config';
 import { AuthProvider } from '../providers/auth/auth';
 import {DishPageService} from '../providers/dish-page/dish-page.service';
+import { Camera } from '@ionic-native/camera';//import in app.module.ts
 
 //import { RegisterPage } from '../pages/register/register';
 
@@ -51,6 +52,7 @@ import {DishPageService} from '../providers/dish-page/dish-page.service';
 
   ],
   providers: [
+    Camera,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
