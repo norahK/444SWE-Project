@@ -33,41 +33,37 @@
       </ion-item>
   </ion-list>
 </ion-content>
-<!---->
+<!--[src]="(user |async )?.profileImage"  style="width: 150px; height: 120px;"
+-->
 
 
 <ion-content padding class="transparent-header">
-  <ion-header>
-    <ion-navbar>
-    </ion-navbar>
-  </ion-header>
-  <div id="profile-bg" color="primary"></div>
+
+  <div id="profile-bg" color="primary"  Style="background-color: #F1C4B1;"></div>
   <div id="content">
     <div id="profile-info" padding>
-      <img id="profile-image" [src]="user.profileImage">
-      <h3 id="profile-name">  {{user.name}}</h3>
-      <p class="profile-description">{{user.bio}}</p>
+
+      <img id="profile-image" [src]="imageUrl"/>
+      <h3 id="profile-name">  {{(user | async)?.name}}</h3>
+      <p class="profile-description">{{(user | async)?.bio}}</p>
       <button ion-button  small color="#F08655" (click)="add()">ADD NEW DISH</button>
-      <button ion-button  class="follow-button" small color="purple" (click)="sittings()">Sittings<ion-icon name=""></ion-icon></button>
-     <!--
-     log out just for now
-     -->
-      <button ion-button (click)="logout()">Log out</button>
+      <button ion-button  class="follow-button" small color="purple" (click)="sittings()"> profile Sitting<ion-icon name='settings' item-start></ion-icon><ion-icon name=""></ion-icon></button>
+      <button ion-button small color="#F08655" (click)="logout()">Log out</button>
     </div>
     <hr/>
 
     <ion-row class="profile-numbers">
       <ion-col col-4>
         <p>liked dish</p>
-        <span>{{user.liked}}</span>
+        <span>{{(user | async)?.liked}}</span>
       </ion-col>
       <ion-col col-4>
         <p>added dishes</p>
-        <span>{{user.added}}</span>
+        <span>{{(user | async)?.added}}</span>
       </ion-col>
       <ion-col col-4>
         <p>tips </p>
-        <span>{{user.tips}}</span>
+        <span>{{(user | async)?.tips}}</span>
       </ion-col>
     </ion-row>
 
@@ -75,9 +71,9 @@
       <ion-card *ngFor="let tip of tips">
         <ion-item>
           <ion-avatar item-start>
-            <img [src]="user.profileImage">
+            <img [src]="">
           </ion-avatar>
-          <h2 class="sticky">{{user.name}}</h2>
+          <h2 class="sticky">{{(user | async)?.name}}</h2>
           <p>{{tip.date}}</p>
         </ion-item>
         <ion-card-content>

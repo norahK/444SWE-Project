@@ -8,6 +8,7 @@ export interface User{
   liked:number;
   tips:number;
   added:number;
+  lists:Array<any>;
 
 
 

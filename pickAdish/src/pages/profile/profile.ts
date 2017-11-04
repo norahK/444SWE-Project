@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {  App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
-import {FirebaseListObservable } from "angularfire2/database-deprecated";
+import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
 import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
 import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
@@ -14,17 +14,6 @@ import firebase from 'firebase';
 })
 export class ProfilePage {
   following = false;
-  userart = {
-    name: 'Paula Bolliger',
-    profileImage: 'assets/img/avatar/girl-avatar.png',
-    coverImage: 'assets/img/background/background-5.jpg',
-    occupation: 'Designer',
-    location: 'Seattle, WA',
-    description: 'A wise man once said: The more you do something, the better you will become at it.',
-    followers: 456,
-    following: 1052,
-    posts: 35
-  };
 
   posts = [
     {
@@ -55,11 +44,11 @@ export class ProfilePage {
       timestamp: '4mo ago'
     },
   ];
+  imageUrl="assets/img/avatar.jpg";//:any
 
-  user={} as User;
+  //user={} as User;
   tips: Observable<any[]>;
-  usersdata :AngularFireObject<User>;
-
+  user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
@@ -67,23 +56,16 @@ export class ProfilePage {
     private authr:AngularFireAuth,
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
-      const unsubscribe = this.authr.authState.subscribe(logedin => {
-        if(!logedin){
-          this.user.name = "no user ";
+      //const unsubscribe =
+      this.authr.authState.subscribe(logedin => {
+        if(!logedin||logedin.isAnonymous){
+       // this.user=Observable.create(o=>this.user=o );
+             //this.user.name="";
           ///go to login page
           return;
-          //return signout
-        }
-        else if (logedin.isAnonymous) {
-          this.user.name= "anonymes";
         } else {
-//    this.userProfile = firebase.database().ref('/userProfile');
-          this.user.id = logedin.uid;
-          this.user.email= logedin.email;
-          //from database
-          this.user.name = logedin.displayName;
-          //gitall info method !
-          this.user.bio ="get from database";
+          this.user= this.db.object(`users/${logedin.uid}`).valueChanges();
+          this.getallinfo(logedin.uid);
           this.gitalltips( logedin.uid);
 
         }
@@ -91,11 +73,13 @@ export class ProfilePage {
     }
      //  get (): FirebaseListObservable<any[]>{
   //  return this.db.list('/tips');
-//}
+async getallinfo(uid){
+//this.imageUrl="";
+}
   sittings(){
     this.navCtrl.push('SettingsPage');
   }
-  add(){
+add(){
     this.navCtrl.push('AddNewDishPage');
   }
 delete(tip){
@@ -137,14 +121,14 @@ this.db.list('/tips/').remove(key);//.then()
 deletetip.present();
 }
 ionViewWillLoad(){
+  const bikeImage = document.getElementById("profile-image") as HTMLImageElement;
+
   // this.authr.auth.currentUser?this.auther.auth.currentUser.email:null;
 
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
-
-       this.usersdata=this.db.object(`users/${data.uid}`);
        this.toast.create({
-        message: `welcome to pic a dish app ${this.user.name}`,
+        message: `welcome to pic a dish app ${data.email}`,
         duration:3000
       }).present();
       }else{
@@ -159,9 +143,10 @@ ionViewWillLoad(){
 /*get currentUserAnonymous(): boolean {
   return this.authr ? this.authr.authState.anonymous : false
 }*/
-logout(){
-  this.authr.auth.signOut();
-  this.navCtrl.setRoot('WelcomeSlideoPage');
+logout(): void{
+    this.app.getRootNav().setRoot('WelcomeSlideoPage');
+ // this.authr.auth.signOut();
+ // this.navCtrl.setRoot('WelcomeSlideoPage');
  // const root= this.app.getRootNavs();
 //root.popToRoot();
 //this.navCtrl.push('WelcomeSlideoPage');//error

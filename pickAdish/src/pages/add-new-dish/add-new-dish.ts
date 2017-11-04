@@ -13,10 +13,20 @@ import { dish } from '../../models/dish';
 })
 export class AddNewDishPage {
   types: string = "non";
-  shops :string ="non";
-
-
-  constructor(public alertCtrl: AlertController,private cam:Camera,public navCtrl: NavController, public navParams: NavParams) {
+  shops:any;
+  cshop :string ="non";
+  thisdish :dish;
+shoppath :any ;
+dishpath :any;
+testCheckboxOpen = false;
+testCheckboxResult: any;
+  constructor(public db: AngularFireDatabase,public alertCtrl: AlertController,private cam:Camera,public navCtrl: NavController, public navParams: NavParams) {
+  this.shoppath = db.database.ref('shops');
+  this.dishpath = db.database.ref('dishes');
+  var selected = [];
+  //$('#checkboxes input:checked').each(function() {
+   //   selected.push($(this).attr('name'));
+  //});
   }
 
   ionViewDidLoad() {
@@ -50,14 +60,14 @@ addShop(){
     message: "Enter a name ,...",
     inputs: [
       {
-        name: 'title',
+        name: 'name',
         placeholder: 'Title'
       },
       {
-        name: 'title',
+        name: 'a',
         placeholder: 'Title'
       },{
-        name: 'title',
+        name: 'b',
         placeholder: 'Title'
       },
     ],
@@ -65,6 +75,7 @@ addShop(){
       {
         text: 'Cancel',
         handler: data => {
+
           console.log('Cancel clicked');
         }
       },
@@ -72,17 +83,95 @@ addShop(){
         text: 'Save',
         handler: data => {
           console.log('Saved clicked');
+          const id= this.dishpath.push();   //get id then add name loc and .. in saide the id s
+          this.shoppath.child(id).set({name:data.name});
         }
       }
     ]
   });
   prompt.present();
+
+
 }
 submit(){
+//this.thisdish.name=;
+
+this.dishpath.push(this.thisdish);
 
 }
 back(){
 
+}
+doCheckbox() {
+  const alert = this.alertCtrl.create();
+  alert.setTitle('Which planets have you visited?');
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Alderaan',
+    value: 'value1',
+    checked: true
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Bespin',
+    value: 'value2'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Coruscant',
+    value: 'value3'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Endor',
+    value: 'value4'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Hoth',
+    value: 'value5'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Jakku',
+    value: 'value6'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Naboo',
+    value: 'value6'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Takodana',
+    value: 'value6'
+  });
+
+  alert.addInput({
+    type: 'checkbox',
+    label: 'Tatooine',
+    value: 'value6'
+  });
+
+  alert.addButton('Cancel');
+  alert.addButton({
+    text: 'Okay',
+    handler: (data: any) => {
+      console.log('Checkbox data:', data);
+      this.testCheckboxOpen = false;
+      this.testCheckboxResult = data;
+    }
+  });
+
+  alert.present();
 }
 }
 

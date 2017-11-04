@@ -1,63 +1,71 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title> Settings</ion-title>
-  </ion-navbar>
+   <button ion-button color="light"
+                            class="save-button"
+                            (click)="save()">SAVE</button>
+                  </ion-navbar>
 </ion-header>
 <ion-content>
+
   <ion-list>
-    <ion-list-header></ion-list-header>
-      <!--ion-avatar item-start (click)="updateProfileImage()">
-        <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture">
+    <ion-list-header>
+      <ion-avatar item-start (click)="updateProfileImage()">
+        <img [src]="user.profileImage ? user.profileImage : placeholderPicture">
       </ion-avatar>
       <p class="username">{{user.name}}</p>
-      <p>Owner</p>
     </ion-list-header>
+    <ion-item>
+        <ion-label>bio</ion-label>
+        <ion-input type="text" name="bio"  value="bio from database" >  </ion-input>
+            </ion-item>
+    <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" name="email" value="from database" >
+
+                        </ion-input>
+    </ion-item>
+
+    <!--save button-->
   </ion-list>
   <ion-list no-border>
     <ion-list-header>
-      General
+      praivicy  info
     </ion-list-header>
     <ion-item>
-      <ion-icon name='settings' item-start></ion-icon>
-      <ion-label>App Language</ion-label>
-      <ion-select [(ngModel)]="language">
-        <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>
-      </ion-select>
+            <ion-label>current password </ion-label>
+
+            <ion-input type="password" name="oldpass" value="" >
+
+            </ion-input>
+
     </ion-item>
     <ion-item>
-      <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
-      <ion-label class="label"> Enable notifications </ion-label>
-      <ion-icon name='notifications' item-start></ion-icon>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      Currency
-    </ion-list-header>
-    <ion-item>
-      <ion-icon name='card' item-start></ion-icon>
-      <ion-label>Payment Method</ion-label>
-      <ion-select [(ngModel)]="paymentMethod">
-        <ion-option *ngFor="let method of paymentMethods" [value]="method">{{method}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-icon name='logo-usd' item-start></ion-icon>
-      <ion-label>Currency</ion-label>
-      <ion-select [(ngModel)]="currency">
-        <ion-option *ngFor="let currency of currencies" [value]="currency">{{currency}}</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      Other
-    </ion-list-header>
-    <ion-item>
-      <ion-icon name='power' item-start></ion-icon>
-      <button ion-button (click)="logOut()" item-end>
-      Logout
+        <ion-label>new password</ion-label>
+        <ion-input type="password" name="newpass" value="" >
+                        </ion-input>
+</ion-item>
+<ion-item>
+    <button ion-button clear (click)="resetPassword()">
+        I forgot my password
       </button>
-    </ion-item-->
+</ion-item>
+ <!--save button-->
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      account
+    </ion-list-header>
+    <ion-item>
+        <ion-icon name='power' item-start></ion-icon>
+        <button ion-button (click)="logOut()">
+        Logout
+        </button>
+    </ion-item>
+    <ion-item>
+        <button ion-button (click)="deleteAccount()">
+            delete Account
+            </button>
+    </ion-item>
   </ion-list>
 </ion-content>

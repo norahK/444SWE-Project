@@ -14,9 +14,6 @@ import{RegisterPage} from '../register/register';
 export class LoginPage {
 user={} as User;
 loading: any;
-@ViewChild('slider') slider: Slides;
-slideIndex = 0;
-slides = [1,2,3];
 //public backgroundImage = 'assets/img/background/background-6.jpg';
   constructor(    public loadingCtrl: LoadingController,
      public alertCtrl: AlertController,
@@ -31,7 +28,7 @@ const r=this.authr.auth.signInWithEmailAndPassword(user.email,user.password);
 if(r){
   this.navCtrl.setRoot(TabsPage);//ProfilePage);// +to profile tab
 }else{
-  this.Loading('user name or passord incorrict');
+  this.Loading('user name or password incorrect');
 }}catch(e){
   this.Loading(e);
 }
@@ -84,7 +81,7 @@ ionViewWillLoad(){
                   this.authr.auth.sendPasswordResetEmail(data.recoverEmail)
                            .then(()=>{
                                      this.navCtrl.popToRoot();
-                             this.Loading('email sended check your email ');})
+                             this.Loading('email sended, check your email ');})
                            .catch((err)=>{
                              this.navCtrl.popToRoot();
                              this.Loading(err.message);

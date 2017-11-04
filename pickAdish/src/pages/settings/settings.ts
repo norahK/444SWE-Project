@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {   App,LoadingController,IonicPage, NavController, NavParams,ToastController,AlertController } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
+import{AngularFireAuth}from 'angularfire2/auth';
+import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
+import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
+import { User } from '../../models/user';
+import { Observable } from 'rxjs/Observable';
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -14,12 +15,119 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
+  profilePicture: string;
+  profileRef: any;
+  errorMessage: any;
+  placeholderPicture = 'assets/img/avatar.jpg';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  enableNotifications = true;
+  language: any;
+  currency: any;
+  paymentMethod: any;
+
+  user={} as User;
+
+  constructor(public app: App,
+    public alertService: AlertController,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    public camera: Camera, private authr:AngularFireAuth,
+    private db:AngularFireDatabase,
+    public navCtrl: NavController
+  ) {
+
+//get user info
+
+
+   }
+
+  save() {
+   //update database and storege
   }
 
+  updateImage(value) {
+    this.profilePicture = 'data:image/jpeg;base64,' + value.val();
+  }
+
+  updateProfileImage() {
+        //go to camera or galary
+    this.camera.getPicture({
+      quality: 50,
+      allowEdit: true,
+      cameraDirection: this.camera.Direction.FRONT,
+      destinationType: this.camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      this.user.profileImage = imageData;
+    }, (err) => {
+    //  this.toastCtrl.create('Error: ' + err);
+    });
+  }
+  resetPassword() {
+    let alert = this.alertService.create({
+      title:'enter your email',
+        inputs:[
+          {
+            name:'recoverEmail',
+            placeholder:'email'
+          },
+        ],
+        buttons: [
+            {
+                text: "send",
+                handler: data=> {
+         this.authr.auth.sendPasswordResetEmail(data.recoverEmail)
+                  .then(()=>{
+                            this.navCtrl.popToRoot();
+                    this.Loading('email sended, check your email ');})
+                  .catch((err)=>{
+                    this.navCtrl.popToRoot();
+                    this.Loading(err.message);
+                  });
+            }
+            },
+            {
+              text: "cancel",
+              role: 'Dismiss'
+
+          }
+        ]
+    });
+    alert.present();
+
+}
+
+  logOut() {
+    //alart
+    this.app.getRootNav().setRoot('WelcomeSlideoPage');
+   /* this.alertService.presentAlertWithCallback('Are you sure?',
+      'This will log you out of this application.').then((yes) => {
+        if (yes) {
+
+          this.authr.auth.signOut();
+          this.navCtrl.setRoot('WelcomeSlideoPage');
+        }
+      });*/
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+  }
+  Loading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 500
+    });
+    loading.onDidDismiss(() => {
+      const alert = this.alertService.create({
+        subTitle: message,
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    });
+
+    loading.present();
+  }
+  deleteAccount(){
+    ///alart
+
   }
 
 }

@@ -17,8 +17,7 @@ import { FIREBASE_CONFIG } from './ap.firebase.config';
 import { AuthProvider } from '../providers/auth/auth';
 import {DishPageService} from '../providers/dish-page/dish-page.service';
 import { Camera } from '@ionic-native/camera';//import in app.module.ts
-
-//import { RegisterPage } from '../pages/register/register';
+import { LoginPage } from '../pages/login/login';
 
 
 @NgModule({
@@ -29,8 +28,8 @@ import { Camera } from '@ionic-native/camera';//import in app.module.ts
     HomePage,
     ShopsPage,
     TabsPage,
-   // LoginPage,
-   // RegisterPage,
+   LoginPage,
+   //RegisterPage,
 
   ],
   imports: [
@@ -47,8 +46,8 @@ import { Camera } from '@ionic-native/camera';//import in app.module.ts
     HomePage,
         ShopsPage,
         TabsPage,
-//LoginPage,
-    //RegisterPage,
+LoginPage,
+   // RegisterPage,
 
   ],
   providers: [
