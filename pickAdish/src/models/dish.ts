@@ -1,4 +1,4 @@
-export interface dish{
+export interface Dish{
   pic:string;
   name:string;
   price:number;
@@ -7,6 +7,7 @@ export interface dish{
   shopid:string;
   id:string;
   date:Date;
+  AverageRating:number;
 
 
 
