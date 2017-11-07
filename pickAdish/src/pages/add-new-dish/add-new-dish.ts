@@ -4,7 +4,7 @@ import{storage}from 'firebase';
 import{Camera,CameraOptions}from'@ionic-native/camera';
 import{AngularFireDatabase}from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { dish } from '../../models/dish';
+import { Dish } from '../../models/dish';
 
 @IonicPage()
 @Component({
@@ -15,7 +15,7 @@ export class AddNewDishPage {
   types: string = "non";
   shops:any;
   cshop :string ="non";
-  thisdish :dish;
+  thisdish :Dish;
 shoppath :any ;
 dishpath :any;
 testCheckboxOpen = false;

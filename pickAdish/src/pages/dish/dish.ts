@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Dish} from'../../models/dish';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the DishPage page.
@@ -14,8 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dish.html',
 })
 export class DishPage {
-
+  dish : Dish;
+  //dish :  Observable<Dish>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+   // this.dish= this.db.object(`users/${logedin.uid}`).valueChanges();
+    
+  // this.dish.name = "asma"; 
   }
 
   ionViewDidLoad() {
