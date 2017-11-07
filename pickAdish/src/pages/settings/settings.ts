@@ -66,7 +66,7 @@ this.authr.authState.subscribe(logedin => {
   save() {
     this.authr.authState.subscribe(logedin => {
     //this.authState.updatePassword(this.user.password);
-    logedin.updateEmail(this.user.email);
+    //logedin.updateEmail(this.user.email);
       this.db.object(`users/${this.user.id}`).update(this.user)
       .then(data =>
         this.Loading("saved yaaay"))

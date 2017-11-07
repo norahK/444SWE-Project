@@ -5,9 +5,7 @@ export interface User{
   id:string;
   profileImage:string;
   bio:string;
-  liked:number;
-  tips:number;
-  added:number;
+
   lists:Array<any>;
 
 

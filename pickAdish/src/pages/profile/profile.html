@@ -52,20 +52,7 @@
     </div>
     <hr/>
 
-    <ion-row class="profile-numbers">
-      <ion-col col-4>
-        <p>liked dish</p>
-        <span>{{(user | async)?.liked}}</span>
-      </ion-col>
-      <ion-col col-4>
-        <p>added dishes</p>
-        <span>{{(user | async)?.added}}</span>
-      </ion-col>
-      <ion-col col-4>
-        <p>tips </p>
-        <span>{{(user | async)?.tips}}</span>
-      </ion-col>
-    </ion-row>
+
 
     <div id="tips">
       <ion-card *ngFor="let tip of tips">
