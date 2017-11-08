@@ -1,11 +1,7 @@
 export interface Tip{
-  pic:string;
+  image:string;
   title:string;
-  content:string;
-  id:string;
-  date:Date;
-
-
-
-
+  body:string;
+ user_id:string;
+  date:string;//Date
 }

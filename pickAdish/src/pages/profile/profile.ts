@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
+import {  LoadingController,App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
 import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
@@ -7,49 +7,23 @@ import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
 import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
+import { Tip } from '../../models/tip';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-  following = false;
-
-  posts = [
-    {
-      postImageUrl: 'assets/img/background/background-2.jpg',
-      text: `I believe in being strong when everything seems to be going wrong.
-             I believe that happy girls are the prettiest girls.
-             I believe that tomorrow is another day and I believe in miracles.`,
-      date: 'November 5, 2016',
-      likes: 12,
-      comments: 4,
-      timestamp: '11h ago'
-    },
-    {
-      postImageUrl: 'assets/img/background/background-3.jpg',
-      text: 'Do not go where the path may lead, go instead where there is no path and leave a trail.',
-      date: 'October 23, 2016',
-      likes: 30,
-      comments: 64,
-      timestamp: '30d ago'
-    },
-    {
-      postImageUrl: 'assets/img/background/background-4.jpg',
-      date: 'June 28, 2016',
-      likes: 46,
-      text: `Hope is the thing with feathers that perches in the soul
-             and sings the tune without the words And never stops at all.`,
-      comments: 66,
-      timestamp: '4mo ago'
-    },
-  ];
   imageUrl="assets/img/avatar.jpg";//:any
-
   //user={} as User;
-  tips: Observable<any[]>;
+  //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
+  //tips: Observable<any[]>;
+  tipsRef$:FirebaseListObservable<Tip[]>;//AngularFireList<Tip[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
+    public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
     private toast:ToastController,
@@ -67,7 +41,6 @@ export class ProfilePage {
           this.user= this.db.object(`users/${logedin.uid}`).valueChanges();
           this.getallinfo(logedin.uid);
           this.gitalltips( logedin.uid);
-
         }
       });
     }
@@ -88,8 +61,41 @@ delete(tip){
 gotoDishpage(id){
  // this.navCtrl.push('SettingsPage');+pass id with it
 }
-  gitalltips(uid){
-    /*   firebase
+ async gitalltips(uid){
+  /*  this.db.database.ref('tips').on('value', function(snapshot) {
+this.tips=snapshot.val();
+this.Loading(this.tips);
+var keys=Object.keys(this.tips);
+for(var i=0;i<keys.length;i++){
+var k=keys[i];
+var int=this.tips[i];//.initials;
+}
+    },function(err){
+      this.Loading("error");
+    });
+*/
+//this.tipsRef$=this.db.list('tips');//.valueChanges();
+
+//this.tipsRef$
+//JSON.parse(tips);
+
+    /*  this.db.list('/users')
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          console.log(snapshot.key, snapshot.val());
+        });
+    })
+
+    this.db.list('/users').subscribe(users=>{
+    });
+    this.db.database.ref('root/').on('value', function(snapshot) {
+      this.tips = snapshot.val();
+      obj.forEach(function(data){
+          alert(data.key());
+      }
+  });
+
+    firebase
     .database()
     .ref('/userProfile')
     .child(newUser.uid)
@@ -98,6 +104,21 @@ gotoDishpage(id){
      //this.tips = db.list('/tips').valueChanges();//change to user tipsth
     //this.tips= this.db.list('/tips/');//.only from regester user
   }
+  Loading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 500
+    });
+    loading.onDidDismiss(() => {
+      const alert = this.alertCtrl.create({
+        subTitle: message,
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    });
+
+    loading.present();
+  }
+
   showOptions(key,title){
 //pop up window to delete or cancele
 let deletetip = this.alertCtrl.create({

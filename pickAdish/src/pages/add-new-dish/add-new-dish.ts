@@ -129,41 +129,6 @@ doCheckbox() {
     value: 'value3'
   });
 
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Endor',
-    value: 'value4'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Hoth',
-    value: 'value5'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Jakku',
-    value: 'value6'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Naboo',
-    value: 'value6'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Takodana',
-    value: 'value6'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'Tatooine',
-    value: 'value6'
-  });
 
   alert.addButton('Cancel');
   alert.addButton({

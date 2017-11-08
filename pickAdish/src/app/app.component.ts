@@ -10,22 +10,22 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;//='WelcomeSlideoPage';// TabsPage;
+  rootPage:any;//='DishPage';// TabsPage;
 
   constructor(    private authr:AngularFireAuth,
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-   platform.ready().then(() => {
+  platform.ready().then(() => {
       //Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
      statusBar.styleDefault();
       splashScreen.hide();
-     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if ((!user) || user.isAnonymous) {
         this.rootPage = 'WelcomeSlideoPage';
-         unsubscribe();
+       unsubscribe();
       } else {
           this.rootPage = TabsPage;
-          unsubscribe();
+         unsubscribe();
       }
     });
     });

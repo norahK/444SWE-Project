@@ -1,15 +1,8 @@
 export interface Dish{
-  pic:string;
   name:string;
   price:number;
-  type:string;
-  occasion:string[];
-  shopid:string;
+  shop:string;
   id:string;
-  date:Date;
-  AverageRating:number;
-
-
-
-
+number_of_raters :number;
+average_rate:number;
 }

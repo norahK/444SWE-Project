@@ -2,68 +2,25 @@
   <ion-navbar>
     <ion-title>
       <!-->search<!-->
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-searchbar (ionInput)="getItems($event)" ></ion-searchbar>
 
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
-
-  <ion-list>
-    <ion-item >
-<!-->foreach(){}<!-->
-      <ion-card>
-    <img src="img/z.jpg"/>
-    <ion-card-content>
-      <ion-card-title> Dish name        </ion-card-title>
-      <p>  shop name  </p>
-      <p> ****</p>
-      <p>0.0 RS</p>
-    </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-  <img src=""/>
-  <ion-card-content>
-    <ion-card-title> Dish name        </ion-card-title>
-    <p>  shop name  </p>
-    <p> ****</p>
-    <p>0.0 RS</p>
-  </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-<img src="img/nin-live.png"/>
-<ion-card-content>
-  <ion-card-title> Dish name        </ion-card-title>
-  <p>  shop name  </p>
-  <p> ****</p>
-  <p>0.0 RS</p>
-</ion-card-content>
-</ion-card>
-
-<ion-card>
-<img src="img/nin-live.png"/>
-<ion-card-content>
-<ion-card-title> Dish name        </ion-card-title>
-<p>  shop name  </p>
-<p> ****</p>
-<p>0.0 RS</p>
-</ion-card-content>
-</ion-card>
-
-<ion-card>
-<img src="img/nin-live.png"/>
-<ion-card-content>
-<ion-card-title> Dish name        </ion-card-title>
-<p>  shop name  </p>
-<p> ****</p>
-<p>0.0 RS</p>
-</ion-card-content>
-</ion-card>
-
+<ion-content padding >
+  <ion-list  >
+    <ion-item  class="iitem"  *ngFor="let item of dishesListRef$ | async  ">
+      <div style="white-space:nowrap;">
+        <div style=" display:inline; float: left;" >  <ion-img style=" width: 80px; height: 80px; border-radius:80%;" src="assets\img\Cake.png" alt="dish image" ></ion-img>
+        </div>      <div style=" display:inline; white-space:nowrap; margin:left;">
+      <h2>  {{ item.name}}  </h2>
+      <h4> {{ item.shop}}</h4>
+      <h3>{{ item.average_rate}}</h3>
+      <h3>{{ item.price}}</h3></div>
+      </div>
     </ion-item>
   </ion-list>
+
+  <ion-scroll direction="x"></ion-scroll>
 </ion-content>

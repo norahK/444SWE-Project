@@ -3,10 +3,18 @@ page-profile {
       background: linear-gradient(0deg, #eeeef1 0%, white 80%, white 100%);
     }
     button,
-    ion-button,
     .button-md,
     .button-ios {
       text-transform: none !important;
+    }
+    .sitting {
+      float:right;
+      width: 15%;
+      margin-top: 10px;
+      height: 15%;
+      text-align: center;
+      background: none;
+
     }
     p {
       color: #444;

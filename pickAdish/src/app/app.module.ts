@@ -1,7 +1,8 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import{HttpModule}from'@angular/http';
 
 import { ListsPage } from '../pages/lists/lists';
 import { ProfilePage } from '../pages/profile/profile';
@@ -18,7 +19,8 @@ import { AuthProvider } from '../providers/auth/auth';
 import {DishPageService} from '../providers/dish-page/dish-page.service';
 import { Camera } from '@ionic-native/camera';//import in app.module.ts
 import { LoginPage } from '../pages/login/login';
-
+//import { Ionic2RatingModule } from 'ionic2-rating';
+import {IonRating} from '../components/ion-rating/ion-rating';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,20 @@ import { LoginPage } from '../pages/login/login';
     ShopsPage,
     TabsPage,
    LoginPage,
+<<<<<<< HEAD
+=======
+   IonRating
    //RegisterPage,
+>>>>>>> 6a9e5d05d8e68ed05f27a8b7a9c34ad9b430c1f0
 
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    AngularFireAuthModule,AngularFireDatabaseModule
+    AngularFireAuthModule,AngularFireDatabaseModule,
+   // Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +55,6 @@ import { LoginPage } from '../pages/login/login';
         ShopsPage,
         TabsPage,
 LoginPage,
-   // RegisterPage,
 
   ],
   providers: [
@@ -56,6 +63,11 @@ LoginPage,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider, DishPageService
-  ]
+  ],
+
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
+
 })
 export class AppModule {}

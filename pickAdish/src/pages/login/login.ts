@@ -51,7 +51,7 @@ ionViewWillLoad(){
     //tested sucsess :)
     Loading(message) {
        const loading = this.loadingCtrl.create({
-         duration: 500
+         duration: 400
        });
        loading.onDidDismiss(() => {
          const alert = this.alertCtrl.create({
