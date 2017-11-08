@@ -9,12 +9,12 @@
    <ion-list>
       <ion-item>
         <ion-label floating >Name</ion-label>
-        <ion-input type="text" ></ion-input>
+        <ion-input type="text"  [(ngModel)]="dish.name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating >Price SR</ion-label>
-        <ion-input type="number" placeholder=""></ion-input>
+        <ion-input type="number"  [(ngModel)]="dish.price"></ion-input>
       </ion-item>
     <ion-item>
       <button ion-button (click)="takePhoto()">pic <ion-icon name="add"></ion-icon>
@@ -22,7 +22,7 @@
     </ion-item>
     <ion-item>
         <ion-label floating>type of dish </ion-label>
-        <ion-select [(ngModel)]="types">
+        <ion-select [(ngModel)]="dish.type">
           <ion-option value="non">choose a type</ion-option>
           <ion-option value="cake">cake</ion-option>
           <ion-option value="choco">choco</ion-option>
@@ -31,7 +31,6 @@
       </ion-item>
 <!--list of checks-->
 <ion-item>
-    <ion-list>
         <!--
 
               <ion-select [(ngModel)]="language">
@@ -44,19 +43,12 @@
             </label>
               {{employee.name}}
         </ion-item-->
-    </ion-list>
+    <ion-label  (click)="doCheckbox()" >occasion </ion-label>
 
-    <ion-label >occasion </ion-label>
-    <div id="checkboxes">
-      <input id="chkbx_0" type="checkbox" name="c_n_0" checked="checked" />Option 1
-      <input id="chkbx_1" type="checkbox" name="c_n_1" />Option 2
-      <input id="chkbx_2" type="checkbox" name="c_n_2" />Option 3
-      <input id="chkbx_3" type="checkbox" name="c_n_3" checked="checked" />Option 4
-  </div>
 
-    <ion-checkbox disabled="true"></ion-checkbox>
 </ion-item>
-
+<div id="selectedO" >
+  </div>
 <!--shops from database-->
     <ion-item>
         <ion-label floating >shops</ion-label>
@@ -68,7 +60,7 @@
 </ion-item>
 <ion-item>
     <div padding>
-        <button ion-button (click)="submit()">Add</button>
+        <button ion-button (click)="submit(dish)">Add</button>
         <button ion-button (click)="back()">Cancel</button>
         </div>
 </ion-item>

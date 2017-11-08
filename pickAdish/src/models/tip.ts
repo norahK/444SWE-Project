@@ -4,4 +4,5 @@ export interface Tip{
   body:string;
  user_id:string;
   date:string;//Date
+  //d:Date =new Date()
 }

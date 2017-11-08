@@ -15,7 +15,9 @@ export class AddNewDishPage {
   types: string = "non";
   shops:any;
   cshop :string ="non";
-  thisdish :Dish;
+dish={} as Dish;
+  //thisdish :Dish ;
+
 shoppath :any ;
 dishpath :any;
 testCheckboxOpen = false;
@@ -34,7 +36,6 @@ testCheckboxResult: any;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddNewDishPage');
   }
 async takePhoto(){
 
@@ -97,35 +98,39 @@ addShop(){
 
 
 }
-submit(){
+submit(dish:Dish){
 //this.thisdish.name=;
-
-this.dishpath.push(this.thisdish);
+this.dishpath.push(dish);
+//sucsuss or error loading before toast
+//or add othe +cancel
+this.back();
 
 }
 back(){
+  this.navCtrl.pop();
+   // window.history.back();
 
 }
 doCheckbox() {
   const alert = this.alertCtrl.create();
-  alert.setTitle('Which planets have you visited?');
+  alert.setTitle('Which occation is propriat for this dish ');
 
   alert.addInput({
     type: 'checkbox',
-    label: 'Alderaan',
+    label: 'meeting',
     value: 'value1',
     checked: true
   });
 
   alert.addInput({
     type: 'checkbox',
-    label: 'Bespin',
+    label: 'party',
     value: 'value2'
   });
 
   alert.addInput({
     type: 'checkbox',
-    label: 'Coruscant',
+    label: 'office',
     value: 'value3'
   });
 
@@ -134,9 +139,7 @@ doCheckbox() {
   alert.addButton({
     text: 'Okay',
     handler: (data: any) => {
-      console.log('Checkbox data:', data);
-      this.testCheckboxOpen = false;
-      this.testCheckboxResult = data;
+      this.dish.occasion= data;
     }
   });
 
