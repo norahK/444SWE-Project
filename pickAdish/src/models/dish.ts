@@ -1,4 +1,4 @@
-export interface dish{
+export interface Dish{
   name:string;
   price:number;
   shop:string;
