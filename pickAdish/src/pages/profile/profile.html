@@ -35,8 +35,6 @@
 </ion-content>
 <!--[src]="(user |async )?.profileImage"  style="width: 150px; height: 120px;"
 -->
-
-
 <ion-content padding class="transparent-header">
 
   <div id="profile-bg" color="primary"  Style="background-color: #F1C4B1;">
@@ -45,45 +43,33 @@
   </div>
   <div id="content">
     <div id="profile-info" padding>
-
       <img id="profile-image" [src]="imageUrl"/>
       <h3 id="profile-name">  {{(user | async)?.name}}</h3>
       <p class="profile-description">{{(user | async)?.bio}}</p>
-      <button ion-button  small color="#F08655" (click)="add()">ADD NEW DISH</button>
+      <button ion-button  small color="#F08655" (click)="add()">ADD NEW DISH <ion-icon ios="ios-restaurant" md="md-restaurant"></ion-icon>
+      </button>
     </div>
     <hr/>
-
-
     <div id="tips">
-      <ion-card *ngFor="let tip of tipsRef$ |async">
+      <ion-card *ngFor="let tip of tipsRef$ | async">
         <ion-item>
-          <ion-avatar item-start>
-            <img [src]="">
-          </ion-avatar>
-          <h2 class="sticky">{{(user | async)?.name}}</h2>
-          <p>{{tip.date}}</p>
+          <h2 class="sticky">{{tip.title}}</h2>
         </ion-item>
         <ion-card-content>
-            <h3>{{tip.title}}</h3>
           <p>{{tip.body}}</p>
         </ion-card-content>
         <ion-row>
           <ion-col col-4>
               <button ion-button   clear small icon-left (click)="gotoDishpage()">
-                  <ion-icon name='text'></ion-icon>
-                 go to dish page
+  <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
                 </button>
           </ion-col>
           <ion-col col-5>
               <button ion-button no-padding color="purple" clear small icon-left (click)="delete(tip)">
-                  <ion-icon name='trash'></ion-icon>
-                  delete
-               </button>
+                  <ion-icon name='trash'></ion-icon></button>
           </ion-col>
           <ion-col col-3 align-self-center text-center>
-            <p>
-              {{tip.date}}
-            </p>
+            <p>{{tip.date}}</p>
           </ion-col>
         </ion-row>
       </ion-card>

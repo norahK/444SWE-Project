@@ -20,7 +20,7 @@ export class ProfilePage {
   //user={} as User;
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
   //tips: Observable<any[]>;
-  tipsRef$:FirebaseListObservable<Tip[]>;//AngularFireList<Tip[]>;
+  tipsRef$:Observable<Tip[]>;//AngularFireList<Tip[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
     public loadingCtrl: LoadingController,
@@ -74,7 +74,7 @@ var int=this.tips[i];//.initials;
       this.Loading("error");
     });
 */
-//this.tipsRef$=this.db.list('tips');//.valueChanges();
+this.tipsRef$=this.db.list('tips').valueChanges();
 
 //this.tipsRef$
 //JSON.parse(tips);
