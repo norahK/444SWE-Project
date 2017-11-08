@@ -4,7 +4,7 @@ import{AngularFireAuth}from 'angularfire2/auth';
 import { FirebaseListObservable } from "angularfire2/database-deprecated";
  import{AngularFireDatabase} from 'angularfire2/database';
  import { Observable } from 'rxjs/Observable';
-import{dish}from '../../models/dish';
+import{Dish}from '../../models/dish';
 
 @Component({
   selector: 'page-home',
@@ -16,7 +16,7 @@ import{dish}from '../../models/dish';
 
 export class HomePage {
 
-dishesListRef$:Observable<dish[]>;
+dishesListRef$:Observable<Dish[]>;
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.dishesListRef$=this.database.list('dishes').valueChanges();
 
