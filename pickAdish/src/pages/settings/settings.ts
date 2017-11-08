@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {   App,LoadingController,IonicPage, NavController, NavParams,ToastController,AlertController } from 'ionic-angular';
+import { App,LoadingController,IonicPage, NavController, NavParams,ToastController,AlertController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
-import{AngularFireAuth}from 'angularfire2/auth';
-import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
+import{ AngularFireAuth}from 'angularfire2/auth';
+import{ AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
 import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
 import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
 import { User } from '../../models/user';
@@ -26,7 +26,8 @@ export class SettingsPage {
   paymentMethod: any;
 
   user={} as User;
-
+  //user :  Observable<User>;// FirebaseObjectObservable<User>;
+  authState: any = null;
   constructor(public app: App,
     public alertService: AlertController,
     public toastCtrl: ToastController,
@@ -37,12 +38,41 @@ export class SettingsPage {
   ) {
 
 //get user info
+this.authr.authState.subscribe(logedin => {
+  this.authState=logedin;
+  if(!logedin||logedin.isAnonymous){
+ // this.user=Observable.create(o=>this.user=o );
+       //this.user.name="";
+    ///go to login page
+    return;
+  } else {
 
+    const personRef: firebase.database.Reference = firebase.database().ref(`/users/${logedin.uid}`);
+    personRef.on('value', personSnapshot => {
+      this.user.id=logedin.uid;
+      this.user.name = personSnapshot.child('name').val();
+      this.user.bio = personSnapshot.child('bio').val();
+      this.user.profileImage = personSnapshot.child('profileImage').val();
+      this.user.email = personSnapshot.child('email').val();
+
+    });
+    //= this.db.object(`users/${logedin.uid}`).valueChanges();
+
+  }
+});
 
    }
 
   save() {
-   //update database and storege
+    this.authr.authState.subscribe(logedin => {
+    //this.authState.updatePassword(this.user.password);
+    //logedin.updateEmail(this.user.email);
+      this.db.object(`users/${this.user.id}`).update(this.user)
+      .then(data =>
+        this.Loading("saved yaaay"))
+      .catch(error => this.Loading(error));
+
+      });
   }
 
   updateImage(value) {
@@ -98,18 +128,35 @@ export class SettingsPage {
 
   logOut() {
     //alart
-    this.app.getRootNav().setRoot('WelcomeSlideoPage');
+    let alert = this.alertService.create({
+      title:'are you sure you want to sign out ',
+        buttons: [
+            {
+                text: "yes",
+                handler: data=> {
+                  this.authr.auth.signOut();
+                  this.app.getRootNav().setRoot('WelcomeSlideoPage');
+
+                        }
+            },
+            {
+              text: "cancel",
+              role: 'Dismiss'
+
+          }
+        ]
+    });
+    alert.present();
+
    /* this.alertService.presentAlertWithCallback('Are you sure?',
       'This will log you out of this application.').then((yes) => {
         if (yes) {
 
-          this.authr.auth.signOut();
           this.navCtrl.setRoot('WelcomeSlideoPage');
         }
       });*/
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
   }
   Loading(message) {
     const loading = this.loadingCtrl.create({

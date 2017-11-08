@@ -4,7 +4,7 @@ import{storage}from 'firebase';
 import{Camera,CameraOptions}from'@ionic-native/camera';
 import{AngularFireDatabase}from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { dish } from '../../models/dish';
+import { Dish } from '../../models/dish';
 
 @IonicPage()
 @Component({
@@ -15,12 +15,16 @@ export class AddNewDishPage {
   types: string = "non";
   shops:any;
   cshop :string ="non";
-  thisdish :dish;
+  thisdish :Dish;
 shoppath :any ;
 dishpath :any;
 testCheckboxOpen = false;
 testCheckboxResult: any;
-  constructor(public db: AngularFireDatabase,public alertCtrl: AlertController,private cam:Camera,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public db: AngularFireDatabase,
+    public alertCtrl: AlertController,
+    private cam:Camera,
+    public navCtrl: NavController,
+     public navParams: NavParams) {
   this.shoppath = db.database.ref('shops');
   this.dishpath = db.database.ref('dishes');
   var selected = [];
@@ -46,7 +50,7 @@ const options: CameraOptions={
 }
 const result= await this.cam.getPicture(options);
 const img=`data:image/jpeg;base64,${result}`;
-const pic = storage().ref('dishs/id');
+const pic = storage().ref('dish pic');
 pic.putString(img,'data_url');
 }
 catch(e){

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Dish} from'../../models/dish';
+import { Observable } from 'rxjs/Observable';
+import {AngularFireObject, AngularFireDatabase} from 'angularfire2/database'
 
 /**
  * Generated class for the DishPage page.
@@ -14,9 +17,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dish.html',
 })
 export class DishPage {
+// dish = {} as Dish;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //dish : Dish;
+
+  rating: number;
+  like: boolean;
+
+  dish :  Observable<Dish>;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase,)
+   {
+   
+  this.dish= this.db.object(`dishes/1`).valueChanges();
+  this.getallinfo(1);
+    
+ // this.dish.name = "dish name from database for example cake"; 
+  //this.dish.AverageRating = 4.3; 
+  //this.dish.NumOfRaters = 23; 
+  
   }
+
+  async getallinfo(uid){}  
+
+   AddRating(rating: number){}
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DishPage');

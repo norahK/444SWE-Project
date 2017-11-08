@@ -40,7 +40,8 @@ try{
     // ) ;//push({titl: data.title}//.push(user));
     //this.afauth.auth.currentUser.uid
   }
-  ).catch((err)=>{this.Loading(err);
+  ).catch((err)=>{
+    this.Loading(err);
   }
 );
     }

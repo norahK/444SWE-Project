@@ -1,10 +1,11 @@
 <ion-header>
   <ion-navbar primary>
-    <ion-title> Settings</ion-title>
-   <button ion-button color="light"
-                            class="save-button"
-                            (click)="save()">SAVE</button>
-                  </ion-navbar>
+    <ion-title> Settings
+      <button style="float:right"
+       class="save-button"(click)="save()">SAVE
+      </button>
+    </ion-title>
+   </ion-navbar>
 </ion-header>
 <ion-content>
 
@@ -13,15 +14,16 @@
       <ion-avatar item-start (click)="updateProfileImage()">
         <img [src]="user.profileImage ? user.profileImage : placeholderPicture">
       </ion-avatar>
-      <p class="username">{{user.name}}</p>
+      <ion-label floating>name</ion-label>
+      <ion-input class="username" [(ngModel)]="user.name" type="text" name="name" value="{{user.name}}" >  </ion-input>
     </ion-list-header>
     <ion-item>
-        <ion-label>bio</ion-label>
-        <ion-input type="text" name="bio"  value="bio from database" >  </ion-input>
+        <ion-label floating>bio</ion-label>
+        <ion-input type="text" name="bio"  [(ngModel)]="user.bio" value="{{user.bio}}" >  </ion-input>
             </ion-item>
     <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input type="email" name="email" value="from database" >
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="user.email" >
 
                         </ion-input>
     </ion-item>
@@ -33,7 +35,7 @@
       praivicy  info
     </ion-list-header>
     <ion-item>
-            <ion-label>current password </ion-label>
+            <ion-label floating>current password </ion-label>
 
             <ion-input type="password" name="oldpass" value="" >
 
@@ -41,8 +43,8 @@
 
     </ion-item>
     <ion-item>
-        <ion-label>new password</ion-label>
-        <ion-input type="password" name="newpass" value="" >
+        <ion-label floating>new password</ion-label>
+        <ion-input [(ngModel)]="user.password" type="password" name="newpass" value="" >
                         </ion-input>
 </ion-item>
 <ion-item>
