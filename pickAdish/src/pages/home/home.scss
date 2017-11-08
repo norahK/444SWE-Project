@@ -1,3 +1,20 @@
 page-home {
 
+.item{
+  background: #ffe6cc;
+   border-color: #ff944d;}
+h2{
+  color: #ff944d;;
+}
+
+h3,h4,p{
+  color:#999999;
+}
+.ion-scroll{
+  overflow: scroll;
+  height: 200px;
+  min-height: 200px;
+  white-space: nowrap;
+}
+
 }

@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import{HttpModule}from'@angular/http';
 
 import { ListsPage } from '../pages/lists/lists';
 import { ProfilePage } from '../pages/profile/profile';
@@ -34,6 +35,7 @@ import { LoginPage } from '../pages/login/login';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,AngularFireDatabaseModule
