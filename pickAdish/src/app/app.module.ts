@@ -32,7 +32,10 @@ import {IonRating} from '../components/ion-rating/ion-rating';
     TabsPage,
    LoginPage,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6a9e5d05d8e68ed05f27a8b7a9c34ad9b430c1f0
    IonRating
    //RegisterPage,
 >>>>>>> 6a9e5d05d8e68ed05f27a8b7a9c34ad9b430c1f0
