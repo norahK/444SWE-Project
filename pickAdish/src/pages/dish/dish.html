@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar color ="primary">
-    <ion-title> {{dish.name}} </ion-title> 
+    <ion-title> {{(dish | async)?.name}} </ion-title> 
  </ion-navbar>
 </ion-header>
 
 <ion-content padding center text-center>
-
+   <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
 <ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
-<p> average rating </p>
-<p> number of raters </p>
+<p> Average Rating {{(dish | async)?.average_rate}}  </p>
+<p> {{(dish | async)?.number_rates}} Raters </p>
 
 <div padding>
   <ion-segment [(ngModel)]="tap">

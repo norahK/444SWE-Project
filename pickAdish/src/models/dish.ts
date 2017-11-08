@@ -7,7 +7,9 @@ export interface Dish{
   shopid:string;
   id:string;
   date:Date;
-  AverageRating:number;
+  average_rate:number;
+  number_rates:number;
+  image:ImageData;
 
 
 
