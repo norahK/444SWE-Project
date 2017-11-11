@@ -60,12 +60,12 @@
         </ion-card-content>
         <ion-row>
           <ion-col col-4>
-              <button ion-button   clear small icon-left (click)="gotoDishpage()">
+              <button ion-button   clear small icon-left (click)="gotoDishpage(tip.dish)">
   <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
                 </button>
           </ion-col>
           <ion-col col-5>
-              <button ion-button no-padding color="purple" clear small icon-left (click)="delete(tip)">
+              <button ion-button no-padding clear small icon-left (click)="delete(tip.id)">
                   <ion-icon name='trash'></ion-icon></button>
           </ion-col>
           <ion-col col-3 align-self-center text-center>

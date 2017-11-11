@@ -75,7 +75,7 @@ var int=this.tips[i];//.initials;
     });
 */
 this.tipsRef$=this.db.list('tips').valueChanges();
-
+//this.tipsRef$ = firebase.database().ref('tips').orderByChild('user_id').equalTo(uid);
 //this.tipsRef$
 //JSON.parse(tips);
 

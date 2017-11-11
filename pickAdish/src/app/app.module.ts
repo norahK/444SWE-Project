@@ -21,6 +21,8 @@ import { Camera } from '@ionic-native/camera';//import in app.module.ts
 import { LoginPage } from '../pages/login/login';
 //import { Ionic2RatingModule } from 'ionic2-rating';
 import {IonRating} from '../components/ion-rating/ion-rating';
+import {DishPage} from '../pages/dish/dish';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {IonRating} from '../components/ion-rating/ion-rating';
     ShopsPage,
     TabsPage,
    LoginPage,
-   IonRating
+   IonRating,
+   DishPage
 
   ],
   imports: [
@@ -51,7 +54,7 @@ import {IonRating} from '../components/ion-rating/ion-rating';
         ShopsPage,
         TabsPage,
 LoginPage,
-
+DishPage
   ],
   providers: [
     Camera,
