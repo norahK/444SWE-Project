@@ -15,8 +15,10 @@ export class IonRating {
  //text: string;
 
  @Input() numStars: number = 5;
- @Input() value: number = 3;
+ @Input() value: number = 4;
+ @Input() read: boolean = false;
  
+ @Output() ionClick: EventEmitter<number> = new EventEmitter<number>();
 
  stars: String[] = [];
 
@@ -26,14 +28,27 @@ export class IonRating {
   }
  
   ngAfterViewInit(){
-    let tmp = this.value;
-    for (let i=0; i<this.numStars; i++, tmp--){
-     if(tmp >= 1)
-     this.stars.push("star");
-    }
-
-
-
+   this.calc();
   }
+calc(){
+  this.stars = [];
+  let tmp = this.value;
+  for (let i=0; i<this.numStars; i++, tmp--){
+   if(tmp >= 1)
+   this.stars.push("star");
+   else if (tmp > 0 && tmp < 1)
+    this.stars.push("star-half");
+   else  this.stars.push("star-outline"); 
+  }
+}
 
+
+  starClicked(index){
+    if(!this.read){
+    //console.log(index);
+    this.value = index + 1;
+    this.ionClick.emit(this.value);
+    this.calc();
+    }
+  }
 }
