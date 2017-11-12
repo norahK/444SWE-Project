@@ -15,7 +15,7 @@ export class IonRating {
  //text: string;
 
  @Input() numStars: number = 5;
- @Input() value: number = 4;
+ @Input() value: number = 0;
  @Input() read: boolean = false;
  
  @Output() ionClick: EventEmitter<number> = new EventEmitter<number>();
