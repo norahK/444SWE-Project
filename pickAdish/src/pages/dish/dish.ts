@@ -30,23 +30,23 @@ export class DishPage {
  // dish :  Observable<Dish>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase,)
    {
-   
-  this.dish= this.db.object(`dishes/1`).valueChanges();
+
+  //this.dish= this.db.object(`dishes/1`).valueChanges();
   this.getallinfo(1);
-    
- // this.dish.name = "dish name from database for example cake"; 
-  //this.dish.AverageRating = 4.3; 
-  //this.dish.NumOfRaters = 23; 
+
+ // this.dish.name = "dish name from database for example cake";
+  //this.dish.AverageRating = 4.3;
+  //this.dish.NumOfRaters = 23;
   }
 
   UpdateAverageRating(){
 
-  this.dish.average_rate =;
+  //this.dish.average_rate =;
 
 
   }
 
-  async getallinfo(uid){}  
+  async getallinfo(uid){}
 
    AddRating(rating: number){}
 

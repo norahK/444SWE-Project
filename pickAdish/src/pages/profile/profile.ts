@@ -10,7 +10,6 @@ import firebase from 'firebase';
 import { Tip } from '../../models/tip';
 import { Pipe, PipeTransform } from '@angular/core';
 
-
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
@@ -19,8 +18,8 @@ export class ProfilePage {
   imageUrl="assets/img/avatar.jpg";//:any
   //user={} as User;
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
-  //tips: Observable<any[]>;
-  tipsRef$:Observable<Tip[]>;//AngularFireList<Tip[]>;
+  tips: FirebaseListObservable<any>;;
+  tipsRef$:Observable<any>;//AngularFireList<Tip[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
     public loadingCtrl: LoadingController,
@@ -62,7 +61,17 @@ gotoDishpage(id){
  // this.navCtrl.push('SettingsPage');+pass id with it
 }
  async gitalltips(uid){
-  /*  this.db.database.ref('tips').on('value', function(snapshot) {
+ //this.tipsRef$= this.db.database.ref('posts').limitToLast(100);
+ /*this.tipsRef$=firebase.database.prototype.list('tips', {
+  query: {
+    orderByChild: 'user_id',
+    equalTo: uid
+  }
+}).map(items => {
+const filtered = items.filter(item => (<string[]>item.memberId).indexOf(this.senderPersonModel.uid) > -1);
+return filtered;
+});*/
+/*his.db.database.ref('tips').on('value', function(snapshot) {
 this.tips=snapshot.val();
 this.Loading(this.tips);
 var keys=Object.keys(this.tips);
@@ -75,7 +84,8 @@ var int=this.tips[i];//.initials;
     });
 */
 this.tipsRef$=this.db.list('tips').valueChanges();
-//this.tipsRef$ = firebase.database().ref('tips').orderByChild('user_id').equalTo(uid);
+///this.tips =
+//this.tipsRef$ =this.db.database.ref('tips').orderByChild('user_id').equalTo(uid);
 //this.tipsRef$
 //JSON.parse(tips);
 
