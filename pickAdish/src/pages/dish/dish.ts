@@ -17,14 +17,17 @@ import {AngularFireObject, AngularFireDatabase} from 'angularfire2/database'
   templateUrl: 'dish.html',
 })
 export class DishPage {
-// dish = {} as Dish;
+  average_rate: number;
+
+
+  dish = {} as Dish;
 
   //dish : Dish;
 
   rating: number;
   like: boolean;
 
-  dish :  Observable<Dish>;
+ // dish :  Observable<Dish>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase,)
    {
    
@@ -34,7 +37,13 @@ export class DishPage {
  // this.dish.name = "dish name from database for example cake"; 
   //this.dish.AverageRating = 4.3; 
   //this.dish.NumOfRaters = 23; 
-  
+  }
+
+  UpdateAverageRating(){
+
+  this.dish.average_rate =;
+
+
   }
 
   async getallinfo(uid){}  
