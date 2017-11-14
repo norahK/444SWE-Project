@@ -17,21 +17,21 @@ import {AngularFireObject, AngularFireDatabase} from 'angularfire2/database'
   templateUrl: 'dish.html',
 })
 export class DishPage {
-  average_rate: number;
+  //average_rate: number;
 
 
-  dish = {} as Dish;
+ // dish = {} as Dish;
 
   //dish : Dish;
 
-  rating: number;
-  like: boolean;
+ // rating: number;
+  //like: boolean;
 
- // dish :  Observable<Dish>;
+ dish :  Observable<Dish>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase,)
    {
 
-  //this.dish= this.db.object(`dishes/1`).valueChanges();
+  this.dish= this.db.object(`dishes/1`).valueChanges();
   this.getallinfo(1);
 
  // this.dish.name = "dish name from database for example cake";
@@ -48,7 +48,7 @@ export class DishPage {
 
   async getallinfo(uid){}
 
-   AddRating(rating: number){}
+ //  AddRating(rating: number){}
 
 
   ionViewDidLoad() {
