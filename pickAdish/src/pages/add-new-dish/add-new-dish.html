@@ -9,12 +9,12 @@
    <ion-list>
       <ion-item>
         <ion-label floating >Name</ion-label>
-        <ion-input type="text"  [(ngModel)]="dish.name"></ion-input>
+        <ion-input type="text"  [(ngModel)]="dish.name" required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating >Price SR</ion-label>
-        <ion-input type="number"  [(ngModel)]="dish.price"></ion-input>
+        <ion-input type="number"  [(ngModel)]="dish.price" required></ion-input>
       </ion-item>
     <ion-item>
       <button ion-button (click)="takePhoto()">pic <ion-icon name="add"></ion-icon>
@@ -52,8 +52,9 @@
 <!--shops from database-->
     <ion-item>
         <ion-label floating >shops</ion-label>
-        <ion-select [(ngModel)]="cshop">
-          <ion-option value="non">choose a shop or add one </ion-option>
+        <ion-select [(ngModel)]="dish.shop">
+          <ion-option value="null">choose a shop or add one </ion-option>
+          <ion-option *ngFor="let shop of shops | async" [(value)]="shop.id" >{{shop.name}} </ion-option>
         </ion-select>
 </ion-item>
 <ion-item>        <button ion-button (click)="addShop()">add shop <ion-icon name="add"></ion-icon> </button>
