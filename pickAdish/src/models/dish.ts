@@ -3,7 +3,7 @@ export interface Dish{
   price:number;
   shop:string;
   id:string;
-number_of_raters :number;
+number_of_raters:number;
 average_rate:number;
 occasion: any[];
 type:string;
