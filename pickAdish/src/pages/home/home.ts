@@ -16,7 +16,7 @@ import {DishPage} from '../dish/dish';
 
 export class HomePage {
 
-dishesListRef$:Observable<Dish>;
+dishesListRef$:Observable<Dish[]>;
 searchQuery: string = '';
 // items: string[];
 
@@ -43,7 +43,7 @@ this.navCtrl.push(DishPage)
   // if the value is an empty string don't filter the items
   if (val && val.trim() != '') {
     this.dishesListRef$ = this.dishesListRef$.filter((item) => {
-      return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      return (item[0].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
     })
   }
 
