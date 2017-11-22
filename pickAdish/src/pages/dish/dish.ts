@@ -80,7 +80,9 @@ export class DishPage {
   onMouseOut2(): void {
     this.imgSrc2 = "assets/img/Rate.png";
     }
-
+    liked():void {
+      this.imgSrc1 = "assets/img/Liked.png";
+    }    
 
     log(value){
      console.log(value);

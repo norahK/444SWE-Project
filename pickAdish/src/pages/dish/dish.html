@@ -10,22 +10,21 @@
     </ion-rating>-->
    <!-- <ion-rating [read]="false" [numStars] = "5" [value] = "6" (ionClick) ="log($event)">
         </ion-rating>-->
-        <ion-rating [read]="false" (ionClick) ="log($event)" >
-        </ion-rating>
-       <!-- <ion-rating [read]="false" (ionClick) ="log($event)" [(ngModel)]="dish.average_rate" >
+     <!--   <ion-rating [read]="false" (ionClick) ="log($event)" >
         </ion-rating>-->
+        <ion-rating [read]="false" (ionClick) ="log($event)">
+        </ion-rating>
 <!--<ion-content>
 </ion-content> -->
 
    <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
 <ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
-<p> Average Rating {{(dish | async)?.average_rate}}  </p>
-<p> {{(dish | async)?.number_of_raters }} Raters </p>
+<p (ngModel)="dish.average_rate"> Average Rating {{(dish | async)?.average_rate}}  </p>
+<p (ngModel)="dish.number_of_raters"> {{(dish | async)?.number_of_raters }} Raters </p>
 <div padding>
   <ion-segment [(ngModel)]="tap">
     <ion-segment-button value="like">
-    	<img width="50" height="50" [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/>
-
+      <button ion-button clear outline (click)="liked()" ><img width="50" height="50"  [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
     </ion-segment-button>
     <ion-segment-button value="rate">
       <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
