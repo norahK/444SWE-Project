@@ -2,13 +2,14 @@
   <ion-navbar>
     <ion-title>
       <!-->search<!-->
-        <ion-searchbar (ionInput)="getItems($event)" ></ion-searchbar>
+
 
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content  >
+         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list  >
     <ion-item  class="iitem"  *ngFor="let item of dishesListRef$ | async  " (click)="goToDishPage(item.id)">
       <div style="white-space:nowrap;">
