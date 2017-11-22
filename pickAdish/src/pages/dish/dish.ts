@@ -81,7 +81,11 @@ export class DishPage {
     this.imgSrc2 = "assets/img/Rate.png";
     }
     liked():void {
+
+      if(this.imgSrc1 == "assets/img/Like.png")
       this.imgSrc1 = "assets/img/Liked.png";
+      else 
+      this.imgSrc1 = "assets/img/Like.png";
     }    
 
     log(value){

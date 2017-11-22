@@ -41,11 +41,11 @@ this.navCtrl.push(DishPage)
   var val = ev.target.value;
 
   // if the value is an empty string don't filter the items
-  if (val && val.trim() != '') {
+  /*if (val && val.trim() != '') {
     this.dishesListRef$ = this.dishesListRef$.filter((item) => {
       return (item[0].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
     })
-  }
+  }*/
 
 }
 }
