@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { ListsPage } from '../lists/lists';
+import { NotificationPage } from '../notification/notification';
 import { ProfilePage } from '../profile/profile';
 import { HomePage } from '../home/home';
 import { ShopsPage } from '../shops/shops';
@@ -34,7 +34,7 @@ export class TabsPage {
 
        } else {
         this.tab4Root=ProfilePage;
-        this.tab3Root = ListsPage;
+        this.tab3Root = NotificationPage;
 
         }
       });

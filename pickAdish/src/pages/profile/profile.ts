@@ -16,7 +16,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ProfilePage {
   imageUrl="assets/img/avatar.jpg";//:any
-  //user={} as User;
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
   tips: FirebaseListObservable<any>;;
   tipsRef$:Observable<any>;//AngularFireList<Tip[]>;
@@ -55,12 +54,39 @@ add(){
     this.navCtrl.push('AddNewDishPage');
   }
 delete(tip){
+  let deletetip = this.alertCtrl.create({
+    title: 'do you want to delete this tip?',
+    buttons: [
+      {
+        text: 'delete', role: 'destructive',
+        handler: data => {
+  this.db.list('/tips/').remove(tip);//.then()
+      }
+      },
+      {
+        text: 'cancle',
+         role: 'cancel',
+        handler: () => {      }
+      }
+    ]
+  });
+  deletetip.present();
 
 }
-gotoDishpage(id){
+gotoDishpage(dishid){
+  //there is no shop page yet
  // this.navCtrl.push('SettingsPage');+pass id with it
 }
  async gitalltips(uid){
+  const requestRef = firebase.database().ref('tips');
+  requestRef.orderByChild('user_id')
+            .equalTo(uid)
+            .once(uid)
+            .then(snapshot => snapshot.val())
+            .then((data) => {
+              this.tipsRef$=data;
+
+            })
  //this.tipsRef$= this.db.database.ref('posts').limitToLast(100);
  /*this.tipsRef$=firebase.database.prototype.list('tips', {
   query: {
@@ -83,7 +109,7 @@ var int=this.tips[i];//.initials;
       this.Loading("error");
     });
 */
-this.tipsRef$=this.db.list('tips').valueChanges();
+//this.tipsRef$=this.db.list('tips').valueChanges();
 ///this.tips =
 //this.tipsRef$ =this.db.database.ref('tips').orderByChild('user_id').equalTo(uid);
 //this.tipsRef$
@@ -129,29 +155,7 @@ this.tipsRef$=this.db.list('tips').valueChanges();
     loading.present();
   }
 
-  showOptions(key,title){
-//pop up window to delete or cancele
-let deletetip = this.alertCtrl.create({
-  title: 'do you want to delete this tip?$title',
-  buttons: [
-    {
-      text: 'delete', role: 'destructive',
-      handler: data => {
-this.db.list('/tips/').remove(key);//.then()
-    }
-    },
-    {
-      text: 'cancle',
-       role: 'cancel',
-      handler: () => {
-        console.log('cancel clicked');
-      }
-    }
-  ]
-});
-deletetip.present();
-}
-ionViewWillLoad(){
+ ionViewWillLoad(){
   const bikeImage = document.getElementById("profile-image") as HTMLImageElement;
 
   // this.authr.auth.currentUser?this.auther.auth.currentUser.email:null;
@@ -174,12 +178,5 @@ ionViewWillLoad(){
 /*get currentUserAnonymous(): boolean {
   return this.authr ? this.authr.authState.anonymous : false
 }*/
-logout(): void{
-    this.app.getRootNav().setRoot('WelcomeSlideoPage');
- // this.authr.auth.signOut();
- // this.navCtrl.setRoot('WelcomeSlideoPage');
- // const root= this.app.getRootNavs();
-//root.popToRoot();
-//this.navCtrl.push('WelcomeSlideoPage');//error
-}
+
 }

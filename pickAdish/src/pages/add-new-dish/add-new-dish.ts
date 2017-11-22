@@ -6,6 +6,7 @@ import{AngularFireDatabase}from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Dish } from '../../models/dish';
 import { Observable } from 'rxjs/Observable';
+//import { TSMap } from "typescript-map"
 
 @IonicPage()
 @Component({
@@ -14,15 +15,19 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AddNewDishPage {
   types: string = "non";
-  shops:Observable<any>;;
-  cshop :string ="non";
+  shops:Observable<any>;
+  //cshop :string ="non";
 dish={} as Dish;
   //thisdish :Dish ;
-
 shoppath :any ;
 dishpath :any;
-testCheckboxOpen = false;
-testCheckboxResult: any;
+occs=['party','office','meeting'];
+occmap = {party:false,
+  office:false,
+  meeting:false};
+optionsChecked = [];
+expanded:boolean= false;
+
   constructor(public db: AngularFireDatabase,
     public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
@@ -31,16 +36,48 @@ testCheckboxResult: any;
      public navParams: NavParams) {
   this.shoppath = db.database.ref('shops');
   this.dishpath = db.database.ref('dishes');
-  var selected = [];
-  //$('#checkboxes input:checked').each(function() {
-   //   selected.push($(this).attr('name'));
-  //});
   this.shops=this.db.list('shops').valueChanges();
-
+this.dish.shop="non";
+this.dish.name=null;
+this.dish.price=null;
+this.dish.type="non";
   }
 
   ionViewDidLoad() {
   }
+showCheckboxes() {
+
+    var checkboxes = document.getElementById("checkboxes");
+    if (!this.expanded) {
+      checkboxes.style.display = "block";
+      this.expanded = true;
+    } else {
+      checkboxes.style.display = "none";
+     this.expanded = false;
+    }
+  }
+
+  /*get selectedOptions() { // right now: ['1','3']
+  return this.occs
+            .filter(opt => opt.checked)
+            .map(opt => opt.value)
+}?*/
+initocc() {
+  for (var x = 0; x<this.occs.length; x++) {
+      this.occmap[this.occs[x]] = true;
+  }
+}
+updateCheckedOptions(option, event) {
+  this.occmap[option] = event.target.checked;
+  //add it at the side or under it
+}
+updateoccs() {
+  for(var x in this.occmap) {
+      if(this.occmap[x]) {
+          this.optionsChecked.push(x);
+      }
+  }
+ }
 async takePhoto(){
   try{
 const options: CameraOptions={
@@ -65,7 +102,7 @@ addShop(){
 
   let prompt = this.alertCtrl.create({
     title: 'add new shop',
-    message: "Enter a name ",
+    message: "Enter shop name ",
     inputs: [
       {
         name: 'name',
@@ -83,34 +120,40 @@ addShop(){
       {
         text: 'Save',
         handler: data => {
-          console.log('Saved clicked');
           const id= this.dishpath.push().getKey();   //get id then add name loc and .. in saide the id s
           this.shoppath.child(id).child('name').set(data.name);
           this.shoppath.child(id).child('id').set(id);
           this.dish.shop=id;
+
         }
       }
     ]
   });
   prompt.present();
-
-
 }
-submit(dish:Dish){
-  if(dish.name==null && dish.price==0){
+async submit(dish:Dish){
+
+  if(dish.name==null && dish.price==null){
     this.Loading('you must add name and price');
     return;
   }
   else{
+   this.updateoccs();
+    this.dish.occasion= this.optionsChecked;
 //this.thisdish.name=;
-this.dishpath.push(dish).then((success)=>{this.Loading('added');
+if(this.dish.shop=="non")this.dish.shop=null;
+if(this.dish.type=="non")this.dish.type=null;
+
+this.dishpath.push(dish).then((success)=>{
+  this.Loading('added sucessfuly');
 //or add othe +cancel
 this.back();
 },(Error)=>{
-  this.Loading('error');
+  this.Loading('error happend while ading the dish top database');
 
 });
   }
+
 }
 Loading(message) {
   const loading = this.loadingCtrl.create({
@@ -133,40 +176,37 @@ back(){
    // window.history.back();
 
 }
-doCheckbox() {
+/*doCheckbox() {
   const alert = this.alertCtrl.create();
-  alert.setTitle('Which occation is propriat for this dish ');
-
+  alert.setTitle('Which occation is propriat for this dish');
+  let names = Array.from( this.occ.keys() );
+  for(var i=0;i<names.length;i++){
   alert.addInput({
     type: 'checkbox',
-    label: 'meeting',
-    value: 'meeting',
-    checked: true
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'party',
-    value: 'party'
-  });
-
-  alert.addInput({
-    type: 'checkbox',
-    label: 'office',
-    value: 'office'
-  });
-
-
+    label: names[i],
+    value: names[i],
+    checked:this.occ.get(names[i])
+    });
+}
   alert.addButton('Cancel');
   alert.addButton({
     text: 'Okay',
     handler: (data: any) => {
-      ///what is this data
+          ///what is this data
+          var k=0
+          for(var i=0;i<this.occ.size;i++){
+            this.occ.set(data.get(k),true);
+            k++;
+          }
       this.dish.occasion= data;
+
+
+
     }
   });
 
   alert.present();
-}
+}*/
+
 }
 
