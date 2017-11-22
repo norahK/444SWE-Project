@@ -31,21 +31,24 @@
       </ion-item>
 <!--list of checks-->
 <ion-item>
-        <!--
-
-              <ion-select [(ngModel)]="language">
-        <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>
-      </ion-select>
-
-          ion-item ng-repeat="employee in employees" >
-            <label class="checkbox">
-                <input  ng-model="checkGroups[employee.id]" type="checkbox">
-            </label>
-              {{employee.name}}
-        </ion-item-->
-    <ion-label  (click)="doCheckbox()" >occasion </ion-label>
-
-
+  <form>
+    <div class="multiselect">
+      <div class="selectBox" (click)="showCheckboxes()">
+        <select>
+          <option>Select an occasion for this dish </option>
+        </select>
+        <div class="overSelect"></div>
+      </div>
+      <div id="checkboxes" >
+          <div *ngFor="let oc of occs">
+        <label>
+          <input type="checkbox"  value="{{oc}}"   [checked]="occmap[oc]"
+          (change)="updateCheckedOptions(oc, $event)" />{{oc}}
+        </label>
+</div>
+      </div>
+    </div>
+  </form>
 </ion-item>
 <div id="selectedO" >
   </div>
@@ -53,11 +56,11 @@
     <ion-item>
         <ion-label floating >shops</ion-label>
         <ion-select [(ngModel)]="dish.shop">
-          <ion-option value="null">choose a shop or add one </ion-option>
+          <ion-option value="non">choose a shop or add one </ion-option>
           <ion-option *ngFor="let shop of shops | async" [(value)]="shop.id" >{{shop.name}} </ion-option>
         </ion-select>
 </ion-item>
-<ion-item>        <button ion-button (click)="addShop()">add shop <ion-icon name="add"></ion-icon> </button>
+<ion-item>        <button ion-button (click)="addShop()">add shop<ion-icon name="add"></ion-icon> </button>
 </ion-item>
 <ion-item>
     <div padding>
