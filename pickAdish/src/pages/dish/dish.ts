@@ -21,6 +21,8 @@ export class DishPage {
   //average_rate: number;
 
   userID: any;
+  dishid:string='1';
+ // arrayDish = [];
  //dish = {} as Dish;
 
   //dish : Dish;
@@ -32,6 +34,7 @@ export class DishPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase, private authr :AngularFireAuth)
    {
   this.dish= this.db.object(`dishes/1`).valueChanges();
+
   this.getallinfo(1);
 
 
@@ -41,6 +44,8 @@ export class DishPage {
       this.userID = data.uid;
       }
       });
+
+    //  this.db.list(`users/${this.userID}/likedDishes`).subscribe
  // this.dish.name = "dish name from database for example cake";
   //this.dish.AverageRating = 4.3;
   //this.dish.NumOfRaters = 23;
@@ -91,10 +96,14 @@ export class DishPage {
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-      this.db.list(`users/${this.userID}/likedDishes`).push('1');
+       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set('hi');
+      
+      //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }
-      else 
+      else {
       this.imgSrc1 = "assets/img/Like.png";
+      this.db.list(`users/${this.userID}/likedDishes`).remove(this.dishid);
+      }
     }    
 
     log(value){
