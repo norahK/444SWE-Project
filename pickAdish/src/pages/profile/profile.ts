@@ -78,7 +78,7 @@ gotoDishpage(dishid){
  // this.navCtrl.push('SettingsPage');+pass id with it
 }
  async gitalltips(uid){
-  const requestRef = firebase.database().ref('tips');
+  /*const requestRef = firebase.database().ref('tips');
   requestRef.orderByChild('user_id')
             .equalTo(uid)
             .once(uid)
@@ -86,7 +86,7 @@ gotoDishpage(dishid){
             .then((data) => {
               this.tipsRef$=data;
 
-            })
+            })*/
  //this.tipsRef$= this.db.database.ref('posts').limitToLast(100);
  /*this.tipsRef$=firebase.database.prototype.list('tips', {
   query: {
