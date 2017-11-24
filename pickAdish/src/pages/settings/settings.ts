@@ -68,9 +68,10 @@ this.authr.authState.subscribe(logedin => {
     //this.authState.updatePassword(this.user.password);
     //logedin.updateEmail(this.user.email);
       this.db.object(`users/${this.user.id}`).update(this.user)
-      .then(data =>
-        this.Loading("saved yaaay"))
-      .catch(error => this.Loading(error));
+      .then((success)=>{
+        this.Loading("profile updated");
+        this.navCtrl.pop();
+      }).catch(error => this.Loading(error));
 
       });
   }
