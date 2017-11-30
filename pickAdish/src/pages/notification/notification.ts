@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController,IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 
 /**
  * Generated class for the NotificationPage page.
@@ -14,12 +14,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(private alert:AlertController ,private plt:Platform ,public navCtrl: NavController, public navParams: NavParams) {
+  this.onnotification();
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationPage');
   }
 
+  async onnotification(){
+    try{
+await this.plt.ready();
+FCMPlugin.onnotification((data)=>{
+this.alert.create({
+  message:data.message
+}).present();
+},(error)=>console.log("error"));
+
+
+  }catch(e){
+
+  }
+  }
 }

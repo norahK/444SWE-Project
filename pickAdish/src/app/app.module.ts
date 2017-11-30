@@ -22,6 +22,7 @@ import { LoginPage } from '../pages/login/login';
 //import { Ionic2RatingModule } from 'ionic2-rating';
 import {IonRating} from '../components/ion-rating/ion-rating';
 import {DishPage} from '../pages/dish/dish';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 
 @NgModule({
@@ -61,7 +62,9 @@ DishPage
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider, DishPageService
+    AuthProvider, DishPageService,
+    Push,//here
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
 
   schemas: [
