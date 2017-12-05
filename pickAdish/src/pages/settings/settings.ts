@@ -53,7 +53,6 @@ this.authr.authState.subscribe(logedin => {
       this.user.name = personSnapshot.child('name').val();
       this.user.bio = personSnapshot.child('bio').val();
       this.user.profileImage = personSnapshot.child('profileImage').val();
-      this.user.email = personSnapshot.child('email').val();
 
     });
     //= this.db.object(`users/${logedin.uid}`).valueChanges();

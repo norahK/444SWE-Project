@@ -23,6 +23,7 @@ import { LoginPage } from '../pages/login/login';
 import {IonRating} from '../components/ion-rating/ion-rating';
 import {DishPage} from '../pages/dish/dish';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+//import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,AngularFireDatabaseModule,
+    //CommonModule
    // Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
