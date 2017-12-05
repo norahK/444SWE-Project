@@ -1,3 +1,23 @@
 page-dish {
-div-hieght : 30px;
+min-height : 30px;
+.img {
+    max-width: 100%;
+    height: auto;
+    position: relative; 
 }
+.button{
+    position: relative;
+}
+.ion-segment-button{
+    position: relative;
+}
+.ion-segment{
+    position: absolute;
+}
+.ion-rating{
+    max-width: 100%;
+    height: auto;  
+    position: relative;  
+}
+}
+

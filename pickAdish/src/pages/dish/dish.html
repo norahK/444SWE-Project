@@ -1,3 +1,4 @@
+<ion-split-pane>  
 <ion-header>
   <ion-navbar color ="primary">
     <ion-title> {{(d | async)?.name}} </ion-title>
@@ -20,10 +21,10 @@
 <ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
 <p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
 <p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
-<div padding>
+<div padding >
   <ion-segment [(ngModel)]="tap">
     <ion-segment-button value="like">
-      <button ion-button clear outline (click)="liked()" ><img width="50" height="50" [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
+      <button ion-button clear outline (click)="liked()" ><img no-padding width="50px" [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
     </ion-segment-button>
     <ion-segment-button value="rate">
         <ion-rating [read]="false" (ionClick) ="log($event)">
@@ -157,6 +158,7 @@
   </ion-list>-->
 
 </ion-content>
+</ion-split-pane>
 <!--
 <ion-content padding class="transparent-header">
   <ion-header>
