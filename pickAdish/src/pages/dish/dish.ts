@@ -21,7 +21,7 @@ export class DishPage {
   //average_rate: number;
 
   userID: any;
- // dish_name: any;
+  //dish_name: any;
   dishid:string='1';
  // arrayDish = [];
    dish = {} as Dish;
@@ -37,8 +37,10 @@ export class DishPage {
   this.d= this.db.object(`dishes/1`).valueChanges();
 
   this.getallinfo(1);
-
-
+  //this.dish_name = this.db.list(`dishes/1/name`);
+  //var dishes = this.db.database.ref('dishes/1');
+  
+  
 
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
@@ -98,7 +100,7 @@ export class DishPage {
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set(this.dish.name);
+       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set("cake");
 
       //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }

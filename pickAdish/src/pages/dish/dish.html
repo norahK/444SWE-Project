@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color ="primary">
-    <ion-title> {{(dish | async)?.name}} </ion-title>
+    <ion-title> {{(d | async)?.name}} </ion-title>
  </ion-navbar>
 </ion-header>
 
@@ -19,12 +19,12 @@
 
    <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
 <ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
-<p (ngModel)="dish.average_rate"> Average Rating {{(dish | async)?.average_rate}}  </p>
-<p (ngModel)="dish.number_of_raters"> {{(dish | async)?.number_of_raters }} Raters </p>
-<div overflow="visible" padding>
-  <ion-segment  [(ngModel)]="tap">
-    <ion-segment-button overflow="visible" value="like">
-      <button overflow="visible" ion-button clear outline (click)="liked()" ><img overflow="visible"  [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
+<p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
+<p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
+<div padding>
+  <ion-segment [(ngModel)]="tap">
+    <ion-segment-button value="like">
+      <button ion-button clear outline (click)="liked()" ><img width="50" height="50" [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
     </ion-segment-button>
     <ion-segment-button value="rate">
       <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
@@ -96,7 +96,7 @@
 
 
 
-
+<!--
 
 <div [(ngModel)]="tap">
   <ion-list *ngSwitchCase="type">
@@ -110,6 +110,8 @@
     </ion-item>
     ...
   </ion-list>
+</div>
+-->
 <!--
   <ion-list *ngSwitchCase="'type'">
     <ion-item>
@@ -120,7 +122,6 @@
     </ion-item>
     ...
   </ion-list>-->
-</div>
 
 </ion-content>
 <!--
