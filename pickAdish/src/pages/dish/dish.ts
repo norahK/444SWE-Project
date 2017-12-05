@@ -112,8 +112,50 @@ export class DishPage {
 
     log(value){
      console.log(value);
-
     }
+
+    button1Color: String = "secondary";
+    button2Color: String = "secondary";
+    button3Color: String = "secondary";
+    button4Color: String = "secondary";
+    
+    async selected(id){
+     
+      if(id == 1 && this.button1Color == "secondary"){
+      this.button1Color = "Primary";
+      this.db.object(`dishes/${this.dishid}/occasions/1`).set("family meeting");
+    }
+      else if(id == 2 && this.button2Color == "secondary"){
+      this.button2Color = "Primary";
+      this.db.object(`dishes/${this.dishid}/occasions/2`).set("party");
+      }      
+      else if(id == 3 && this.button3Color == "secondary"){
+      this.button3Color = "Primary";
+      this.db.object(`dishes/${this.dishid}/occasions/3`).set("visitation");
+      }      
+      else if(id == 4 && this.button4Color == "secondary"){
+      this.button4Color = "Primary";
+      this.db.object(`dishes/${this.dishid}/occasions/4`).set("holiday");
+      }      
+      else if(id == 1 && this.button1Color == "Primary"){
+      this.button1Color = "secondary";
+      this.db.list(`dishes/${this.dishid}/occasions/1`).remove();
+      }
+      else if(id == 2 && this.button2Color == "Primary"){
+      this.button2Color = "secondary";
+      this.db.list(`dishes/${this.dishid}/occasions/2`).remove();      
+      }
+      else if(id == 3 && this.button3Color == "Primary"){
+      this.button3Color = "secondary";
+      this.db.list(`dishes/${this.dishid}/occasions/3`).remove();      
+      }
+      else if(id == 4 && this.button4Color == "Primary"){
+      this.button4Color = "secondary";
+      this.db.list(`dishes/${this.dishid}/occasions/4`).remove();      
+      }
+      else ;
+    }
+
 }
 
 

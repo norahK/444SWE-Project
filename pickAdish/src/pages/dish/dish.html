@@ -12,8 +12,7 @@
         </ion-rating>-->
      <!--   <ion-rating [read]="false" (ionClick) ="log($event)" >
         </ion-rating>-->
-        <ion-rating [read]="false" (ionClick) ="log($event)">
-        </ion-rating>
+       
 <!--<ion-content>
 </ion-content> -->
 
@@ -27,9 +26,14 @@
       <button ion-button clear outline (click)="liked()" ><img width="50" height="50" [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
     </ion-segment-button>
     <ion-segment-button value="rate">
+        <ion-rating [read]="false" (ionClick) ="log($event)">
+          </ion-rating>
+     <!-- <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
       <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/><img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/><img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/><img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-    </ion-segment-button>
+      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
+      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
+      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>-->
+     </ion-segment-button>
     <ion-segment-button value="type">
       Occasions
     </ion-segment-button>
@@ -39,7 +43,30 @@
   </ion-segment>
 </div>
 
-
+<div [ngSwitch]="tap">    
+<ion-list *ngSwitchCase="'type'">
+    <ion-item>
+      <ion-thumbnail item-start>
+          <button (click)="selected(1)" ion-button [color]="button1Color" outline>family meeting</button>
+        </ion-thumbnail>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+          <button (click)="selected(2)" ion-button [color]="button2Color" outline>party</button>
+        </ion-thumbnail>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+          <button (click)="selected(3)" ion-button [color]="button3Color" outline>visitation</button>
+        </ion-thumbnail>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+          <button (click)="selected(4)" ion-button [color]="button4Color" outline>holiday</button>
+        </ion-thumbnail>
+    </ion-item>
+  </ion-list>
+</div>
 <!--tip card -->
 
 <!--div id="tips">
@@ -92,16 +119,10 @@
 
 
 
-
-
-
-
 <!--
 
 <div [(ngModel)]="tap">
 
-<<<<<<< HEAD
-=======
     <ion-item>
       <ion-thumbnail item-start>
         <img src="img/thumbnail-puppy-1.jpg">
@@ -112,7 +133,6 @@
   </ion-list>
 </div>
 -->
->>>>>>> 6bf9b35b48e31784546a02795786e5acaecafd6a
 <!--
    <ion-list *ngSwitchCase="type>
    <ion-option-button>family meeting</ion-option-button>
