@@ -32,15 +32,16 @@ export class DishPage {
   //like: boolean;
 
   d :  Observable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase, private authr :AngularFireAuth)
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private db:AngularFireDatabase, 
+              private authr :AngularFireAuth)
    {
   this.d= this.db.object(`dishes/1`).valueChanges();
 
   this.getallinfo(1);
   //this.dish_name = this.db.list(`dishes/1/name`);
   //var dishes = this.db.database.ref('dishes/1');
-  
-  
 
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
@@ -57,19 +58,15 @@ export class DishPage {
   UpdateAverageRating(){
 
   //this.dish.average_rate =;
-
-
   }
 
   async getallinfo(uid){}
 
  //  AddRating(rating: number){}
 
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad DishPage');
   }
-
 
   tap: string = "type";
   isAndroid: boolean = false;
