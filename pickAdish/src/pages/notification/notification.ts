@@ -14,23 +14,23 @@ import { AlertController,IonicPage, NavController, NavParams,Platform } from 'io
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
+  n:Array<string>;
   constructor(private alert:AlertController ,private plt:Platform ,public navCtrl: NavController, public navParams: NavParams) {
   this.onnotification();
 }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NotificationPage');
   }
 
   async onnotification(){
     try{
 await this.plt.ready();
 FCMPlugin.onnotification((data)=>{
+this.n.push(data);
 this.alert.create({
   message:data.message
 }).present();
 },(error)=>console.log("error"));
-
 
   }catch(e){
 
