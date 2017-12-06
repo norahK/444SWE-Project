@@ -15,8 +15,12 @@
       </button>
     </div>
     <hr/>
+
+
+
+
     <div id="tips">
-      <ion-card *ngFor="let tip of tipsRef$ | async">
+      <ion-card *ngFor="let tip of tipsRef$ | async ">
         <ion-item>
           <h2 class="sticky">{{tip.title}}</h2>
         </ion-item>

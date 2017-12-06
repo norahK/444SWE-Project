@@ -17,7 +17,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ProfilePage {
   imageUrl="assets/img/avatar.jpg";//:any
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
-  tips: FirebaseListObservable<any>;;
+ // tips: FirebaseListObservable<any>;
+  public tips: AngularFireList<any>;
   tipsRef$:Observable<any>;//AngularFireList<Tip[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
@@ -29,6 +30,7 @@ export class ProfilePage {
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
       //const unsubscribe =
+      this.tips= this.db.list('/tips');
       this.authr.authState.subscribe(logedin => {
         if(!logedin||logedin.isAnonymous){
        // this.user=Observable.create(o=>this.user=o );
@@ -76,69 +78,11 @@ delete(tip){
 gotoDishpage(dishid){
   //there is no shop page yet
  // this.navCtrl.push('SettingsPage');+pass id with it
-}
- async gitalltips(uid){
-  /*const requestRef = firebase.database().ref('tips');
-  requestRef.orderByChild('user_id')
-            .equalTo(uid)
-            .once(uid)
-            .then(snapshot => snapshot.val())
-            .then((data) => {
-              this.tipsRef$=data;
+ }
+ async gitalltips(uid:string){
 
-            })*/
- //this.tipsRef$= this.db.database.ref('posts').limitToLast(100);
- /*this.tipsRef$=firebase.database.prototype.list('tips', {
-  query: {
-    orderByChild: 'user_id',
-    equalTo: uid
-  }
-}).map(items => {
-const filtered = items.filter(item => (<string[]>item.memberId).indexOf(this.senderPersonModel.uid) > -1);
-return filtered;
-});*/
-/*his.db.database.ref('tips').on('value', function(snapshot) {
-this.tips=snapshot.val();
-this.Loading(this.tips);
-var keys=Object.keys(this.tips);
-for(var i=0;i<keys.length;i++){
-var k=keys[i];
-var int=this.tips[i];//.initials;
-}
-    },function(err){
-      this.Loading("error");
-    });
-*/
-//this.tipsRef$=this.db.list('tips').valueChanges();
-///this.tips =
-//this.tipsRef$ =this.db.database.ref('tips').orderByChild('user_id').equalTo(uid);
-//this.tipsRef$
-//JSON.parse(tips);
-
-    /*  this.db.list('/users')
-    .subscribe(snapshots=>{
-        snapshots.forEach(snapshot => {
-          console.log(snapshot.key, snapshot.val());
-        });
-    })
-
-    this.db.list('/users').subscribe(users=>{
-    });
-    this.db.database.ref('root/').on('value', function(snapshot) {
-      this.tips = snapshot.val();
-      obj.forEach(function(data){
-          alert(data.key());
-      }
-  });
-
-    firebase
-    .database()
-    .ref('/userProfile')
-    .child(newUser.uid)
-    .set({ email: email });
-  });*/
-     //this.tips = db.list('/tips').valueChanges();//change to user tipsth
-    //this.tips= this.db.list('/tips/');//.only from regester user
+  this.tipsRef$ = this.db.list('tips',
+  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
   }
   Loading(message) {
     const loading = this.loadingCtrl.create({
