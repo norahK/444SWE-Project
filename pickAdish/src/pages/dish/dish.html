@@ -1,4 +1,4 @@
-<ion-split-pane>  
+<ion-split-pane>
 <ion-header>
   <ion-navbar color ="primary">
     <ion-title> {{(d | async)?.name}} </ion-title>
@@ -13,20 +13,12 @@
         </ion-rating>-->
      <!--   <ion-rating [read]="false" (ionClick) ="log($event)" >
         </ion-rating>-->
-       
+
 <!--<ion-content>
 </ion-content> -->
 
    <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
 <ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
-<<<<<<< HEAD
-<p (ngModel)="dish.average_rate"> Average Rating {{(dish | async)?.average_rate}}  </p>
-<p (ngModel)="dish.number_of_raters"> {{(dish | async)?.number_of_raters }} Raters </p>
-<div padding>
-  <ion-segment [(ngModel)]="tap">
-    <ion-segment-button value="like">
-      <button ion-button clear outline (click)="liked()" ><img width="50" height="50"  [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/></button>
-=======
 <p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
 <p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
 <div padding >
@@ -34,7 +26,6 @@
     <ion-segment-button value="like">
       <button ion-button clear outline (click)="liked()" ><img width="50" no-padding [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/>
       </button>
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
     </ion-segment-button>
     <ion-segment-button value="rate">
         <ion-rating [read]="false" (ionClick) ="log($event)">
@@ -54,88 +45,23 @@
   </ion-segment>
 </div>
 
-<div [ngSwitch]="tap">    
+<div [ngSwitch]="tap">
 <ion-list *ngSwitchCase="'type'">
     <ion-item>
       <ion-thumbnail item-start>
           <button (click)="selected(1)" ion-button [color]="button1Color" outline>family meeting</button>
         </ion-thumbnail>
     </ion-item>
-<<<<<<< HEAD
-    <ion-card-content>
-        <h3>{{tip.title}}</h3>
-      <p>{{tip.body}}</p>
-    </ion-card-content>
-    <ion-row>
-      <ion-col col-4>
-          <button ion-button   clear small icon-left (click)="gotoDishpage()">
-              <ion-icon name='text'></ion-icon>
-             go to dish page
-            </button>
-      </ion-col>
-      <ion-col col-5>
-          <button ion-button no-padding color="purple" clear small icon-left (click)="delete(tip)">
-              <ion-icon name='trash'></ion-icon>
-              delete
-           </button>
-      </ion-col>
-      <ion-col col-3 align-self-center text-center>
-        <p>
-          {{tip.date}}
-        </p>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-</div-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div [(ngModel)]="tap">
-  <ion-list *ngSwitchCase="'type'">
-=======
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
     <ion-item>
       <ion-thumbnail item-start>
           <button (click)="selected(2)" ion-button [color]="button2Color" outline>party</button>
         </ion-thumbnail>
     </ion-item>
-<<<<<<< HEAD
-    ...
-  </ion-list>
-
-  <ion-list *ngSwitchCase="'tip'">
-=======
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
     <ion-item>
       <ion-thumbnail item-start>
           <button (click)="selected(3)" ion-button [color]="button3Color" outline>visitation</button>
         </ion-thumbnail>
     </ion-item>
-<<<<<<< HEAD
-    ...
-  </ion-list>
-</div>
--->
-=======
     <ion-item>
       <ion-thumbnail item-start>
           <button (click)="selected(4)" ion-button [color]="button4Color" outline>holiday</button>
@@ -143,7 +69,6 @@
     </ion-item>
   </ion-list>
 </div>
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
 </ion-content>
 </ion-split-pane>
 <!--

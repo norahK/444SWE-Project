@@ -115,6 +115,7 @@ addShop(){
         text: 'Cancel',
         handler: data => {
           prompt.dismiss();
+          return false;
         }
       },
       {

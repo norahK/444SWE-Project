@@ -1,35 +1,32 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the NotificationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import {  LoadingController,App,ActionSheetController,ToastController,AlertController } from 'ionic-angular';
+import{AngularFireAuth}from 'angularfire2/auth';
+import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
+import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import { WelcomeSlideoPage } from '../welcome-slideo/welcome-slideo';
+import { User } from '../../models/user';
+import { Observable } from 'rxjs/Observable';
+import firebase from 'firebase';
+import { Tip } from '../../models/tip';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Platform } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-notification',
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
-<<<<<<< HEAD
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-=======
   n:Array<string>;
   constructor(private alert:AlertController ,private plt:Platform ,public navCtrl: NavController, public navParams: NavParams) {
   this.onnotification();
 }
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
+
 
   ionViewDidLoad() {
   }
 
-<<<<<<< HEAD
-=======
   async onnotification(){
     try{
 await this.plt.ready();
@@ -44,5 +41,4 @@ this.alert.create({
 
   }
   }
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
 }

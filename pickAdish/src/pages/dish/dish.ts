@@ -21,29 +21,21 @@ export class DishPage {
   //average_rate: number;
 
   userID: any;
-<<<<<<< HEAD
-=======
   //dish_name: any;
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
   dishid:string='1';
  // arrayDish = [];
  //dish = {} as Dish;
 
-  //dish : Dish;
+dish : any;
 
  // rating: number;
   //like: boolean;
 
-<<<<<<< HEAD
-  dish :  Observable<Dish>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase, private authr :AngularFireAuth)
-=======
   d :  Observable<any>;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private db:AngularFireDatabase, 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private db:AngularFireDatabase,
               private authr :AngularFireAuth)
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
    {
   this.dish= this.db.object(`dishes/1`).valueChanges();
 
@@ -104,20 +96,15 @@ export class DishPage {
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-<<<<<<< HEAD
-       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set('hi');
-      
-=======
        this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set("cake");
 
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
       //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }
       else {
       this.imgSrc1 = "assets/img/Like.png";
       this.db.list(`users/${this.userID}/likedDishes`).remove(this.dishid);
       }
-    }    
+    }
 
     log(value){
      console.log(value);
@@ -127,9 +114,9 @@ export class DishPage {
     button2Color: String = "secondary";
     button3Color: String = "secondary";
     button4Color: String = "secondary";
-    
+
     async selected(id){
-     
+
       if(id == 1 && this.button1Color == "secondary"){
       this.button1Color = "Primary";
       this.db.object(`dishes/${this.dishid}/occasions/1`).set("family meeting");
@@ -137,30 +124,30 @@ export class DishPage {
       else if(id == 2 && this.button2Color == "secondary"){
       this.button2Color = "Primary";
       this.db.object(`dishes/${this.dishid}/occasions/2`).set("party");
-      }      
+      }
       else if(id == 3 && this.button3Color == "secondary"){
       this.button3Color = "Primary";
       this.db.object(`dishes/${this.dishid}/occasions/3`).set("visitation");
-      }      
+      }
       else if(id == 4 && this.button4Color == "secondary"){
       this.button4Color = "Primary";
       this.db.object(`dishes/${this.dishid}/occasions/4`).set("holiday");
-      }      
+      }
       else if(id == 1 && this.button1Color == "Primary"){
       this.button1Color = "secondary";
       this.db.list(`dishes/${this.dishid}/occasions/1`).remove();
       }
       else if(id == 2 && this.button2Color == "Primary"){
       this.button2Color = "secondary";
-      this.db.list(`dishes/${this.dishid}/occasions/2`).remove();      
+      this.db.list(`dishes/${this.dishid}/occasions/2`).remove();
       }
       else if(id == 3 && this.button3Color == "Primary"){
       this.button3Color = "secondary";
-      this.db.list(`dishes/${this.dishid}/occasions/3`).remove();      
+      this.db.list(`dishes/${this.dishid}/occasions/3`).remove();
       }
       else if(id == 4 && this.button4Color == "Primary"){
       this.button4Color = "secondary";
-      this.db.list(`dishes/${this.dishid}/occasions/4`).remove();      
+      this.db.list(`dishes/${this.dishid}/occasions/4`).remove();
       }
       else ;
     }
