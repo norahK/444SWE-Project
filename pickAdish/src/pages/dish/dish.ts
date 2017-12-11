@@ -39,7 +39,14 @@ dish : any;
               private authr :AngularFireAuth)
    {
   this.d= this.db.object(`dishes/1`).valueChanges();
+  /*this.dish = this.db.object('dishes/1',{ preserveSnapshot: true });
+  this.dish.subscribe(snapshot => {
+    this.avg = snapshot.val().average_rate;
+    this.raters = snapshot.val().number_of_raters;
+  });*/
+ 
   this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
+  //this.avg = this.dish.average_rate;
  // this.raters= this.db.object(`dishes/${this.dishid}/number_of_raters`).valueChanges();
   this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
   this.getallinfo(1);

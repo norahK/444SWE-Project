@@ -17,38 +17,20 @@ import { Platform } from 'ionic-angular';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
-<<<<<<< HEAD
-=======
-
->>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
   n:Array<string>;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  constructor(private alert:AlertController ,private plt:Platform ,public navCtrl: NavController, public navParams: NavParams) {
- // this.onnotification();
-=======
-=======
->>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
+
   constructor(
    // private alert:AlertController ,
    // private plt:Platform ,
     public navCtrl: NavController,
      public navParams: NavParams) {
   //this.onnotification();
-<<<<<<< HEAD
->>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
-=======
->>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
-}
-<<<<<<< HEAD
-=======
 
->>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
-
+/*
   ionViewDidLoad() {
   }
 
-<<<<<<< HEAD
+
   /*async onnotification(){
 =======
 <<<<<<< HEAD
@@ -74,18 +56,12 @@ this.alert.create({
   }catch(e){
 
   }
-<<<<<<< HEAD
-  }*/
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-  }*/
-=======
   }
->>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
->>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
-=======
+
   }
->>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
->>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
+
+     }*/
+
+  }
+
 }

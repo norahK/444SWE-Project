@@ -53,16 +53,9 @@ this.navCtrl.push(DishPage)
   //.orderByChild('_searchLastName').startAt(val).endAt(val+"\uf8ff")
 
   // Reset items back to all of the items
-<<<<<<< HEAD
-
-
-  // set val to the value of the ev target
-
-=======
   this.initializeItems();
   // set val to the value of the ev target
     }
->>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
   // if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
    this.dishesListRef$ = this.dishesListRef$.filter((item ) => {
