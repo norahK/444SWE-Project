@@ -23,15 +23,21 @@ export class NotificationPage {
 >>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
   n:Array<string>;
 <<<<<<< HEAD
+<<<<<<< HEAD
   constructor(private alert:AlertController ,private plt:Platform ,public navCtrl: NavController, public navParams: NavParams) {
  // this.onnotification();
 =======
+=======
+>>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
   constructor(
    // private alert:AlertController ,
    // private plt:Platform ,
     public navCtrl: NavController,
      public navParams: NavParams) {
   //this.onnotification();
+<<<<<<< HEAD
+>>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
+=======
 >>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
 }
 <<<<<<< HEAD
@@ -46,7 +52,12 @@ export class NotificationPage {
   /*async onnotification(){
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
   /*async onnotification(){
+=======
+  async onnotification(){
+>>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
+>>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
 =======
   async onnotification(){
 >>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
@@ -67,7 +78,12 @@ this.alert.create({
   }*/
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
   }*/
+=======
+  }
+>>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
+>>>>>>> 905e6628fb5d2402fb5d9c6a8152012b9be4ed19
 =======
   }
 >>>>>>> 9ba80d3ac69c02c7bf147f847b2db47796f9e88d
