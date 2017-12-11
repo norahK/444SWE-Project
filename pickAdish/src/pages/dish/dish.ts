@@ -19,7 +19,8 @@ import{AngularFireAuth}from 'angularfire2/auth';
 })
 export class DishPage {
   //average_rate: number;
-
+  avg: any;
+  raters: any;
   userID: any;
   //dish_name: any;
   dishid:string='1';
@@ -37,8 +38,10 @@ dish : any;
               private db:AngularFireDatabase,
               private authr :AngularFireAuth)
    {
-  this.dish= this.db.object(`dishes/1`).valueChanges();
-
+  this.d= this.db.object(`dishes/1`).valueChanges();
+  this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
+ // this.raters= this.db.object(`dishes/${this.dishid}/number_of_raters`).valueChanges();
+  this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
   this.getallinfo(1);
   //this.dish_name = this.db.list(`dishes/1/name`);
   //var dishes = this.db.database.ref('dishes/1');
@@ -55,10 +58,17 @@ dish : any;
   //this.dish.NumOfRaters = 23;
   }
 
-  UpdateAverageRating(){
+  UpdateAverageRating(value){
+ var data = {
+  number_of_raters: this.raters+ 1,
+  average_rate: this.avg + value / this.raters,
+ };
+   // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);     
+  //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
 
-  //this.dish.average_rate =;
-  }
+this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
+
+}
 
   async getallinfo(uid){}
 
@@ -108,6 +118,8 @@ dish : any;
 
     log(value){
      console.log(value);
+     this.UpdateAverageRating(value);
+      
     }
 
     button1Color: String = "secondary";

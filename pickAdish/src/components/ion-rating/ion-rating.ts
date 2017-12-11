@@ -17,22 +17,23 @@ import{AngularFireAuth}from 'angularfire2/auth';
   templateUrl: 'ion-rating.html'
 })
 export class IonRating {
- /* userID: any;
+  userID: any;
   //dish_name: any;
   dishid:string='1';
   RatingPath :any;
-  
+  numOfRaters: any;
+  avg: any;
  // arrayDish = [];
-   dish = {} as Dish;
+   //dish = {} as Dish;
 
-  //dish : Dish;
+  dish : Dish;
   //   rating = {} as Rating;
    rating : Rating;
 
  // rating: number;
   //like: boolean;
 
-  d :  Observable<any>; */
+  d :  Observable<any>; 
  //text: string;
 
  @Input() numStars: number = 5;
@@ -46,11 +47,12 @@ export class IonRating {
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase, private authr :AngularFireAuth) {
     //console.log('Hello IonRating Component');
     //this.text = 'Hello World';
-  /*  this.d= this.db.object(`dishes/1`).valueChanges();
+    this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
+    this.d= this.db.object(`dishes/1`).valueChanges();
     
       this.getallinfo(1);
       
-      this.RatingPath = db.database.ref('rating');
+     // this.RatingPath = db.database.ref('rating');
       
     
       this.authr.authState.subscribe(data=>{
@@ -58,10 +60,10 @@ export class IonRating {
           this.userID = data.uid;
           }
           });    
-          this.rating.dish_id = this.dishid;
-          this.rating.user_id = this.userID;   */   
+        // this.rating.dish_id = this.dishid;
+        // this.rating.user_id = this.userID;    
   }
-  // async getallinfo(uid){}
+   async getallinfo(uid){}
 
   ngAfterViewInit(){
    this.calc();
@@ -85,7 +87,7 @@ calc(){
     this.value = index + 1;
     this.ionClick.emit(this.value);
     this.calc();
-   //this.db.object(`ratings/${this.userID}/likedDishes/${this.dishid}`).set("cake");
+   //this.db.object(`ratings/${this.dishid}/user_id`).set(this.userID);
   // this.db.list.(`rating/likedDishes/${this.dishid}`).set("cake");
  
  // this.rating.stars_value = 
