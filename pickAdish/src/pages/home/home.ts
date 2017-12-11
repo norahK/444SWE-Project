@@ -7,10 +7,7 @@ import{AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
-<<<<<<< HEAD
-=======
 import 'rxjs/add/operator/filter';
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
 
 @Component({
   selector: 'page-home',
@@ -18,10 +15,6 @@ import 'rxjs/add/operator/filter';
 })
 
 export class HomePage {
-<<<<<<< HEAD
-=======
-
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
 dishesListRef$:Observable<any>;
 searchQuery: string = '';
 // items: string[];
@@ -60,16 +53,10 @@ this.navCtrl.push(DishPage)
   //.orderByChild('_searchLastName').startAt(val).endAt(val+"\uf8ff")
     }
   // Reset items back to all of the items
-<<<<<<< HEAD
-  this.initializeItems();
-  // set val to the value of the ev target
-  var val = ev.target.value;
-=======
 
 
   // set val to the value of the ev target
 
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
   // if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
    this.dishesListRef$ = this.dishesListRef$.filter((item ) => {

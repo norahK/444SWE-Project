@@ -22,11 +22,8 @@ import { LoginPage } from '../pages/login/login';
 //import { Ionic2RatingModule } from 'ionic2-rating';
 import {IonRating} from '../components/ion-rating/ion-rating';
 import {DishPage} from '../pages/dish/dish';
-<<<<<<< HEAD
-=======
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 //import { CommonModule } from '@angular/common';
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
 
 
 @NgModule({

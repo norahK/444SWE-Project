@@ -19,12 +19,10 @@ import{AngularFireAuth}from 'angularfire2/auth';
 })
 export class DishPage {
   //average_rate: number;
-
+  avg: any;
+  raters: any;
   userID: any;
-<<<<<<< HEAD
-=======
   //dish_name: any;
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
   dishid:string='1';
  // arrayDish = [];
  //dish = {} as Dish;
@@ -34,19 +32,16 @@ export class DishPage {
  // rating: number;
   //like: boolean;
 
-<<<<<<< HEAD
-  dish :  Observable<Dish>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFireDatabase, private authr :AngularFireAuth)
-=======
   d :  Observable<any>;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private db:AngularFireDatabase, 
               private authr :AngularFireAuth)
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
    {
-  this.dish= this.db.object(`dishes/1`).valueChanges();
-
+  this.d= this.db.object(`dishes/1`).valueChanges();
+  this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
+ // this.raters= this.db.object(`dishes/${this.dishid}/number_of_raters`).valueChanges();
+  this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
   this.getallinfo(1);
   //this.dish_name = this.db.list(`dishes/1/name`);
   //var dishes = this.db.database.ref('dishes/1');
@@ -63,10 +58,17 @@ export class DishPage {
   //this.dish.NumOfRaters = 23;
   }
 
-  UpdateAverageRating(){
+  UpdateAverageRating(value){
+ var data = {
+  number_of_raters: this.raters+ 1,
+  average_rate: this.avg + value / this.raters,
+ };
+   // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);     
+  //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
 
-  //this.dish.average_rate =;
-  }
+this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
+
+}
 
   async getallinfo(uid){}
 
@@ -104,13 +106,8 @@ export class DishPage {
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-<<<<<<< HEAD
-       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set('hi');
-      
-=======
        this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set("cake");
 
->>>>>>> 13db5d94ce720029c6a369821f759ada2f74c8b7
       //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }
       else {
@@ -121,6 +118,8 @@ export class DishPage {
 
     log(value){
      console.log(value);
+     this.UpdateAverageRating(value);
+      
     }
 
     button1Color: String = "secondary";
