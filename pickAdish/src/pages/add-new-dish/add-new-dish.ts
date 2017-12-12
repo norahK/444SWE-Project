@@ -134,7 +134,7 @@ addShop(){
 }
 async submit(dish:Dish){
 
-  if(dish.name==null && dish.price==null){
+  if(dish.name==null || dish.price==null || dish.name=="" || dish.price == 0 ){
     this.Loading('you must add name and price');
     return;
   }
