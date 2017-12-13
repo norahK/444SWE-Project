@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
 import { Tip } from '../../models/tip';
 import { Pipe, PipeTransform } from '@angular/core';
+import {DishPage} from '../dish/dish';
 
 @Component({
   selector: 'page-profile',
@@ -57,12 +58,12 @@ add(){
   }
 delete(tip){
   let deletetip = this.alertCtrl.create({
-    title: 'do you want to delete this tip?',
+    title: `do you want to delete ${tip.title} tip?`,
     buttons: [
       {
         text: 'delete', role: 'destructive',
         handler: data => {
-  this.db.list('/tips/').remove(tip);//.then()
+  this.db.list('tips').remove(tip.id);//.then()
       }
       },
       {
@@ -76,8 +77,10 @@ delete(tip){
 
 }
 gotoDishpage(dishid){
-  //there is no shop page yet
- // this.navCtrl.push('SettingsPage');+pass id with it
+  this.navCtrl.push(DishPage, {
+    dishId: dishid
+});
+  //there is no shop page yet if no id
  }
  async gitalltips(uid:string){
 

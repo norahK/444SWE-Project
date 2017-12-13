@@ -22,7 +22,9 @@ searchQuery: string = '';
  this.initializeItems();
   }
   goToDishPage(s){
-this.navCtrl.push(DishPage)
+    this.navCtrl.push(DishPage, {
+      dishId: s
+  });
   }
   initializeItems() {
   this.dishesListRef$= this.database.list('dishes').valueChanges();
