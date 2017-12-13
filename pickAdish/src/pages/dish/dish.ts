@@ -39,16 +39,28 @@ dish : any;
               private authr :AngularFireAuth)
    {
   this.d= this.db.object(`dishes/1`).valueChanges();
-  /*this.dish = this.db.object('dishes/1',{ preserveSnapshot: true });
-  this.dish.subscribe(snapshot => {
+  
+ // this.dish = this.db.object(`dishes/${this.dishid}`);
+  //this.avg = this.db.database.ref('dishes/1/average_rate').once('value');  
+  //this.raters = this.db.database.ref('dishes/1/number_of_raters').once('value');
+
+  db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
     this.avg = snapshot.val().average_rate;
     this.raters = snapshot.val().number_of_raters;
-  });*/
- 
-  this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
+    return false;    
+  })
+
+/*
+
+ this.dish.snapshot(snapshot => {
+    this.avg = snapshot.val().average_rate;
+    this.raters = snapshot.val().number_of_raters;
+  });
+ */
+ // this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
   //this.avg = this.dish.average_rate;
  // this.raters= this.db.object(`dishes/${this.dishid}/number_of_raters`).valueChanges();
-  this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
+  //this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
   this.getallinfo(1);
   //this.dish_name = this.db.list(`dishes/1/name`);
   //var dishes = this.db.database.ref('dishes/1');
@@ -66,9 +78,10 @@ dish : any;
   }
 
   UpdateAverageRating(value){
+  var orginal_r = this.avg * this.raters ;    
  var data = {
   number_of_raters: this.raters+ 1,
-  average_rate: this.avg + value / this.raters,
+  average_rate: ((orginal_r + value) / (this.raters+1)).toFixed(2)
  };
    // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);     
   //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
