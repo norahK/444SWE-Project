@@ -39,41 +39,26 @@ dish : any;
               private authr :AngularFireAuth)
    {
        // this.dish = this.db.object(`dishes/${this.dishid}`);
-    //this.avg = this.db.database.ref('dishes/1/average_rate').once('value');
-    //this.raters = this.db.database.ref('dishes/1/number_of_raters').once('value');
+   
+       this.dishid = navParams.get('dishid');
 
-   /* db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
+      // this.dishid = "1"; 
+       this.d= this.db.object(`dishes/${this.dishid}`).valueChanges();
+       
+    db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
       this.avg = snapshot.val().average_rate;
       this.raters = snapshot.val().number_of_raters;
       return false;
     })
 
-  /*
-
-   this.dish.snapshot(snapshot => {
-      this.avg = snapshot.val().average_rate;
-      this.raters = snapshot.val().number_of_raters;
-    });
-   */
-   // this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
-
-
-    this.dishid = navParams.get('dishId');
-
-  this.d= this.db.object(`dishes/${this.dishid}`).valueChanges();
   /*this.dish = this.db.object('dishes/1',{ preserveSnapshot: true });
   this.dish.subscribe(snapshot => {
     this.avg = snapshot.val().average_rate;
     this.raters = snapshot.val().number_of_raters;
   });*/
 
-  this.avg= this.db.object(`dishes/${this.dishid}/average_rate`).valueChanges();
-  //this.avg = this.dish.average_rate;
- // this.raters= this.db.object(`dishes/${this.dishid}/number_of_raters`).valueChanges();
-  //this.raters = this.db.database.ref(`dishes`).child(`${this.dishid}`).child(`number_of_raters`);
-  this.getallinfo(1);
-  //this.dish_name = this.db.list(`dishes/1/name`);
-  //var dishes = this.db.database.ref('dishes/1');
+  this.getallinfo(this.dishid);
+
 
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){

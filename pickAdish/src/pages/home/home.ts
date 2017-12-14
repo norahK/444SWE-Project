@@ -23,7 +23,7 @@ searchQuery: string = '';
   }
   goToDishPage(s){
     this.navCtrl.push(DishPage, {
-      dishId: s
+      dishid: s
   });
   }
   initializeItems() {

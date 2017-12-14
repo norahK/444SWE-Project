@@ -27,6 +27,7 @@ occmap = {party:false,
   meeting:false};
 optionsChecked = [];
 expanded:boolean= false;
+userid:String;
 
   constructor(public db: AngularFireDatabase,
     public alertCtrl: AlertController,
@@ -146,6 +147,8 @@ if(this.dish.shop=="non")this.dish.shop=null;
 if(this.dish.type=="non")this.dish.type=null;
 
 this.dishpath.push(dish).then((success)=>{
+  
+  //this.dishpath.child(this.dish.id).child("id").set(success.getKey());
   this.Loading('added sucessfuly');
 //or add othe +cancel
 this.back();
