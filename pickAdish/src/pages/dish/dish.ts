@@ -22,7 +22,7 @@ export class DishPage {
   avg: any;
   raters: any;
   userID: any;
-  //dish_name: any;
+  dish_name: any;
   dishid:string;
  // arrayDish = [];
  //dish = {} as Dish;
@@ -48,6 +48,7 @@ dish : any;
     db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
       this.avg = snapshot.val().average_rate;
       this.raters = snapshot.val().number_of_raters;
+      this.dish_name = snapshot.val().name;
       return false;
     })
 
@@ -77,6 +78,7 @@ dish : any;
  var data = {
   number_of_raters: this.raters+ 1,
   average_rate: ((orginal_r + value) / (this.raters+1)).toFixed(2)
+  
  };
    // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);
   //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
@@ -121,7 +123,7 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set("cake");
+       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set(this.dish_name);
 
       //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }
@@ -133,6 +135,11 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
 
     log(value){
      console.log(value);
+     this.db.object(`rating`).set({
+      dish_id: this.dishid,
+      stars_value: value,
+      user_id : this.userID
+    });     
      this.UpdateAverageRating(value);
 
     }
