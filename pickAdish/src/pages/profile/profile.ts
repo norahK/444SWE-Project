@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  LoadingController,App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
+import {  Platform,LoadingController,App,ActionSheetController,NavController,ToastController,AlertController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
 import{AngularFireObject,AngularFireDatabase,AngularFireList} from'angularfire2/database';
 import {FirebaseListObservable ,FirebaseObjectObservable} from "angularfire2/database-deprecated";
@@ -8,7 +8,7 @@ import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
 import { Tip } from '../../models/tip';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform ,Inject} from '@angular/core';
 import {DishPage} from '../dish/dish';
 
 @Component({
@@ -19,8 +19,9 @@ export class ProfilePage {
   imageUrl="assets/img/avatar.jpg";//:any
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
  // tips: FirebaseListObservable<any>;
-  public tips: AngularFireList<any>;
-  tipsRef$:Observable<any>;//AngularFireList<Tip[]>;
+  public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
+  tipsRef:Observable<any>;//AngularFireList<Tip[]>;
+
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   constructor(public app: App,
     public loadingCtrl: LoadingController,
@@ -31,7 +32,7 @@ export class ProfilePage {
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
       //const unsubscribe =
-      this.tips= this.db.list('/tips');
+    // this.tips= this.db.list<Tip>('tips');
       this.authr.authState.subscribe(logedin => {
         if(!logedin||logedin.isAnonymous){
        // this.user=Observable.create(o=>this.user=o );
@@ -45,6 +46,8 @@ export class ProfilePage {
         }
       });
     }
+  //  private mySegment: string = 'one';
+
      //  get (): FirebaseListObservable<any[]>{
   //  return this.db.list('/tips');
 async getallinfo(uid){
@@ -63,7 +66,8 @@ delete(tip){
       {
         text: 'delete', role: 'destructive',
         handler: data => {
-  this.db.list('tips').remove(tip.id);//.then()
+          this.tips.remove(tip.$key)//then
+  //this.db.list('/tips').remove(tip);//.then()
       }
       },
       {
@@ -84,7 +88,7 @@ gotoDishpage(dishid){
  }
  async gitalltips(uid:string){
 
-  this.tipsRef$ = this.db.list('tips',
+  this.tipsRef = this.db.list('tips',
   ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
   }
   Loading(message) {
@@ -106,7 +110,7 @@ gotoDishpage(dishid){
   const bikeImage = document.getElementById("profile-image") as HTMLImageElement;
 
   // this.authr.auth.currentUser?this.auther.auth.currentUser.email:null;
-
+7
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
        this.toast.create({

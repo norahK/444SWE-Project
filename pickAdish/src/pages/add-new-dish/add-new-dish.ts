@@ -6,6 +6,9 @@ import{AngularFireDatabase}from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Dish } from '../../models/dish';
 import { Observable } from 'rxjs/Observable';
+import{AngularFireAuth}from 'angularfire2/auth';
+import { User } from '../../models/user';
+
 //import { TSMap } from "typescript-map"
 
 @IonicPage()
@@ -27,14 +30,26 @@ occmap = {party:false,
   meeting:false};
 optionsChecked = [];
 expanded:boolean= false;
-userid:String;
+user:any;
 
   constructor(public db: AngularFireDatabase,
     public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
       private cam:Camera,
     public navCtrl: NavController,
+    private authr:AngularFireAuth,
      public navParams: NavParams) {
+      this.authr.authState.subscribe(logedin => {
+        if(!logedin||logedin.isAnonymous){
+       // this.user=Observable.create(o=>this.user=o );
+             //this.user.name="";
+          ///go to login page
+          return;
+        } else {
+          this.dish.user_id=logedin.uid;
+
+               }
+      });
   this.shoppath = db.database.ref('shops');
   this.dishpath = db.database.ref('dishes');
   this.shops=this.db.list('shops').valueChanges();
@@ -147,7 +162,7 @@ if(this.dish.shop=="non")this.dish.shop=null;
 if(this.dish.type=="non")this.dish.type=null;
 
 this.dishpath.push(dish).then((success)=>{
-  
+
   //this.dishpath.child(this.dish.id).child("id").set(success.getKey());
   this.Loading('added sucessfuly');
 //or add othe +cancel

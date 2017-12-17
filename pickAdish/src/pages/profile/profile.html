@@ -16,11 +16,20 @@
     </div>
     <hr/>
 
+    <div padding>
+      <ion-segment [(ngModel)]="user">
+        <ion-segment-button value="tipslist">
+          Tips
+        </ion-segment-button>
+        <ion-segment-button value="dishes">
+          Dishes
+        </ion-segment-button>
+      </ion-segment>
+    </div>
 
-
-
-    <div id="tips">
-      <ion-card *ngFor="let tip of tipsRef$ | async ">
+    <div [ngSwitch]="user">
+<div *ngSwitchCase="'tipslist'" >
+      <ion-card *ngFor="let tip of tipsRef | async ">
         <ion-item>
           <h2 class="sticky">{{tip.title}}</h2>
         </ion-item>
@@ -43,5 +52,70 @@
         </ion-row>
       </ion-card>
     </div>
-  </div>
+      <ion-card *ngSwitchCase="'dishes'">
+        <ion-item>
+          <ion-thumbnail item-start>
+          </ion-thumbnail>
+          <h2>Luna</h2>
+        </ion-item>
+</ion-card>
+    </div>
+
+
+      <!--div class="bar bar-header bar-dark">
+
+        <ion-segment ng-model="categories" full="true"  assertive>
+        <ion-segment-button value="tips">
+          Tips
+        </ion-segment-button>
+        <ion-segment-button value="dishes">
+          Dishes
+        </ion-segment-button>
+
+      </ion-segment>
+        </div>
+
+        <div ng-switch="categories">
+
+            <ion-card ng-switch-when="tips" *ngFor="let tip of tipsRef | async ">
+              <ion-item>
+                <h2 class="sticky">{{tip.title}}</h2>
+              </ion-item>
+              <ion-card-content>
+                <p>{{tip.body}}</p> <p>{{tip.dish}}</p>
+              </ion-card-content>
+              <ion-row>
+                <ion-col col-4>
+                    <button ion-button   clear small icon-left (click)="gotoDishpage(tip.dish)">
+        <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+                      </button>
+                </ion-col>
+                <ion-col col-5>
+                    <button ion-button no-padding clear small icon-left (click)="delete(tip)">
+                        <ion-icon name='trash'></ion-icon></button>
+                </ion-col>
+                <ion-col col-3 align-self-center text-center>
+                  <p>{{tip.date}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+
+
+          <ion-card ng-switch-when="dishes">
+            <ion-item>
+              Game of Thrones
+            </ion-item>
+            <ion-item>
+              Daredevil
+            </ion-item>
+            <ion-item>
+              Arrow
+            </ion-item>
+          </ion-card>
+
+
+        </div>
+</div-->
+</div>
+
 </ion-content>
