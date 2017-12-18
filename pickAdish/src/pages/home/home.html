@@ -16,11 +16,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-item  class="item"  *ngFor="let item of dishesListRef |async " (click)="goToDishPage(item.id)">
-      <div style="white-space:nowrap;">
-        <div style="  display:inline; float: left;" >
-          <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets\img\SweetTonesL"  ></ion-img>
-        </div>
+
+    <ion-item    *ngFor="let item of dishesListRef |async " (click)="goToDishPage(item.id)">
+        <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" ng-src="assets/img/dish-2-icon.png" alt="dish image" ></ion-img>
+      <div>
           <br>       <div style="  margin-left:20px; float:left; display:inline; white-space:nowrap; margin:right;">
       <h2>  {{ item.name}}  </h2>
   <h4>
