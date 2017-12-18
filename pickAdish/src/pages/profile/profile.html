@@ -52,6 +52,7 @@
         </ion-row>
       </ion-card>
     </div>
+<<<<<<< HEAD
       <ion-card *ngSwitchCase="'dishes'">
         <ion-item>
           <ion-thumbnail item-start>
@@ -59,6 +60,33 @@
           <h2>Luna</h2>
         </ion-item>
 </ion-card>
+=======
+<div *ngSwitchCase="'dishes'">
+
+  <ion-card *ngFor="let dish of dishes | async ">
+
+      <ion-card-content>
+          <h2 floting >{{dish.name}} Dish</h2>
+        <p>{{dish.price}} RS</p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col col-4>
+            <button ion-button   clear small icon-left (click)="gotoDishpage(dish)">
+<ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+              </button>
+        </ion-col>
+        <ion-col col-5>
+            <button ion-button no-padding clear small icon-left (click)="delete(dish)">
+                <ion-icon name='trash'></ion-icon></button>
+        </ion-col>
+        <ion-col col-3 align-self-center text-center>
+          <p>{{dish.number_of_raters}} Rate</p>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+</div>
+</div>
+>>>>>>> 7d60bbe624e979ec3b779134621af1aff1edc034
     </div>
 
 
