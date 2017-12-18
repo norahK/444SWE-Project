@@ -40,9 +40,9 @@ dish : any;
    {
        // this.dish = this.db.object(`dishes/${this.dishid}`);
 
-      this.dishid = navParams.get('dishid');
+   //   this.dishid = navParams.get('dishid');
 
-      /// this.dishid = "d1";
+       this.dishid = "d1";
 
        this.d= this.db.object(`dishes/${this.dishid}`).valueChanges();
 
