@@ -45,6 +45,7 @@ export class ProfilePage {
           this.user= this.db.object(`users/${logedin.uid}`).valueChanges();
           this.getallinfo(logedin.uid);
           this.gitalltips( logedin.uid);
+          this.gitalldishes( logedin.uid);
         }
       });
    // if(unsubscribe!==null)  unsubscribe.unsubscribe();
@@ -86,6 +87,11 @@ gotoDishpage(dishid){
     dishid: dishid
 });
   //there is no shop page yet if no id
+ }
+ async gitalldishes(uid:string){
+
+  this.dishes = this.db.list('dishes',
+  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
  }
  async gitalltips(uid:string){
 

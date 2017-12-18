@@ -56,12 +56,9 @@
 <div *ngSwitchCase="'dishes'">
 
   <ion-card *ngFor="let dish of dishes | async ">
-      <ion-item>
-          <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets\img\SweetTonesL"  ></ion-img>
 
-      </ion-item>
       <ion-card-content>
-          <h2>{{dish.name}}</h2>
+          <h2 floting >{{dish.name}} Dish</h2>
         <p>{{dish.price}} RS</p>
       </ion-card-content>
       <ion-row>
