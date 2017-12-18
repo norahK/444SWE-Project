@@ -39,12 +39,13 @@ dish : any;
               private authr :AngularFireAuth)
    {
        // this.dish = this.db.object(`dishes/${this.dishid}`);
-   
-      // this.dishid = navParams.get('dishid');
 
-       this.dishid = "d1"; 
+      this.dishid = navParams.get('dishid');
+
+      /// this.dishid = "d1";
+
        this.d= this.db.object(`dishes/${this.dishid}`).valueChanges();
-       
+
     db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
       this.avg = snapshot.val().average_rate;
       this.raters = snapshot.val().number_of_raters;
@@ -78,7 +79,7 @@ dish : any;
  var data = {
   number_of_raters: this.raters+ 1,
   average_rate: ((orginal_r + value) / (this.raters+1)).toFixed(2)
-  
+
  };
    // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);
   //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
@@ -139,7 +140,7 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
       dish_id: this.dishid,
       stars_value: value,
       user_id : this.userID
-    });     
+    });
      this.UpdateAverageRating(value);
 
     }

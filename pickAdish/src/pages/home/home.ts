@@ -27,7 +27,7 @@ this.initializeItems();
 
   goToDishPage(s){
     this.navCtrl.push(DishPage, {
-      dishid: s
+      dishid: s.$key
   });
   }
 
