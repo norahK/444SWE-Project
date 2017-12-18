@@ -21,10 +21,9 @@ export class ProfilePage {
  // tips: FirebaseListObservable<any>;
   public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
   tipsRef:Observable<any>;//AngularFireList<Tip[]>;
+dishes :Observable<any>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
-  dishes:Observable<any>;//
-  userch: string = 'tipslist';
-
+  userch ='tipslist';
   constructor(public app: App,
     public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,
@@ -33,9 +32,9 @@ export class ProfilePage {
     private authr:AngularFireAuth,
     private db:AngularFireDatabase,
     public navCtrl: NavController) {
+      //const unsubscribe =
     // this.tips= this.db.list<Tip>('tips');
-   // const unsubscribe =
-     this.authr.authState.subscribe(logedin => {
+      this.authr.authState.subscribe(logedin => {
         if(!logedin||logedin.isAnonymous){
        // this.user=Observable.create(o=>this.user=o );
              //this.user.name="";
@@ -45,18 +44,20 @@ export class ProfilePage {
           this.user= this.db.object(`users/${logedin.uid}`).valueChanges();
           this.getallinfo(logedin.uid);
           this.gitalltips( logedin.uid);
+          this.gitalldishes( logedin.uid);
         }
       });
-   // if(unsubscribe!==null)  unsubscribe.unsubscribe();
-
     }
+  //  private mySegment: string = 'one';
 
      //  get (): FirebaseListObservable<any[]>{
   //  return this.db.list('/tips');
-async getallinfo(uid){//this.imageUrl="";
+async getallinfo(uid){
+//this.imageUrl="";
 }
-sittings(){
-    this.navCtrl.push('SettingsPage');}
+  sittings(){
+    this.navCtrl.push('SettingsPage');
+  }
 add(){
     this.navCtrl.push('AddNewDishPage');
   }
@@ -83,9 +84,14 @@ delete(tip){
 }
 gotoDishpage(dishid){
   this.navCtrl.push(DishPage, {
-    dishid: dishid
+    dishId: dishid
 });
   //there is no shop page yet if no id
+ }
+ async gitalldishes(uid:string){
+
+  this.dishes = this.db.list('dishes',
+  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
  }
  async gitalltips(uid:string){
 
@@ -111,6 +117,7 @@ gotoDishpage(dishid){
   const bikeImage = document.getElementById("profile-image") as HTMLImageElement;
 
   // this.authr.auth.currentUser?this.auther.auth.currentUser.email:null;
+7
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
        this.toast.create({
@@ -129,6 +136,5 @@ gotoDishpage(dishid){
 /*get currentUserAnonymous(): boolean {
   return this.authr ? this.authr.authState.anonymous : false
 }*/
-
 
 }

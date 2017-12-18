@@ -18,7 +18,8 @@
 </ion-content> -->
 
    <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
-<ion-img width="150" height="150" src="assets/img/Cake.png" alt="food image"></ion-img>
+   <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/dish-2-icon.png" alt="dish image" ></ion-img>
+
 <p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
 <p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
 <p (ngModel)="dish.price">  ({(d | async)?.price }} SR </p>
