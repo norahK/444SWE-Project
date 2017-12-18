@@ -17,7 +17,7 @@
 <ion-content>
   <ion-list>
 
-    <ion-item    *ngFor="let item of dishesListRef |async " (click)="goToDishPage(item.id)">
+    <ion-item *ngFor="let item of dishesListRef |async " (click)="goToDishPage(item.id)">
         <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" ng-src="assets/img/dish-2-icon.png" alt="dish image" ></ion-img>
       <div>
 
@@ -37,5 +37,6 @@
       </div>
     </ion-item>
   </ion-list>
+
   <ion-scroll direction="x"></ion-scroll>
 </ion-content>

@@ -21,8 +21,9 @@ export class ProfilePage {
  // tips: FirebaseListObservable<any>;
   public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
   tipsRef:Observable<any>;//AngularFireList<Tip[]>;
-
+dishes :Observable<any>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
+  userch ='tipslist';
   constructor(public app: App,
     public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,

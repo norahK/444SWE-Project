@@ -17,7 +17,7 @@
     <hr/>
 
     <div padding>
-      <ion-segment [(ngModel)]="user">
+      <ion-segment [(ngModel)]="userch">
         <ion-segment-button value="tipslist">
           Tips
         </ion-segment-button>
@@ -27,7 +27,7 @@
       </ion-segment>
     </div>
 
-    <div [ngSwitch]="user">
+    <div [ngSwitch]="userch">
 <div *ngSwitchCase="'tipslist'" >
       <ion-card *ngFor="let tip of tipsRef | async ">
         <ion-item>
@@ -52,15 +52,6 @@
         </ion-row>
       </ion-card>
     </div>
-<<<<<<< HEAD
-      <ion-card *ngSwitchCase="'dishes'">
-        <ion-item>
-          <ion-thumbnail item-start>
-          </ion-thumbnail>
-          <h2>Luna</h2>
-        </ion-item>
-</ion-card>
-=======
 <div *ngSwitchCase="'dishes'">
 
   <ion-card *ngFor="let dish of dishes | async ">
@@ -86,8 +77,6 @@
     </ion-card>
 </div>
 </div>
->>>>>>> 7d60bbe624e979ec3b779134621af1aff1edc034
-    </div>
 
 
       <!--div class="bar bar-header bar-dark">
