@@ -2,12 +2,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
-import { FirebaseListObservable } from "angularfire2/database-deprecated";
+import firebase from 'firebase';
 import{AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
+import { Pipe, PipeTransform ,Inject} from '@angular/core';
 
 @Component({
   selector: 'page-home',
@@ -15,55 +16,50 @@ import 'rxjs/add/operator/filter';
 })
 
 export class HomePage {
-dishesListRef$:Observable<any>;
+dishesListRef:any;
 searchQuery: string = '';
+shops:any;
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
- this.initializeItems();
+this.initializeItems();
+ this.shops=this.database.list(`shops`).valueChanges();
   }
+
   goToDishPage(s){
     this.navCtrl.push(DishPage, {
       dishid: s
   });
   }
-  initializeItems() {
-  this.dishesListRef$= this.database.list('dishes').valueChanges();
+
+  getname(v){
+    if(this.shops.id==v){
+    return (this.shops.name);
+  }
   }
 
-  getItems(ev) {
-    this.initializeItems();
-    var val = ev.target.value;
-    if (val && val.trim() != '') {
-     /* this.dishesListRef$ = this.database.list('dishes',
-      ref => ref.orderByChild('negativtimestamp')).valueChanges()
-      .filter(item => item.values === val);*/
+  filterData(){
+  this.dishesListRef=this.dishesListRef.filter((item)=>{
+    return item.price<50;
+  });
+}
 
-      this.dishesListRef$ = this.dishesListRef$.filter((v) => {
-        if(v.name && val) {
-          if (v.name.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-            return v;
-          }
-          return "false";
-        }
-      });
+initializeItems() {
+  this.dishesListRef=this.database.list(`dishes`).valueChanges();
 
+}
 
-  /*this.dishesListRef$= this.database.list('dishes',
-  ref => ref.orderByChild("childNode")
-  .startAt("[a-zA-Z0-9]*")
-  .endAt(val)).valueChanges();*/
-  //.orderByChild('_searchLastName').startAt(val).endAt(val+"\uf8ff")
+getItems(ev) {
+var val = ev.target.value;
+// Reset items back to all of the items
+this.initializeItems();
+// set val to the value of the ev target
 
-  // Reset items back to all of the items
-  this.initializeItems();
-  // set val to the value of the ev target
-    }
-  // if the value is an empty string don't filter the items
+// if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
-   this.dishesListRef$ = this.dishesListRef$.filter((item ) => {
-      return (item[1].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-    })
-  }
+this.dishesListRef= this.dishesListRef.filter((item ) => {
+  return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+})
+}
 }
 
 }

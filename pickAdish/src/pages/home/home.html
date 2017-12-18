@@ -2,26 +2,35 @@
   <ion-navbar>
     <ion-title>
       <!-->search<!-->
-
-
     </ion-title>
+
+<div>
+<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+<ion-buttons>
+<button style="padding-left:50;"ion-button icon-only (click)="filterData()"><ion-icon style="padding-left:50;"name="ios-funnel"></ion-icon></button>
+
+</ion-buttons></div>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content  >
-         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-list  >
-    <ion-item  class="iitem"  *ngFor="let item of dishesListRef$ | async  " (click)="goToDishPage(item.id)">
+<ion-content>
+  <ion-list>
+    <ion-item  class="item"  *ngFor="let item of dishesListRef |async " (click)="goToDishPage(item.id)">
       <div style="white-space:nowrap;">
-        <div style=" display:inline; float: left;" >  <ion-img style=" width: 80px; height: 80px; border-radius:80%;" src="assets\img\Cake.png" alt="dish image" ></ion-img>
-        </div>      <div style=" display:inline; white-space:nowrap; margin:left;">
+        <div style="  display:inline; float: left;" >
+          <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets\img\SweetTonesL"  ></ion-img>
+        </div>
+          <br>       <div style="  margin-left:20px; float:left; display:inline; white-space:nowrap; margin:right;">
       <h2>  {{ item.name}}  </h2>
-      <h4> {{ item.shop}}</h4>
+  <h4>
+
+</h4>
       <h3>{{ item.average_rate}}</h3>
-      <h3>{{ item.price}}</h3></div>
+      <h3>{{ item.price}}</h3>
+    </div>
       </div>
     </ion-item>
   </ion-list>
-
   <ion-scroll direction="x"></ion-scroll>
 </ion-content>
