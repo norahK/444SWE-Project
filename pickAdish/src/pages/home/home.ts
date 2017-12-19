@@ -2,14 +2,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import{AngularFireAuth}from 'angularfire2/auth';
-import firebase from 'firebase';
 import{AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
-
+//import * as $ from 'jquery';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -19,6 +18,7 @@ export class HomePage {
 dishesListRef:any;
 searchQuery: string = '';
 shops:any;
+count:any;
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.initializeItems();
@@ -36,13 +36,29 @@ this.initializeItems();
     return (this.shops.name);
   }
   }
-
-  filterData(){
+  RestData(){
+      this.dishesListRef=this.database.list(`dishes`).valueChanges();
+  }
+filterT(v){
   this.dishesListRef=this.dishesListRef.filter((item)=>{
-    return item.price<50;
+    return item.type==v;
   });
 }
 
+filterO(v){
+  this.count==0;
+  this.dishesListRef=this.dishesListRef.filter((item)=>{
+    while(item.occasion!=null){
+if(item.occasion[this.count]==v){
+return true;}
+this.count++;
+  }
+  });
+}
+
+Toggle(){
+
+}
 initializeItems() {
   this.dishesListRef=this.database.list(`dishes`).valueChanges();
 
