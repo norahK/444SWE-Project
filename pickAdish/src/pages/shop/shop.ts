@@ -28,6 +28,7 @@ dishes:Observable<Dish[]>;
     private authr :AngularFireAuth)
 {
 this.shopid=navParams.get('shopid');
+
 }
 
   ionViewDidLoad() {
