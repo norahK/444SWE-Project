@@ -1,7 +1,7 @@
 <ion-split-pane>
 <ion-header>
   <ion-navbar color ="primary">
-    <ion-title>{{dishid}}, {{d.name}} </ion-title>
+    <ion-title> {{d.name}} </ion-title>
  </ion-navbar>
 </ion-header>
 <ion-content padding center text-center>
@@ -56,8 +56,18 @@
   </ion-list>
 </div>
 <div>
+    <ion-card *ngFor="let tip of tipsRef$ | async ">
+      <ion-item>
+        <h2 class="sticky">{{tip.title}}</h2>
+      </ion-item>
+      <ion-card-content>
+        <p>{{tip.body}}</p>
+      </ion-card-content>
+            <ion-col col-3 align-self-center text-center>
+          <p>{{tip.date}}</p>
+        </ion-col>
 
-
+    </ion-card>
 </div>
 </ion-content>
 </ion-split-pane>

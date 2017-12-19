@@ -43,7 +43,7 @@ this.initializeItems();
     this.initializeItems();
    }
 
-filterT(v){
+filterT(v: string){
   this.dishesListRef$ = this.database.list('dishes',
   ref => ref.orderByChild('type_of_dish').equalTo(v)).snapshotChanges().map(
     changes=>{
@@ -57,18 +57,18 @@ filterT(v){
       );
     }
 
-filterO(v){
+filterO(v:string){
 
- this.count==0;
+ /*this.count==0;
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
     while(item.occasion!=null){
 if(item.occasion[this.count]==v){
 return true;}
 this.count++;
   }
-  });
- /* this.dishesListRef$ = this.database.list('dishes',
-  ref => ref.orderByChild('occasions').equalTo('v')).snapshotChanges().map(
+  });*/
+  this.dishesListRef$ = this.database.list('dishes',
+  ref => ref.orderByChild('occasions').startAt(v)).snapshotChanges().map(
     changes=>{
       return changes.map(c=>({
         key :c.payload.key,
@@ -77,7 +77,7 @@ this.count++;
 
       )
     }
-      );*/
+      );
 }
 
 Toggle(){

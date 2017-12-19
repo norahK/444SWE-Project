@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import {AngularFireObject, AngularFireDatabase} from 'angularfire2/database'
 import{AngularFireAuth}from 'angularfire2/auth';
 import firebase from 'firebase';
+import { Tip } from '../../models/tip';
+
 /**
  * Generated class for the DishPage page.
  *
@@ -29,6 +31,7 @@ export class DishPage {
  //dish = {} as Dish;
 
 dish : any;
+tipsRef$:Observable<Tip[]>;
 
  // rating: number;
   //like: boolean;
@@ -62,7 +65,7 @@ dish : any;
       this.userID = data.uid;
       }
       });
-
+this.gitalltips(this.d.key);
     //  this.db.list(`users/${this.userID}/likedDishes`).subscribe
  // this.dish.name = "dish name from database for example cake";
   //this.dish.AverageRating = 4.3;
@@ -118,13 +121,26 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
             this.tippath.child(id).child('body').set(data.body);
             this.tippath.child(id).child('user_id').set(this.userID);
             this.tippath.child(id).child('dish').set(this.d.key);
-
-
           }
         }
       ]
     });
     prompt.present();
+  }
+  gitalltips(did){
+  this.tipsRef$ = this.db.list('tips',
+  ref => ref.orderByChild('dish').equalTo(did))
+  .snapshotChanges().map(
+changes=>{
+  return changes.map(c=>({
+    key :c.payload.key,
+    ...c.payload.val()
+  })
+
+  )
+}
+  );
+
   }
   isAndroid: boolean = false;
 
@@ -229,8 +245,5 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
 
       loading.present();
     }
-    deleteAccount(){
-      ///alart
 
-    }
 }
