@@ -1,11 +1,9 @@
 <ion-split-pane>
 <ion-header>
   <ion-navbar color ="primary">
-    <ion-title> {{(d | async)?.name}} {{dishid}} </ion-title>
+    <ion-title> {{(d | async)?.name}} </ion-title>
  </ion-navbar>
 </ion-header>
-
-
 <ion-content padding center text-center>
    <!-- <ion-rating [read]="false" [numStars] = "8" [value] = "6" (ionClick) ="log($event)">
     </ion-rating>-->
@@ -22,8 +20,8 @@
 
 <p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
 <p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
-<p (ngModel)="dish.price">  ({(d | async)?.price }} SR </p>
-<p (ngModel)="dish.shop"> Shop: {{(d | async)?.shop }} </p>
+<p (ngModel)="dish.price">  {{(d | async)?.price }} SR </p>
+<p (ngModel)="dish.shop">  Shop: {{(d | async)?.shop }} </p>
 
 <div padding >
   <ion-segment [(ngModel)]="tap">
@@ -75,6 +73,7 @@
 </div>
 </ion-content>
 </ion-split-pane>
+
 <!--
 <ion-content padding class="transparent-header">
   <ion-header>

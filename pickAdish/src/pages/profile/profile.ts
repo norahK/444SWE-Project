@@ -10,18 +10,21 @@ import firebase from 'firebase';
 import { Tip } from '../../models/tip';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
 import {DishPage} from '../dish/dish';
+import { Dish } from '../../models/dish';
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+ // tips: FirebaseListObservable<any>;
   imageUrl="assets/img/avatar.jpg";//:any
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
  // tips: FirebaseListObservable<any>;
-  public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
-  tipsRef:Observable<any>;//AngularFireList<Tip[]>;
-dishes :Observable<any>;
+  private tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
+  // : Observable<Tip[]>;
+  tipsRef$:Observable<Tip[]>;//AngularFireList<Tip[]>;
+dishes :Observable<Dish[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   userch ='tipslist';
   constructor(public app: App,
@@ -68,7 +71,30 @@ delete(tip){
       {
         text: 'delete', role: 'destructive',
         handler: data => {
-          this.tips.remove(tip.$key)//then
+
+         this.db.list('tips').remove(tip.key)//then
+  //this.db.list('/tips').remove(tip);//.then()
+      }
+      },
+      {
+        text: 'cancle',
+         role: 'cancel',
+        handler: () => {      }
+      }
+    ]
+  });
+  deletetip.present();
+
+}
+deletedish(dish){
+  let deletetip = this.alertCtrl.create({
+    title: `do you want to delete ${dish.title} dish?`,
+    buttons: [
+      {
+        text: 'delete', role: 'destructive',
+        handler: data => {
+
+         this.db.list('dishes').remove(dish.key)//then
   //this.db.list('/tips').remove(tip);//.then()
       }
       },
@@ -91,13 +117,42 @@ gotoDishpage(dishid){
  async gitalldishes(uid:string){
 
   this.dishes = this.db.list('dishes',
-  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
+  ref => ref.orderByChild('user_id').equalTo(uid)) .snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
+
  }
  async gitalltips(uid:string){
 
-  this.tipsRef = this.db.list('tips',
-  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
-  }
+  this.tipsRef$ = this.db.list('tips',
+  ref => ref.orderByChild('user_id').equalTo(uid))
+  .snapshotChanges().map(
+changes=>{
+  return changes.map(c=>({
+    key :c.payload.key,
+    ...c.payload.val()
+  })
+
+  )
+}
+  );
+
+  //  this.tips =
+//this.tips=this.db.list('tips').snapshotChanges().map(
+
+
+
+}
+
+
+
   Loading(message) {
     const loading = this.loadingCtrl.create({
       duration: 500
