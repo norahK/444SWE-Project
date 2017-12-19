@@ -10,6 +10,7 @@ import firebase from 'firebase';
 import { Tip } from '../../models/tip';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
 import {DishPage} from '../dish/dish';
+import { Dish } from '../../models/dish';
 
 @Component({
   selector: 'page-profile',
@@ -23,7 +24,7 @@ export class ProfilePage {
   private tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
   // : Observable<Tip[]>;
   tipsRef$:Observable<Tip[]>;//AngularFireList<Tip[]>;
-dishes :Observable<any>;
+dishes :Observable<Dish[]>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   userch ='tipslist';
   constructor(public app: App,
@@ -71,7 +72,29 @@ delete(tip){
         text: 'delete', role: 'destructive',
         handler: data => {
 
-         // this.tipsRef$.remove(tip.key)//then
+         this.db.list('tips').remove(tip.key)//then
+  //this.db.list('/tips').remove(tip);//.then()
+      }
+      },
+      {
+        text: 'cancle',
+         role: 'cancel',
+        handler: () => {      }
+      }
+    ]
+  });
+  deletetip.present();
+
+}
+deletedish(dish){
+  let deletetip = this.alertCtrl.create({
+    title: `do you want to delete ${dish.title} dish?`,
+    buttons: [
+      {
+        text: 'delete', role: 'destructive',
+        handler: data => {
+
+         this.db.list('dishes').remove(dish.key)//then
   //this.db.list('/tips').remove(tip);//.then()
       }
       },
@@ -94,7 +117,17 @@ gotoDishpage(dishid){
  async gitalldishes(uid:string){
 
   this.dishes = this.db.list('dishes',
-  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
+  ref => ref.orderByChild('user_id').equalTo(uid)) .snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
+
  }
  async gitalltips(uid:string){
 
