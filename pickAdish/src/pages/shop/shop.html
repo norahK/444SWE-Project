@@ -5,10 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>shop</ion-title>
-  </ion-navbar>
+  <ion-header>
+    <ion-navbar color ="primary">
+      <ion-title> {{(shop | async)?.name}} </ion-title>
+   </ion-navbar>
+  </ion-header>
 
 </ion-header>
 
