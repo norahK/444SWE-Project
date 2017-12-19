@@ -16,12 +16,13 @@ import {DishPage} from '../dish/dish';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+ // tips: FirebaseListObservable<any>;
   imageUrl="assets/img/avatar.jpg";//:any
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
  // tips: FirebaseListObservable<any>;
-  //public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
-  tips : Observable<Tip[]>;
-  tipsRef:Observable<any>;//AngularFireList<Tip[]>;
+  private tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
+  // : Observable<Tip[]>;
+  tipsRef$:Observable<Tip[]>;//AngularFireList<Tip[]>;
 dishes :Observable<any>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
   userch ='tipslist';
@@ -69,7 +70,8 @@ delete(tip){
       {
         text: 'delete', role: 'destructive',
         handler: data => {
-          this.tips.remove(tip.key)//then
+
+         // this.tipsRef$.remove(tip.key)//then
   //this.db.list('/tips').remove(tip);//.then()
       }
       },
@@ -96,21 +98,22 @@ gotoDishpage(dishid){
  }
  async gitalltips(uid:string){
 
-  this.tipsRef = this.db.list('tips',
-  ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
- try{
-this.tips=this.db.list('tips').snapshotChanges().map(
-  changes=>{
-    return changes.map(c=>({
-      key: c.payload.key,
-      ...c.payload.val(),
+  this.tipsRef$ = this.db.list('tips',
+  ref => ref.orderByChild('user_id').equalTo(uid))
+  .snapshotChanges().map(
+changes=>{
+  return changes.map(c=>({
+    key :c.payload.key,
+    ...c.payload.val()
+  })
 
-    }))
-  }
-)
- }catch(e){
+  )
+}
+  );
 
- }
+  //  this.tips =
+//this.tips=this.db.list('tips').snapshotChanges().map(
+
 
 
 }
