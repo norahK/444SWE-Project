@@ -8,8 +8,7 @@ import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
-import * as $ from 'jquery';
-import jQuery from "jquery";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
