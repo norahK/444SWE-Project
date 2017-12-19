@@ -25,6 +25,7 @@ import {DishPage} from '../pages/dish/dish';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 //import { CommonModule } from '@angular/common';
 
+import{ShopPage}from '../pages/shop/shop';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
     TabsPage,
    LoginPage,
    IonRating,
-   DishPage
+   DishPage,
+   ShopPage
 
   ],
   imports: [
@@ -57,7 +59,8 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
         ShopsPage,
         TabsPage,
 LoginPage,
-DishPage
+DishPage,
+ShopPage
   ],
   providers: [
     Camera,

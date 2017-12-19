@@ -6,6 +6,8 @@ import { FirebaseListObservable } from "angularfire2/database-deprecated";
 import{AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import{shop}from '../../models/shop';
+import{ShopPage}from '../shop/shop';
+
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
 import firebase from 'firebase';
 import 'rxjs/add/operator/filter';
@@ -41,7 +43,12 @@ this.initializeItems();
     }
       );
     }
+    gotoshoppage(shop){
+      this.navCtrl.push(ShopPage, {
+        shopId: shop.key
+    });
 
+    }
   getItems(ev) {
   var val = ev.target.value;
   // Reset items back to all of the items

@@ -1,9 +1,4 @@
-<!--
-  Generated template for the ShopPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-header>
     <ion-navbar color ="primary">
@@ -14,14 +9,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content  padding center text-center>
 
-    <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/Shop-icon.png" alt="shop image"  ></ion-img>
+    <ion-img style="float:none; width: 80px; height: 80px; border-radius:80%; margin-top:40pt" src="assets/img/Shop-icon.png" alt="shop image"  ></ion-img>
 
     <div id='info'>
-        <p (ngModel)="shop.name"> Shop name {{(shop| async)?.average_rate}}  </p>
-        <p (ngModel)="shop."> {{(shop | async)?.number_of_raters }} Raters </p>
-        <p (ngModel)="shop.price"> Price : {{(shop | async)?.price }} SR </p>
-        <p (ngModel)="shop.shop">Shop: {{(shop | async)?.shop }} </p>
+        <p> Shop name {{(shop| async)?.name}}  </p>
+        <p> Location :{{(shop | async)?.location }}  </p>
+        <p >oppining hours {{(shop | async)?.opining_hours }} </p>
         </div>
+        <ion-list>
+
+                <ion-item  class="item"  *ngFor="let item of dishes |async " (click)="goToDishPage(item)">
+                  <div style="white-space:nowrap;">
+                    <div style="  display:inline; float: left;" >
+                      <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/k26380246.jpg" alt="shop image"  ></ion-img>
+                    </div>
+                      <br>       <div style="  margin-left:20px; float:left; display:inline; white-space:nowrap; margin:right;">
+                  <h2>  {{ item.name}}  </h2>
+              <h4>
+
+            </h4>
+                  <h3>{{ item.average_rate}}</h3>
+                  <h3>{{ item.price}}</h3>
+                </div>
+                  </div>
+                </ion-item>
+              </ion-list>
 </ion-content>

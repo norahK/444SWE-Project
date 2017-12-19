@@ -52,7 +52,21 @@ user:any;
       });
   this.shoppath = db.database.ref('shops');
   this.dishpath = db.database.ref('dishes');
-  this.shops=this.db.list('shops').valueChanges();
+
+ // this.shops=this.db.list('shops').snapshotChanges();
+  this.shops = this.db.list('shops',
+  ref => ref.orderByChild('name')).snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
+
+
 this.dish.shop="non";
 this.dish.name=null;
 this.dish.price=null;
@@ -139,7 +153,6 @@ addShop(){
         handler: data => {
           const id= this.dishpath.push().getKey();   //get id then add name loc and .. in saide the id s
           this.shoppath.child(id).child('name').set(data.name);
-          this.shoppath.child(id).child('id').set(id);
           this.dish.shop=id;
 
         }

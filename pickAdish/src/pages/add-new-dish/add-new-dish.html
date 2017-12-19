@@ -59,7 +59,7 @@
         <ion-label floating >shops</ion-label>
         <ion-select [(ngModel)]="dish.shop">
           <ion-option value="non">choose a shop or add one </ion-option>
-          <ion-option *ngFor="let shop of shops | async" [(value)]="shop.id" >{{shop.name}} </ion-option>
+          <ion-option *ngFor="let shop of shops | async" [(value)]="shop.key" >{{shop.name}} </ion-option>
         </ion-select>
 </ion-item>
 <ion-item>        <button ion-button (click)="addShop()">add shop<ion-icon name="add"></ion-icon> </button>

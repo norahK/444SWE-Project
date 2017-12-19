@@ -1,3 +1,20 @@
 page-shop {
+    min-height : 30px;
+    .img {
+        max-width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .button{
+        position: relative;
+    }
 
-}
+    #info p{
+      color:#F08655;
+    font-style: bold;
+    size: 50pt;
+float: none;
+     width: 240px;
+    }
+
+    }
