@@ -8,6 +8,8 @@ import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
+import firebase from 'firebase';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -104,7 +106,7 @@ var val = ev.target.value;
 // Reset items back to all of the items
 this.initializeItems();
 // set val to the value of the ev target
-
+if (!val)return;
 // if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
 this.dishesListRef$= this.dishesListRef$.filter((item ) => {
