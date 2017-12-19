@@ -16,21 +16,31 @@ import 'rxjs/add/operator/filter';
 
 export class ShopsPage {
 
-  shopsListRef:any;
+  shopsListRef$:any;
   searchQuery: string = '';
   constructor(public navCtrl: NavController,private database: AngularFireDatabase) {
 this.initializeItems();
   }
 
   filterData(){
-  this.shopsListRef=this.shopsListRef.filter((item)=>{
+  this.shopsListRef$=this.shopsListRef$.filter((item)=>{
     return ;
   });
 }
 
   initializeItems() {
-  this.shopsListRef= this.database.list('shops').valueChanges();
-  }
+  this.shopsListRef$= this.database.list('shops',
+  ref => ref.orderByChild('location')) .snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
+    }
 
   getItems(ev) {
   var val = ev.target.value;
@@ -40,7 +50,7 @@ this.initializeItems();
 
   // if the value is an empty string don't filter the items
   if (val && val.trim() != '') {
-  this.shopsListRef= this.shopsListRef.filter((item ) => {
+  this.shopsListRef$= this.shopsListRef$.filter((item ) => {
     return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
   })
   }

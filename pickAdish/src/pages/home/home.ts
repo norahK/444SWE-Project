@@ -28,7 +28,7 @@ this.initializeItems();
 
   goToDishPage(s){
     this.navCtrl.push(DishPage, {
-      dishId: s
+      dishId: s.key
   });
   }
 
@@ -64,7 +64,7 @@ initializeItems() {
 
 
 
-  this.dishesListRef$=this.database.list(`dishes`).valueChanges();
+  //this.dishesListRef$=this.database.list(`dishes`).valueChanges();
   this.dishesListRef$ = this.database.list('dishes',
   ref => ref.orderByChild('price')) .snapshotChanges().map(
     changes=>{
