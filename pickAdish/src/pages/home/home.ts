@@ -40,7 +40,6 @@ this.initializeItems();
   RestData(){
       this.dishesListRef$=this.database.list(`dishes`).valueChanges();
   }
-
 filterT(v){
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
     return item.type==v;
