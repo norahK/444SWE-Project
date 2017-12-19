@@ -19,8 +19,8 @@ searchQuery: string = '';
 shops:any;
 count:any;
 public Clicked :boolean=false;
-selectedO :any ;
-selectedT:any;
+selectedO :String ;
+selectedT:String;
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.initializeItems();
@@ -59,15 +59,15 @@ filterT(v){
 
 filterO(v){
 
- /* this.count==0;
+ this.count==0;
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
     while(item.occasion!=null){
 if(item.occasion[this.count]==v){
 return true;}
 this.count++;
   }
-  });*/
-  this.dishesListRef$ = this.database.list('dishes',
+  });
+ /* this.dishesListRef$ = this.database.list('dishes',
   ref => ref.orderByChild('occasions').equalTo('v')).snapshotChanges().map(
     changes=>{
       return changes.map(c=>({
@@ -77,7 +77,7 @@ this.count++;
 
       )
     }
-      );
+      );*/
 }
 
 Toggle(){
@@ -87,7 +87,7 @@ Toggle(){
 initializeItems() {
   //this.dishesListRef$=this.database.list(`dishes`).valueChanges();
   this.dishesListRef$ = this.database.list('dishes',
-  ref => ref.orderByChild('price')) .snapshotChanges().map(
+  ref => ref.orderByChild('price')).snapshotChanges().map(
     changes=>{
       return changes.map(c=>({
         key :c.payload.key,

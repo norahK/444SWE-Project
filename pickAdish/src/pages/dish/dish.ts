@@ -45,7 +45,7 @@ dish : any;
         this.d.key=this.dishid;
         const dishRef:firebase.database.Reference = firebase.database().ref(`dishes/${this.dishid}`);
         dishRef.on('value', personSnapshot => {
-         this.d.name = personSnapshot.child('name').val();
+         this.d.name = personSnapshot.child('name ').val();
          this.d.price = personSnapshot.child('price').val();
          this.d.average_rate = personSnapshot.child('average_rate').val();
          if(this.d.average_rate==null ||this.d.average_rate == 0 )this.d.average_rate=0;
