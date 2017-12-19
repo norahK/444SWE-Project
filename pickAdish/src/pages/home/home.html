@@ -22,7 +22,7 @@
 </ion-buttons>
 
 
-
+<div *ngIf="Clicked" >
 <div class="toggle">
   <img src="assets/img/occation2.png" style="  float:left; width : 35px ; height : 35px" ng-click="toggleO()" >
   <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px" ng-click="toggleT()" >
@@ -66,7 +66,7 @@
 </div>
 
 </div>
-
+</div>
   </ion-navbar>
 
 </ion-header>
@@ -75,7 +75,7 @@
 <ion-content>
   <ion-list>
 
-    <ion-item  class="item"  *ngFor="let item of dishesListRef$ |async " (click)="goToDishPage(item.key)">
+    <ion-item  class="item"  *ngFor="let item of dishesListRef$ |async " (click)="goToDishPage(item)">
       <div style="white-space:nowrap;">
         <div style="  display:inline; float: left;" >
           <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/k26380246.jpg" alt="shop image"  ></ion-img>

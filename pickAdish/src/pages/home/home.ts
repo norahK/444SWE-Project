@@ -19,6 +19,8 @@ export class HomePage {
 searchQuery: string = '';
 shops:any;
 count:any;
+public Clicked :boolean=false;
+
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.initializeItems();
@@ -38,8 +40,8 @@ this.initializeItems();
   }
   }
   RestData(){
-      this.dishesListRef$=this.database.list(`dishes`).valueChanges();
-  }
+    this.initializeItems();
+   }
 
 filterT(v){
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
@@ -59,12 +61,10 @@ this.count++;
 }
 
 Toggle(){
+  this.Clicked = !this.Clicked;
 
 }
 initializeItems() {
-
-
-
   //this.dishesListRef$=this.database.list(`dishes`).valueChanges();
   this.dishesListRef$ = this.database.list('dishes',
   ref => ref.orderByChild('price')) .snapshotChanges().map(
