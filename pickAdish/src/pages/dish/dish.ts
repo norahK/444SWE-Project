@@ -34,6 +34,7 @@ dish : any;
   //like: boolean;
   d ={} as Dish;// Observable<any>;
  public Clicked :boolean=false;
+ tippath :any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
@@ -55,20 +56,7 @@ dish : any;
          this.d.shop = personSnapshot.child('shop').val();
          this.d.type = personSnapshot.child('type').val();
         });
-      //this.d= this.db.object<Dish>(`dishes/${this.dishid}`).valueChanges();
-      /*db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
-        this.avg = snapshot.val().average_rate;
-        this.raters = snapshot.val().number_of_raters;
-        this.dish_name = snapshot.val().name;
-        return false;
-      })
-*/
-  /*this.dish = this.db.object('dishes/1',{ preserveSnapshot: true });
-  this.dish.subscribe(snapshot => {
-    this.avg = snapshot.val().average_rate;
-    this.raters = snapshot.val().number_of_raters;
-  });*/
-
+        this.tippath = db.database.ref('tips');
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
       this.userID = data.uid;
@@ -100,7 +88,44 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
   ionViewDidLoad() {
     console.log('ionViewDidLoad DishPage');
   }
+  addtip(){
 
+    let prompt = this.alertService.create({
+      title: `add new tip for ${this.d.name}`,
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'title'
+        },
+        {
+          name: 'body',
+          placeholder: 'tip body'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            prompt.dismiss();
+            return false;
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            const id= this.tippath.push().getKey();   //get id then add name loc and .. in saide the id s
+            this.tippath.child(id).child('title').set(data.title);
+            this.tippath.child(id).child('body').set(data.body);
+            this.tippath.child(id).child('user_id').set(this.userID);
+            this.tippath.child(id).child('dish').set(this.d.key);
+
+
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
   isAndroid: boolean = false;
 
   //constructor(platform: Platform) {
