@@ -20,11 +20,6 @@ export class SettingsPage {
   errorMessage: any;
   placeholderPicture = 'assets/img/avatar.jpg';
 
-  enableNotifications = true;
-  language: any;
-  currency: any;
-  paymentMethod: any;
-
   user={} as User;
   //user :  Observable<User>;// FirebaseObjectObservable<User>;
   authState: any = null;

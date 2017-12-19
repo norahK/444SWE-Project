@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController,LoadingController, NavParams,AlertController } from 'ionic-angular';
 import {Dish} from'../../models/dish';
 import { Observable } from 'rxjs/Observable';
 import {AngularFireObject, AngularFireDatabase} from 'angularfire2/database'
 import{AngularFireAuth}from 'angularfire2/auth';
-
+import firebase from 'firebase';
 /**
  * Generated class for the DishPage page.
  *
@@ -19,11 +19,12 @@ import{AngularFireAuth}from 'angularfire2/auth';
 })
 export class DishPage {
   //average_rate: number;
-  avg: any;
+  /*avg: any;
   raters: any;
-  userID: any;
-  dish_name: any;
+  dish_name: any;*/
   dishid:string;
+  userID: any;
+
  // arrayDish = [];
  //dish = {} as Dish;
 
@@ -31,38 +32,42 @@ dish : any;
 
  // rating: number;
   //like: boolean;
-
-  d : any;// Observable<any>;
+  d ={} as Dish;// Observable<any>;
+ public Clicked :boolean=false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public alertService: AlertController,
               private db:AngularFireDatabase,
               private authr :AngularFireAuth)
-
-
    {
-       // this.dish = this.db.object(`dishes/${this.dishid}`);
-
-     this.dishid = navParams.get('dishId');
-
-     ///  this.dishid = "d1";
-
-       this.d= this.db.object(`dishes/${this.dishid}`).valueChanges();
-
-    db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
-      this.avg = snapshot.val().average_rate;
-      this.raters = snapshot.val().number_of_raters;
-      this.dish_name = snapshot.val().name;
-      return false;
-    })
-
+        this.dishid = navParams.get('dishId');
+        this.d.key=this.dishid;
+        const dishRef:firebase.database.Reference = firebase.database().ref(`dishes/${this.dishid}`);
+        dishRef.on('value', personSnapshot => {
+         this.d.name = personSnapshot.child('name').val();
+         this.d.price = personSnapshot.child('price').val();
+         this.d.average_rate = personSnapshot.child('average_rate').val();
+         if(this.d.average_rate==null ||this.d.average_rate == 0 )this.d.average_rate=0;
+         this.d.occasion = personSnapshot.child('occasion').val();
+         this.d.number_of_raters = personSnapshot.child('number_of_raters').val();
+         if(this.d.number_of_raters==null ||this.d.number_of_raters == 0 )this.d.number_of_raters=0;
+         this.d.shop = personSnapshot.child('shop').val();
+         this.d.type = personSnapshot.child('type').val();
+        });
+      //this.d= this.db.object<Dish>(`dishes/${this.dishid}`).valueChanges();
+      /*db.database.ref(`dishes/${this.dishid}`).once('value', (snapshot) => {
+        this.avg = snapshot.val().average_rate;
+        this.raters = snapshot.val().number_of_raters;
+        this.dish_name = snapshot.val().name;
+        return false;
+      })
+*/
   /*this.dish = this.db.object('dishes/1',{ preserveSnapshot: true });
   this.dish.subscribe(snapshot => {
     this.avg = snapshot.val().average_rate;
     this.raters = snapshot.val().number_of_raters;
   });*/
-
-  this.getallinfo(this.dishid);
-
 
   this.authr.authState.subscribe(data=>{
     if(data&&data.email&&data.uid){
@@ -75,22 +80,20 @@ dish : any;
   //this.dish.AverageRating = 4.3;
   //this.dish.NumOfRaters = 23;
   }
+  public onClick() {
+            this.Clicked = !this.Clicked;
+        }
 
   UpdateAverageRating(value){
-  var orginal_r = this.avg * this.raters ;
+  var orginal_r = this.d.average_rate * this.d.number_of_raters ;
  var data = {
-  number_of_raters: this.raters+ 1,
-  average_rate: ((orginal_r + value) / (this.raters+1)).toFixed(2)
+  number_of_raters: this.d.number_of_raters+ 1,
+  average_rate: ((orginal_r + value) / (this.d.number_of_raters+1)).toFixed(2)
 
  };
-   // this.db.object(`dishes/${this.dishid}/number_of_raters`).update(this.raters+1);
-  //  this.db.object(`dishes/${this.dishid}/average_rate`).update((this.avg+value)/this.raters);
-
 this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
 
 }
-
-  async getallinfo(uid){}
 
  //  AddRating(rating: number){}
 
@@ -98,7 +101,6 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
     console.log('ionViewDidLoad DishPage');
   }
 
-  tap: string = "type";
   isAndroid: boolean = false;
 
   //constructor(platform: Platform) {
@@ -126,7 +128,7 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
 
       if(this.imgSrc1 == "assets/img/Like.png"){
       this.imgSrc1 = "assets/img/Liked.png";
-       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set(this.dish_name);
+       this.db.object(`users/${this.userID}/likedDishes/${this.dishid}`).set(this.d.key);
 
       //this.db.list(`users/${this.userID}/likedDishes`).set().push('1');
       }
@@ -188,5 +190,22 @@ this.db.database.ref(`dishes`).child(`${this.dishid}`).update(data);
       }
       else ;
     }
+    Loading(message) {
+      const loading = this.loadingCtrl.create({
+        duration: 500
+      });
+      loading.onDidDismiss(() => {
+        const alert = this.alertService.create({
+          subTitle: message,
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      });
 
+      loading.present();
+    }
+    deleteAccount(){
+      ///alart
+
+    }
 }

@@ -1,54 +1,38 @@
 <ion-split-pane>
 <ion-header>
   <ion-navbar color ="primary">
-    <ion-title> {{(d | async)?.name}} </ion-title>
+    <ion-title>{{dishid}}, {{d.name}} </ion-title>
  </ion-navbar>
 </ion-header>
 <ion-content padding center text-center>
-   <!-- <ion-rating [read]="false" [numStars] = "8" [value] = "6" (ionClick) ="log($event)">
-    </ion-rating>-->
-   <!-- <ion-rating [read]="false" [numStars] = "5" [value] = "6" (ionClick) ="log($event)">
-        </ion-rating>-->
-     <!--   <ion-rating [read]="false" (ionClick) ="log($event)" >
-        </ion-rating>-->
-
-<!--<ion-content>
-</ion-content> -->
 
    <!-- <ion-img >{{(dish | async)?.image}}</ion-img>-->
    <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/dish-2-icon.png" alt="dish image" ></ion-img>
-
-<p (ngModel)="dish.average_rate"> Average Rating {{(d | async)?.average_rate}}  </p>
-<p (ngModel)="dish.number_of_raters"> {{(d | async)?.number_of_raters }} Raters </p>
-<p (ngModel)="dish.price">  {{(d | async)?.price }} SR </p>
-<p (ngModel)="dish.shop">  Shop: {{(d | async)?.shop }} </p>
-
-<div padding >
-  <ion-segment [(ngModel)]="tap">
-    <ion-segment-button value="like">
-      <button ion-button clear outline (click)="liked()" ><img width="50" no-padding [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/>
-      </button>
-    </ion-segment-button>
-    <ion-segment-button value="rate">
-        <ion-rating [read]="false" (ionClick) ="log($event)">
-          </ion-rating>
-     <!-- <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>
-      <img width="50" height="50" [src]="imgSrc2" (mouseover)="onMouseOver2()" (mouseout)="onMouseOut2()" alt="star image"/>-->
-     </ion-segment-button>
-    <ion-segment-button value="type">
-      Occasions
-    </ion-segment-button>
-    <ion-segment-button value="tip">
-      Tip
-    </ion-segment-button>
-  </ion-segment>
+<div id='info'>
+<p > Average Rating {{d.average_rate}}  </p>
+<p > {{d.number_of_raters }} Raters </p>
+<p > Price : {{d.price }} SR </p>
+<p >Shop: {{d.shop }} </p>
 </div>
 
-<div [ngSwitch]="tap">
-<ion-list *ngSwitchCase="'type'">
+<div padding >
+
+<div id="rating">
+        <ion-rating [read]="false" (ionClick) ="log($event)">
+          </ion-rating>
+        </div>
+        <button ion-button outline clear icon-left (click)="liked()" >
+            <img width="50" no-padding [src]="imgSrc1" (mouseover)="onMouseOver1()" (mouseout)="onMouseOut1()" alt="heart image"/>
+              </button>
+          <button ion-button clear outline value="type" (click)="onClick()">      Occasions
+          </button>
+          <button ion-button clear outline value="tip" >
+              Add tip
+          </button>
+</div>
+
+<div *ngIf="Clicked" >
+<ion-list >
     <ion-item>
       <ion-thumbnail item-start>
           <button (click)="selected(1)" ion-button [color]="button1Color" outline>family meeting</button>
@@ -71,74 +55,10 @@
     </ion-item>
   </ion-list>
 </div>
+<div>
+
+
+</div>
 </ion-content>
 </ion-split-pane>
 
-<!--
-<ion-content padding class="transparent-header">
-  <ion-header>
-    <ion-navbar>
-    </ion-navbar>
-  </ion-header>
-  <div id="profile-bg" [ngStyle]="{'background-image': 'url(' + user.coverImage +')'}"></div>
-  <div id="content">
-    <div id="profile-info" padding>
-      <img id="profile-image" [src]="img/Users/Asmaa/Desktop/first_ionic/Cake_D-512/png">
-      <h3 id="profile-name">dish name</h3>
-      <p>user occupation &bull; user location</p>
-      <p class="profile-description"> user description</p>
-      <button ion-button *ngIf="!following" small color="purple" (click)="follow()">Follow</button>
-      <button ion-button *ngIf="following" class="follow-button" small color="purple" (click)="follow()">Following<ion-icon name="checkmark"></ion-icon></button>
-    </div>
-    <hr/>
-    <ion-row class="profile-numbers">
-      <ion-col col-4>
-        <p>Followers</p>
-        <span>user followers</span>
-      </ion-col>
-      <ion-col col-4>
-        <p>Following</p>
-        <span>user following</span>
-      </ion-col>
-      <ion-col col-4>
-        <p>Posts</p>
-        <span>user posts</span>
-      </ion-col>
-    </ion-row>
-    <div id="posts">
-      <ion-card *ngFor="let post of posts">
-        <ion-item>
-          <ion-avatar item-start>
-            <img [src]="user.profileImage">
-          </ion-avatar>
-          <h2 class="sticky"> user name </h2>
-          <p>post date</p>
-        </ion-item>
-        <img [src]="post.postImageUrl" (click)="imageTapped(post)">
-        <ion-card-content>
-          <p> post text</p>
-        </ion-card-content>
-        <ion-row>
-          <ion-col col-4>
-            <button ion-button color="purple" clear small icon-left (click)="like(post)">
-                <ion-icon name='thumbs-up'></ion-icon>
-                post likes Likes
-              </button>
-          </ion-col>
-          <ion-col col-5>
-            <button ion-button no-padding color="purple" clear small icon-left (click)="comment(post)">
-                <ion-icon name='text'></ion-icon>
-                post comments Comments
-              </button>
-          </ion-col>
-          <ion-col col-3 align-self-center text-center>
-            <p>
-              post timestamp
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
-  </div>
-</ion-content>
--->

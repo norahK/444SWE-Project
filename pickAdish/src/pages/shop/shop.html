@@ -15,7 +15,13 @@
 
 
 <ion-content padding>
-    <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/Shop-icon.png" alt="shop image"  ></ion-img>
-    
 
+    <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/Shop-icon.png" alt="shop image"  ></ion-img>
+
+    <div id='info'>
+        <p (ngModel)="shop.name"> Shop name {{(shop| async)?.average_rate}}  </p>
+        <p (ngModel)="shop."> {{(shop | async)?.number_of_raters }} Raters </p>
+        <p (ngModel)="shop.price"> Price : {{(shop | async)?.price }} SR </p>
+        <p (ngModel)="shop.shop">Shop: {{(shop | async)?.shop }} </p>
+        </div>
 </ion-content>
