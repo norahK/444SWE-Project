@@ -1,4 +1,5 @@
 export interface Tip{
+  Key?: string;
   image:string;
   title:string;
   body:string;

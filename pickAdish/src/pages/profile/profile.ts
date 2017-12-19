@@ -19,7 +19,8 @@ export class ProfilePage {
   imageUrl="assets/img/avatar.jpg";//:any
   //tipsRef$: FirebaseListObservable<Tip[]>;//Observable<any[]>;
  // tips: FirebaseListObservable<any>;
-  public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
+  //public tips= this.db.list<Tip>('tips');//: AngularFireList<any>;
+  tips : Observable<Tip[]>;
   tipsRef:Observable<any>;//AngularFireList<Tip[]>;
 dishes :Observable<any>;
   user :  Observable<User>;// FirebaseObjectObservable<User>;
@@ -68,7 +69,7 @@ delete(tip){
       {
         text: 'delete', role: 'destructive',
         handler: data => {
-          this.tips.remove(tip.$key)//then
+          this.tips.remove(tip.key)//then
   //this.db.list('/tips').remove(tip);//.then()
       }
       },
@@ -97,7 +98,25 @@ gotoDishpage(dishid){
 
   this.tipsRef = this.db.list('tips',
   ref => ref.orderByChild('user_id').equalTo(uid)).valueChanges();
+ try{
+this.tips=this.db.list('tips').snapshotChanges().map(
+  changes=>{
+    return changes.map(c=>({
+      key: c.payload.key,
+      ...c.payload.val(),
+
+    }))
   }
+)
+ }catch(e){
+
+ }
+
+
+}
+
+
+
   Loading(message) {
     const loading = this.loadingCtrl.create({
       duration: 500
