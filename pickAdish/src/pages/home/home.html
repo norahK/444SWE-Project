@@ -3,23 +3,27 @@
     <ion-title>
       <!-->search<!-->
     </ion-title>
-    <script>
-    $(document).ready(function(){
-        $(".b1").click(function(){
-            $("toggle").slideToggle();
-        });
-    });
-    </script>
+
+
 <div>
 <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
 <ion-buttons >
-<button class="b1" tyle="padding-left:50;"ion-button icon-only  (click)="Toggle()"><ion-icon style="padding-left:50;"name="ios-funnel"></ion-icon></button>
+<button class="b1" tyle="padding-left:50;"ion-button icon-only ><ion-icon style="padding-left:50;"name="ios-funnel"></ion-icon></button>
 <button style="padding-left:50;"ion-button icon-only (click)="RestData()"><ion-icon style="padding-left:50;"name="ios-refresh-circle"></ion-icon></button>
 </ion-buttons>
 
+<script>
+$(document).ready(function(){
+    $(".b1").click(function(){
+        $("toggle").slideToggle();
+    });
+});
+</script>
 <div class="toggle" style="display:none;">
   <img src="assets/img/occasion2.png" style="  float:left; width : 35px ; height : 35px" ng-click="toggleO()" >
   <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px" ng-click="toggleT()" >
+  <img src="assets/img/dollar.png" style=" margin-left:45px; float:left; width : 30px ; height : 30px" ng-click="filterData()" >
 
 
   <!--<ion-buttons>
@@ -58,11 +62,15 @@
 
 <ion-content>
   <ion-list>
+<<<<<<< HEAD
 
     <ion-item  class="item"  *ngFor="let item of dishesListRef$ |async " (click)="goToDishPage(item.key)">
+=======
+    <ion-item  class="item"  *ngFor="let item of dishesListRef|async   " (click)="goToDishPage(item.id)">
+>>>>>>> 8837aa1bac07581f602ca4ac17a49f23946df598
       <div style="white-space:nowrap;">
         <div style="  display:inline; float: left;" >
-          <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets\img\SweetTonesL"  ></ion-img>
+          <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/SweetTonesL"  ></ion-img>
         </div>
           <br>       <div style="  margin-left:20px; float:left; display:inline; white-space:nowrap; margin:right;">
       <h2>  {{ item.name}}  </h2>
