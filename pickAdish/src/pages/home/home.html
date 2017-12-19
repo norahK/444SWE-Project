@@ -1,4 +1,12 @@
 <ion-header>
+  <script>
+
+      $('.b1').click(function(){
+          $('.toggle').slideToggle("fast");
+      });
+
+  </script>
+
   <ion-navbar>
     <ion-title>
       <!-->search<!-->
@@ -13,13 +21,8 @@
 <button style="padding-left:50;"ion-button icon-only (click)="RestData()"><ion-icon style="padding-left:50;"name="ios-refresh-circle"></ion-icon></button>
 </ion-buttons>
 
-<script>
-$(document).ready(function(){
-    $(".b1").click(function(){
-        $("toggle").slideToggle();
-    });
-});
-</script>
+
+
 <div class="toggle" style="display:none;">
   <img src="assets/img/occasion2.png" style="  float:left; width : 35px ; height : 35px" ng-click="toggleO()" >
   <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px" ng-click="toggleT()" >

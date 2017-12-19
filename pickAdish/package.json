@@ -43,6 +43,7 @@
     "ionic-ratings": "^0.3.0",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
+    "jquery": "^3.2.1",
     "keyboard": "0.0.1",
     "promise-polyfill": "^6.0.2",
     "react-native-ratings": "^4.1.0",
