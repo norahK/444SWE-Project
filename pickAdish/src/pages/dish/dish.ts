@@ -32,7 +32,7 @@ dish : any;
  // rating: number;
   //like: boolean;
 
-  d :  Observable<any>;
+  d : any;// Observable<any>;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private db:AngularFireDatabase,
