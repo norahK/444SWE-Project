@@ -8,7 +8,6 @@ import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
-import * as $ from 'jquery';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,7 +19,8 @@ searchQuery: string = '';
 shops:any;
 count:any;
 public Clicked :boolean=false;
-
+selectedO :any ;
+selectedT:any;
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.initializeItems();
@@ -44,20 +44,40 @@ this.initializeItems();
    }
 
 filterT(v){
-  this.dishesListRef$=this.dishesListRef$.filter((item)=>{
-    return item.type==v;
-  });
-}
+  this.dishesListRef$ = this.database.list('dishes',
+  ref => ref.orderByChild('type_of_dish').equalTo(v)).snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
+    }
 
 filterO(v){
-  this.count==0;
+
+ /* this.count==0;
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
     while(item.occasion!=null){
 if(item.occasion[this.count]==v){
 return true;}
 this.count++;
   }
-  });
+  });*/
+  this.dishesListRef$ = this.database.list('dishes',
+  ref => ref.orderByChild('occasions').equalTo('v')).snapshotChanges().map(
+    changes=>{
+      return changes.map(c=>({
+        key :c.payload.key,
+        ...c.payload.val()
+      })
+
+      )
+    }
+      );
 }
 
 Toggle(){
