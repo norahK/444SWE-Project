@@ -8,8 +8,7 @@ import{Dish}from '../../models/dish';
 import {DishPage} from '../dish/dish';
 import 'rxjs/add/operator/filter';
 import { Pipe, PipeTransform ,Inject} from '@angular/core';
-import firebase from 'firebase';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,9 +19,6 @@ export class HomePage {
 searchQuery: string = '';
 shops:any;
 count:any;
-public Clicked :boolean=false;
-selectedO :String ;
-selectedT:String;
 // items: string[];
   constructor(public navCtrl: NavController ,private database: AngularFireDatabase) {
 this.initializeItems();
@@ -42,54 +38,35 @@ this.initializeItems();
   }
   }
   RestData(){
-    this.initializeItems();
-   }
+      this.dishesListRef$=this.database.list(`dishes`).valueChanges();
+  }
 
-filterT(v: string){
-  this.dishesListRef$ = this.database.list('dishes',
-  ref => ref.orderByChild('type_of_dish').equalTo(v)).snapshotChanges().map(
-    changes=>{
-      return changes.map(c=>({
-        key :c.payload.key,
-        ...c.payload.val()
-      })
+filterT(v){
+  this.dishesListRef$=this.dishesListRef$.filter((item)=>{
+    return item.type==v;
+  });
+}
 
-      )
-    }
-      );
-    }
-
-filterO(v:string){
-
- /*this.count==0;
+filterO(v){
+  this.count==0;
   this.dishesListRef$=this.dishesListRef$.filter((item)=>{
     while(item.occasion!=null){
 if(item.occasion[this.count]==v){
 return true;}
 this.count++;
   }
-  });*/
-  this.dishesListRef$ = this.database.list('dishes',
-  ref => ref.orderByChild('occasions').startAt(v)).snapshotChanges().map(
-    changes=>{
-      return changes.map(c=>({
-        key :c.payload.key,
-        ...c.payload.val()
-      })
-
-      )
-    }
-      );
+  });
 }
 
 Toggle(){
-  this.Clicked = !this.Clicked;
 
 }
+
 initializeItems() {
+
   //this.dishesListRef$=this.database.list(`dishes`).valueChanges();
   this.dishesListRef$ = this.database.list('dishes',
-  ref => ref.orderByChild('price')).snapshotChanges().map(
+  ref => ref.orderByChild('price')) .snapshotChanges().map(
     changes=>{
       return changes.map(c=>({
         key :c.payload.key,
@@ -99,6 +76,7 @@ initializeItems() {
       )
     }
       );
+
 }
 
 getItems(ev) {
@@ -106,11 +84,11 @@ var val = ev.target.value;
 // Reset items back to all of the items
 this.initializeItems();
 // set val to the value of the ev target
-if (!val)return;
+
 // if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
 this.dishesListRef$= this.dishesListRef$.filter((item ) => {
-  return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  return (item[0].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
 })
 }
 }

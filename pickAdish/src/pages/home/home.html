@@ -23,24 +23,25 @@
 
 
 <div *ngIf="Clicked" >
-<div class="toggle">
+<!--<div class="toggle">
   <img src="assets/img/occation2.png" style="  float:left; width : 35px ; height : 35px" ng-click="toggleO()" >
   <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px" ng-click="toggleT()" >
-<!--<ion-buttons>
+<ion-buttons>
   <button style="padding-left:50;"ion-button icon-only (click)="filterO()"><ion-icon style="padding-left:50;"name="ios-calendar" ></ion-icon></button>
   <button style="padding-left:50;"ion-button icon-only (click)="filterO()"><ion-icon style="padding-left:50;"name="ios-calendar" ></ion-icon></button>
   <button style="padding-left:50;"ion-button icon-only (click)="flterData()"><ion-icon style="padding-left:50;" name="ios-cash"></ion-icon></button>
-</ion-buttons>-->
-</div>
+</ion-buttons>
+</div>-->
 <!--style="display:none;"-->
 <!--list of occoastions-->
 
 <div class="toggle1" >
-  <!--<img src="assets/img/occation2.png" style="  margin-left:30px; float:left; width : 35px ; height : 35px"  >-->
+<img src="assets/img/occation2.png" style="  margin-left:30px; float:left; width : 35px ; height : 35px"  >
   <ion-list>
     <ion-item>
         <ion-label>Occations </ion-label>
       <ion-select #newSelect [(ngModel)]="selectedO" (ionChange)="filterO(selectedO)">
+        <ion-option value="none" checked="true">none</ion-option>
         <ion-option value="party" checked="true">party</ion-option>
         <ion-option value="office" >office</ion-option>
         <ion-option value="meeting">meeting</ion-option>
@@ -53,11 +54,13 @@
 
 <!--list of types-->
 <div class="toggle2" >
-  <!--  <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px"  >-->
+
+ <img src="assets/img/dish type.png" style=" margin-left:30px; float:left; width : 35px ; height : 35px"  >
 <ion-list>
   <ion-item>
       <ion-label>Dish type</ion-label>
     <ion-select #newSelect [(ngModel)]="selectedT" (ionChange)="filterT(selectedT)">
+      <ion-option value="none" checked="true">none</ion-option>
       <ion-option value="cake" checked="true">cake</ion-option>
       <ion-option value="choco" >choco</ion-option>
       <ion-option value="healthy">healthy</ion-option>

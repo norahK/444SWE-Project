@@ -3,10 +3,36 @@
     <ion-title></ion-title>
     <div>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-buttons>
-    <button style="padding-left:50;"ion-button icon-only (click)="filterData()"><ion-icon style="padding-left:50;"name="ios-funnel"></ion-icon></button>
+    <ion-buttons >
+    <button class="b1" tyle="padding-left:50;"ion-button icon-only ><ion-icon style="padding-left:50;"name="ios-funnel"></ion-icon></button>
+    <button style="padding-left:50;"ion-button icon-only (click)="RestData()"><ion-icon style="padding-left:50;"name="ios-refresh-circle"></ion-icon></button>
+    </ion-buttons>
 
-    </ion-buttons></div>
+
+    <div *ngIf="Clicked" >
+
+    <!--list of occoastions-->
+
+    <div class="toggle1" >
+    <img src="assets/img/time-24-512" style="  margin-left:30px; float:left; width : 35px ; height : 35px"  >
+      <ion-list>
+        <ion-item>
+            <ion-label>Opening time </ion-label>
+          <ion-select #newSelect [(ngModel)]="selectedO" (ionChange)="filterO(selectedO)">
+            <ion-option value="none" checked="true">none</ion-option>
+            <ion-option value="9-12pm" checked="true">9-12pm</ion-option>
+            <ion-option value="4-12am" >4-12am</ion-option>
+            <ion-option value="10-12am">10-12am</ion-option>
+            <ion-option value="7-12pm">7-12pm</ion-option>
+
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+
+  </div>
   </ion-navbar>
 </ion-header>
 <ion-content  >

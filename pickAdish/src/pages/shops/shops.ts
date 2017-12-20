@@ -49,6 +49,24 @@ this.initializeItems();
     });
 
     }
+    RestData(){
+      this.shopsListRef$= this.database.list('shops',
+      ref => ref.orderByChild('location')) .snapshotChanges().map(
+        changes=>{
+          return changes.map(c=>({
+            key :c.payload.key,
+            ...c.payload.val()
+          })
+
+          )
+        }
+          );
+    }
+    filterO(v){
+      this.shopsListRef$=this.shopsListRef$.filter((item)=>{
+        return item. opining_hours==v;
+      });
+    }
   getItems(ev) {
   var val = ev.target.value;
   // Reset items back to all of the items
