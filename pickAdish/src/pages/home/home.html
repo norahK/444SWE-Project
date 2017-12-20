@@ -80,7 +80,7 @@
 <ion-content>
   <ion-list>
 
-    <ion-item  class="item"  *ngFor="let item of dishesListRef$ |async " (click)="goToDishPage(item)">
+    <ion-item  class="item"  *ngFor="let item of dishesListRef$ " (click)="goToDishPage(item)">
       <div style="white-space:nowrap;">
         <div style="  display:inline; float: left;" >
           <ion-img style="   float:left; width: 80px; height: 80px; border-radius:80%;" src="assets/img/k26380246.jpg" alt="shop image"  ></ion-img>

@@ -75,7 +75,30 @@ initializeItems() {
 
       )
     }
-      );
+  );
+
+
+  /*  this.dishesListRef$ =[ {
+    "name" : "konafah",
+    "occasion" : [ "meeting" ],
+    "price" : "50 SR",
+    "shop" : "sara sweet ",
+    "type" : "westean"
+  },
+  {
+  "name" : "Cake",
+  "occasion" : [ "meeting" ],
+  "price" : "50 SR",
+  "shop" : "sara sweet ",
+  "type" : "westean"
+},{
+"name" : "Pizza",
+"occasion" : [ "meeting" ],
+"price" : "50 SR",
+"shop" : "sara sweet ",
+"type" : "westean"
+}
+];*/
 
 }
 
@@ -88,7 +111,7 @@ this.initializeItems();
 // if the value is an empty string don't filter the items
 if (val && val.trim() != '') {
 this.dishesListRef$= this.dishesListRef$.filter((item ) => {
-  return (item[0].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
 })
 }
 }
